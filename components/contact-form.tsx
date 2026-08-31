@@ -2,9 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import { profile } from "@/lib/data";
-import { CheckIcon } from "@/components/icons";
+import { CheckIcon, MailIcon } from "@/components/icons";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "fallback";
 
 const fieldClass =
   "block w-full rounded-md border border-line-strong bg-card px-3.5 py-2.5 text-sm text-fg placeholder:text-faint transition-colors hover:border-line-stronger focus:border-accent focus:outline-none";
@@ -14,6 +14,9 @@ const labelClass = "block text-sm font-medium text-fg";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  // Kept so the fallback can hand the visitor their own draft back as a mailto.
+  const [draft, setDraft] = useState({ name: "", message: "" });
+  const [copied, setCopied] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -40,9 +43,20 @@ export function ContactForm() {
 
       const result = (await response.json().catch(() => ({}))) as {
         error?: string;
+        fallback?: boolean;
       };
 
       if (!response.ok) {
+        // Delivery is broken at my end — mail not configured, or the provider
+        // rejected it. Retrying achieves nothing, so hand over the address and
+        // the draft rather than a red box. The form is left filled in on purpose.
+        if (result.fallback) {
+          setDraft({ name: payload.name, message: payload.message });
+          setError(result.error || "The message could not be delivered.");
+          setStatus("fallback");
+          return;
+        }
+
         throw new Error(result.error || "Something went wrong. Please try again.");
       }
 
@@ -55,6 +69,17 @@ export function ContactForm() {
           : "Something went wrong. Please try again.",
       );
       setStatus("error");
+    }
+  }
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard access can be refused outright. The address is printed under
+      // the buttons for exactly this case, so there is nothing to recover from.
     }
   }
 
@@ -80,6 +105,12 @@ export function ContactForm() {
   }
 
   const submitting = status === "submitting";
+
+  // A long message can outrun what some mail clients accept in a mailto, which
+  // is the other reason the textarea above keeps its contents.
+  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
+    draft.name ? `Portfolio enquiry from ${draft.name}` : "Portfolio enquiry",
+  )}&body=${encodeURIComponent(draft.message)}`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
@@ -162,6 +193,49 @@ export function ContactForm() {
         >
           {error}
         </p>
+      ) : null}
+
+      {status === "fallback" ? (
+        <div
+          role="alert"
+          className="rounded-xl border border-line-strong bg-surface p-5"
+        >
+          <p className="flex items-center gap-2 text-sm font-semibold text-fg">
+            <MailIcon className="h-4 w-4 shrink-0 text-faint" />
+            {error}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-muted">
+            Nothing is lost — your message is still in the box above. Send it
+            straight to my inbox instead:
+          </p>
+
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <a
+              href={mailtoHref}
+              className="inline-flex items-center justify-center rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
+            >
+              Open in mail app
+            </a>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-stronger hover:bg-surface"
+            >
+              {copied ? (
+                <>
+                  <CheckIcon className="h-4 w-4" />
+                  Address copied
+                </>
+              ) : (
+                "Copy address"
+              )}
+            </button>
+          </div>
+
+          <p className="mt-3 select-all font-mono text-xs text-subtle">
+            {profile.email}
+          </p>
+        </div>
       ) : null}
     </form>
   );

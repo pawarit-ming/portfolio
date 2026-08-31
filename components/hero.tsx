@@ -21,7 +21,10 @@ const primaryStack = [
 const stats = [
   { value: "22", label: "Production web screens shipped in an internship" },
   { value: "25+", label: "Screens in a cross-platform Flutter app" },
-  { value: "0", label: "Failures in the final automated regression run" },
+  {
+    value: "Appium",
+    label: "Android suite automated in Java, reported with Extent Reports",
+  },
 ];
 
 export function Hero() {

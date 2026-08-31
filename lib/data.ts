@@ -45,7 +45,11 @@ export const targetRoles = [
  */
 export const socials: Social[] = [
   { label: "GitHub", href: "https://github.com/pawarit-ming", icon: "github" },
-  { label: "LinkedIn", href: "", icon: "linkedin" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/pawarit-wang/",
+    icon: "linkedin",
+  },
 ];
 
 export type Experience = {
@@ -162,52 +166,29 @@ export const projects: Project[] = [
       "Figma",
     ],
     cover: {
-      src: "/projects/asset-management-system/registration-wizard.jpeg",
-      alt: "Step one of the asset registration wizard, with a progress bar naming all five steps above a contract form and two file attachment fields",
+      src: "/projects/asset-management-system/registration-wizard.png",
+      alt: "Step one of the asset registration wizard: a progress bar naming all five steps, above a contract form filled in with a project number, budget, contract number and Thai-format dates",
       aspect: "screen",
     },
     gallery: [
       {
-        src: "/projects/asset-management-system/registration-wizard.jpeg",
-        alt: "Step one of the asset registration wizard, with a progress bar naming all five steps above a contract form and two file attachment fields",
+        src: "/projects/asset-management-system/registration-wizard.png",
+        alt: "Step one of the asset registration wizard: a progress bar naming all five steps, above a contract form filled in with a project number, budget, contract number and Thai-format dates",
         aspect: "screen",
         caption: "Step one of the five-step registration wizard",
       },
       {
-        src: "/projects/asset-management-system/dashboard.jpeg",
-        alt: "The dashboard, showing counts of tracked, damaged, borrowed and disposed equipment above budget totals, with the sidebar navigation down the left",
+        src: "/projects/asset-management-system/inspection.png",
+        alt: "The annual inspection screen, filtered to Buddhist-era budget year 2568, listing equipment with asset numbers, GFMIS codes, brand, model and location; each row carries a status badge and an inspection checkbox",
         aspect: "screen",
-        caption: "The sidebar navigation I built, shown on the dashboard",
+        caption:
+          "Annual inspection, ticked off row by row — filtered by พ.ศ. budget year",
       },
       {
-        src: "/projects/asset-management-system/request-report.jpeg",
-        alt: "The registration request report: filters for category, company and Buddhist-era year above a table of requests with edit and delete actions on each row",
+        src: "/projects/asset-management-system/add-supplier.png",
+        alt: "The add-supplier form, filled in: tax ID and GFMIS code, seller and company name, then a Thai address split across building, room, floor, house number, soi, street, district and postcode",
         aspect: "screen",
-        caption: "Registration requests — note the พ.ศ. year filter",
-      },
-      {
-        src: "/projects/asset-management-system/asset-report.jpeg",
-        alt: "The asset report screen, filtering by category, supply type and budget year over a table of registered assets with status badges",
-        aspect: "screen",
-        caption: "The asset registry report",
-      },
-      {
-        src: "/projects/asset-management-system/repair.jpeg",
-        alt: "The repair screen: filters for disposal type, a start and end date, reporter and free text, above a table of equipment with status badges",
-        aspect: "screen",
-        caption: "Repair tracking, with a date-range filter",
-      },
-      {
-        src: "/projects/asset-management-system/inspection.jpeg",
-        alt: "The annual inspection screen, listing equipment with asset numbers, GFMIS codes, brand, model and location, each row carrying an inspection checkbox",
-        aspect: "screen",
-        caption: "Annual inspection, ticked off row by row",
-      },
-      {
-        src: "/projects/asset-management-system/annual-report.jpeg",
-        alt: "The annual report screen with export to PDF and Excel buttons, a filter row, and a table of equipment; the sidebar shows all five report types",
-        aspect: "screen",
-        caption: "Annual report, one of five report views",
+        caption: "Adding a supplier without losing the half-filled form behind it",
       },
     ],
     metrics: [
@@ -223,7 +204,7 @@ export const projects: Project[] = [
     ],
     overview: [
       "The Ministry tracks a large volume of durable equipment — computers, medical devices, furniture — and every purchase, loan, repair, inspection and disposal has to be recorded, found again later, and reported on. The paperwork was the system.",
-      "The replacement was a monorepo: a Next.js frontend, a NestJS API over MySQL, and Docker Compose tying them together for local development. Six people worked on it across six months — four of us on the frontend, building from Figma designs.",
+      "The replacement was a monorepo: a Next.js frontend, a NestJS API over MySQL, and Docker Compose tying them together for local development. Six people worked on it across six months — two of us on the frontend, building from Figma designs.",
       "It was the first time I worked inside a team large enough that my screens had to match someone else's without us checking with each other every day.",
     ],
     role: [
@@ -262,6 +243,12 @@ export const projects: Project[] = [
         title: "Search, filter and paginate",
         description:
           "Every table screen carries the same controls: free-text search across name, asset number, brand and model, plus status and date-range filters and paging over the result.",
+      },
+    ],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/pawarit-ming/asset-management-system",
       },
     ],
     technical: [
@@ -352,9 +339,11 @@ export const projects: Project[] = [
       },
     ],
     metrics: [
+      // My own build scope leads; the model numbers are a team result, so they
+      // follow rather than front the card.
+      { value: "25+", label: "Screens in the app" },
       { value: "94.6%", label: "Verification accuracy" },
       { value: "> 0.94", label: "AUC" },
-      { value: "25+", label: "Screens in the app" },
       { value: "3", label: "People on the team" },
     ],
     highlights: [
@@ -405,6 +394,12 @@ export const projects: Project[] = [
         title: "Multi-step animal registration",
         description:
           "A guided capture flow walks the owner through photographing a new animal from the angles the identification model needs, with import from the gallery as a fallback.",
+      },
+    ],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/pawarit-ming/thai-cattle-passport",
       },
     ],
     technical: [
@@ -496,12 +491,18 @@ export const languages = [
   { name: "English", level: "Intermediate — TOEIC 660, CEFR B1" },
 ];
 
+/**
+ * Section links for the header, the mobile sheet and the footer.
+ *
+ * Contact is deliberately absent: the "Get in touch" button sits right beside
+ * this list and points at the same anchor, and the footer prints the address
+ * itself. Two adjacent controls with one destination read as an oversight.
+ */
 export const navigation = [
   { label: "About", href: "/#about" },
   { label: "Experience", href: "/#experience" },
   { label: "Projects", href: "/#projects" },
   { label: "Skills", href: "/#skills" },
-  { label: "Contact", href: "/#contact" },
 ];
 
 export function getProject(slug: string): Project | undefined {

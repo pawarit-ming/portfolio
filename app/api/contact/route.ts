@@ -50,6 +50,16 @@ function escapeHtml(value: string): string {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * `??` only guards against null and undefined, so an env var that exists but is
+ * empty — trivially created by leaving a field blank in a hosting dashboard —
+ * would beat the fallback and address the mail to "". `lib/site.ts` documents
+ * the same trap for the canonical URL; here it costs every enquiry.
+ */
+function fromEnv(value: string | undefined, fallback: string): string {
+  return value?.trim() || fallback;
+}
+
 export async function POST(request: Request) {
   let body: unknown;
 
@@ -103,9 +113,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL ?? profile.email;
-  const from = process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>";
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const to = fromEnv(process.env.CONTACT_TO_EMAIL, profile.email);
+  const from = fromEnv(
+    process.env.CONTACT_FROM_EMAIL,
+    "Portfolio <onboarding@resend.dev>",
+  );
 
   if (!apiKey) {
     // Better to say so plainly than to fake a success the owner never receives.
@@ -114,7 +127,8 @@ export async function POST(request: Request) {
     );
     return NextResponse.json(
       {
-        error: `Email delivery is not configured yet. Please reach me directly at ${profile.email}.`,
+        error: "Email delivery is not configured on this deployment.",
+        fallback: true,
       },
       { status: 503 },
     );
@@ -146,9 +160,7 @@ export async function POST(request: Request) {
       const detail = await response.text().catch(() => "");
       console.error("[contact] Resend rejected the request:", response.status, detail);
       return NextResponse.json(
-        {
-          error: `Could not send the message. Please email me at ${profile.email}.`,
-        },
+        { error: "The mail service rejected the message.", fallback: true },
         { status: 502 },
       );
     }
@@ -157,7 +169,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("[contact] Unexpected failure:", error);
     return NextResponse.json(
-      { error: `Could not send the message. Please email me at ${profile.email}.` },
+      { error: "The message could not be delivered.", fallback: true },
       { status: 500 },
     );
   }

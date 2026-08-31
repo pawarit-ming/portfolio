@@ -83,9 +83,16 @@ The form posts to `app/api/contact/route.ts`, which validates the input, applies
 small rate limit, drops honeypot submissions, and sends the message through
 [Resend](https://resend.com).
 
-Until you configure it, the form returns a clear "not configured" message and
-points people at the email address instead — it never pretends to have sent
-something it did not.
+Until you configure it, the form never pretends to have sent something it did
+not. When delivery is impossible — no API key, or Resend rejecting the request —
+the response carries a `fallback` flag and the form swaps the red error for a
+panel offering the address directly: an **Open in mail app** link carrying the
+visitor's own subject and message, a **Copy address** button, and the address in
+plain text for when the clipboard is blocked. The textarea keeps its contents
+throughout, so a recruiter's message is never lost to a misconfigured deploy.
+
+Validation failures and rate limiting still show as ordinary inline errors —
+those are worth retrying, so they get the red box.
 
 To turn it on:
 
@@ -127,6 +134,22 @@ In the Vercel project settings, add the environment variables:
   not create it with an empty value — that is a value, not an absence.
 - `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` — if you want the
   contact form live.
+
+Leave a variable out entirely rather than creating it empty. An empty string is
+a value, not an absence; `lib/site.ts` and the contact route both trim and treat
+blanks as unset for that reason, but nothing else in the stack will.
+
+### Before sending the link to anyone
+
+- [ ] `RESEND_API_KEY` set in Vercel, and a test message actually arrived
+- [ ] `CONTACT_TO_EMAIL` points at the inbox you read, and it is not empty
+- [ ] The sender domain is verified in Resend, or the first enquiry may land in
+      spam — `onboarding@resend.dev` is for testing, not for recruiters
+- [ ] Submit the live form once yourself and confirm the success panel, not the
+      fallback panel, is what appears
+- [ ] Hit **Reply** on that test mail and check it addresses the sender rather
+      than you — a wrong reply-to fails silently, and you only find out when a
+      recruiter thinks you ignored them
 
 ## Project structure
 
