@@ -70,12 +70,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg font-sans">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        {/* `disableTransitionOnChange` is deliberately absent: it exists to
+            suppress the colour transition while the theme swaps, and that
+            transition is the point here. globals.css keeps it to paint
+            properties so nothing layout-related animates. */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-invert focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-on-invert"
