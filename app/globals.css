@@ -93,10 +93,14 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
-    monospace;
+  /* Geist carries no Thai glyphs, so Noto Sans Thai sits behind it in both
+     stacks. Per-glyph fallback means Latin still renders in Geist and only Thai
+     characters reach Noto — and a page with no Thai on it never downloads the
+     file, since browsers fetch a font only once something needs it. */
+  --font-sans: var(--font-geist-sans), var(--font-noto-thai), ui-sans-serif,
+    system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-noto-thai), ui-monospace,
+    "SFMono-Regular", Menlo, monospace;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);

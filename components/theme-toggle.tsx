@@ -11,15 +11,15 @@ import { MoonIcon, SunIcon } from "@/components/icons";
  * They are stacked and cross-faded rather than swapped with `display`, which
  * cannot be transitioned: the two would pop while the rest of the page fades.
  */
-export function ThemeToggle() {
+export function ThemeToggle({ label }: { label: string }) {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <button
       type="button"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      aria-label="Toggle colour theme"
-      title="Toggle colour theme"
+      aria-label={label}
+      title={label}
       className="inline-flex h-10 w-10 items-center justify-center rounded-md text-muted transition-colors hover:bg-frame hover:text-fg"
     >
       <span className="relative block h-[1.05rem] w-[1.05rem]">

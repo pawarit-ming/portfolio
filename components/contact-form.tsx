@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { profile } from "@/lib/data";
+// Imported from the leaf modules rather than the `@/lib/content` barrel: that
+// barrel pulls in every language file, and this is a Client Component.
+import { identity } from "@/lib/content/shared";
+import type { ContactErrorCode, UiCopy } from "@/lib/content/types";
 import { CheckIcon, MailIcon } from "@/components/icons";
 
 type Status = "idle" | "submitting" | "success" | "error" | "fallback";
@@ -11,12 +14,23 @@ const fieldClass =
 
 const labelClass = "block text-sm font-medium text-fg";
 
-export function ContactForm() {
+export function ContactForm({ copy }: { copy: UiCopy["form"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   // Kept so the fallback can hand the visitor their own draft back as a mailto.
   const [draft, setDraft] = useState({ name: "", message: "" });
   const [copied, setCopied] = useState(false);
+
+  /**
+   * The endpoint answers with a code, not a sentence — it has no idea which
+   * language the page is in. Anything unrecognised falls back rather than
+   * showing a blank box.
+   */
+  function messageFor(code: unknown): string {
+    return (
+      copy.errors[code as ContactErrorCode] ?? copy.errors.unknown
+    );
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,7 +56,7 @@ export function ContactForm() {
       });
 
       const result = (await response.json().catch(() => ({}))) as {
-        error?: string;
+        code?: ContactErrorCode;
         fallback?: boolean;
       };
 
@@ -52,29 +66,28 @@ export function ContactForm() {
         // the draft rather than a red box. The form is left filled in on purpose.
         if (result.fallback) {
           setDraft({ name: payload.name, message: payload.message });
-          setError(result.error || "The message could not be delivered.");
+          setError(messageFor(result.code));
           setStatus("fallback");
           return;
         }
 
-        throw new Error(result.error || "Something went wrong. Please try again.");
+        setError(messageFor(result.code));
+        setStatus("error");
+        return;
       }
 
       form.reset();
       setStatus("success");
-    } catch (submitError) {
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : "Something went wrong. Please try again.",
-      );
+    } catch {
+      // The request never completed — offline, or the endpoint is unreachable.
+      setError(copy.errors.unknown);
       setStatus("error");
     }
   }
 
   async function copyEmail() {
     try {
-      await navigator.clipboard.writeText(profile.email);
+      await navigator.clipboard.writeText(identity.email);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -88,17 +101,17 @@ export function ContactForm() {
       <div className="rounded-xl border border-success-line bg-success-soft p-6">
         <p className="flex items-center gap-2 text-sm font-semibold text-success-fg">
           <CheckIcon className="h-4 w-4" />
-          Message sent
+          {copy.successTitle}
         </p>
         <p className="mt-2 text-sm leading-relaxed text-success-fg">
-          Thanks for reaching out — I will get back to you as soon as I can.
+          {copy.successBody}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-4 text-sm font-medium text-success-fg underline underline-offset-4 transition-opacity hover:opacity-70"
         >
-          Send another message
+          {copy.sendAnother}
         </button>
       </div>
     );
@@ -108,15 +121,17 @@ export function ContactForm() {
 
   // A long message can outrun what some mail clients accept in a mailto, which
   // is the other reason the textarea above keeps its contents.
-  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
-    draft.name ? `Portfolio enquiry from ${draft.name}` : "Portfolio enquiry",
+  const mailtoHref = `mailto:${identity.email}?subject=${encodeURIComponent(
+    draft.name
+      ? copy.mailtoSubjectFrom.replace("{name}", draft.name)
+      : copy.mailtoSubject,
   )}&body=${encodeURIComponent(draft.message)}`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
       <div>
         <label htmlFor="name" className={labelClass}>
-          Name
+          {copy.nameLabel}
         </label>
         <input
           id="name"
@@ -125,14 +140,14 @@ export function ContactForm() {
           required
           maxLength={100}
           autoComplete="name"
-          placeholder="Your name"
+          placeholder={copy.namePlaceholder}
           className={`mt-2 ${fieldClass}`}
         />
       </div>
 
       <div>
         <label htmlFor="email" className={labelClass}>
-          Email
+          {copy.emailLabel}
         </label>
         <input
           id="email"
@@ -141,14 +156,14 @@ export function ContactForm() {
           required
           maxLength={200}
           autoComplete="email"
-          placeholder="you@company.com"
+          placeholder={copy.emailPlaceholder}
           className={`mt-2 ${fieldClass}`}
         />
       </div>
 
       <div>
         <label htmlFor="message" className={labelClass}>
-          Message
+          {copy.messageLabel}
         </label>
         <textarea
           id="message"
@@ -156,14 +171,14 @@ export function ContactForm() {
           required
           rows={5}
           maxLength={4000}
-          placeholder="Tell me about the role or the project."
+          placeholder={copy.messagePlaceholder}
           className={`mt-2 resize-y ${fieldClass}`}
         />
       </div>
 
       {/* Honeypot: hidden from people, irresistible to bots. */}
       <div aria-hidden className="hidden">
-        <label htmlFor="company">Company</label>
+        <label htmlFor="company">{copy.companyLabel}</label>
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
@@ -173,15 +188,15 @@ export function ContactForm() {
           disabled={submitting}
           className="inline-flex items-center justify-center rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? "Sending…" : "Send message"}
+          {submitting ? copy.submitting : copy.submit}
         </button>
         <p className="text-xs text-subtle">
-          Or email me directly at{" "}
+          {copy.orEmailDirectly}{" "}
           <a
-            href={`mailto:${profile.email}`}
+            href={`mailto:${identity.email}`}
             className="text-accent underline underline-offset-4"
           >
-            {profile.email}
+            {identity.email}
           </a>
         </p>
       </div>
@@ -205,8 +220,7 @@ export function ContactForm() {
             {error}
           </p>
           <p className="mt-2 text-sm leading-relaxed text-muted">
-            Nothing is lost — your message is still in the box above. Send it
-            straight to my inbox instead:
+            {copy.fallbackBody}
           </p>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -214,7 +228,7 @@ export function ContactForm() {
               href={mailtoHref}
               className="inline-flex items-center justify-center rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
             >
-              Open in mail app
+              {copy.openInMailApp}
             </a>
             <button
               type="button"
@@ -224,16 +238,16 @@ export function ContactForm() {
               {copied ? (
                 <>
                   <CheckIcon className="h-4 w-4" />
-                  Address copied
+                  {copy.addressCopied}
                 </>
               ) : (
-                "Copy address"
+                copy.copyAddress
               )}
             </button>
           </div>
 
           <p className="mt-3 select-all font-mono text-xs text-subtle">
-            {profile.email}
+            {identity.email}
           </p>
         </div>
       ) : null}

@@ -1,11 +1,63 @@
 import { ImageResponse } from "next/og";
-import { profile } from "@/lib/data";
+import { getContent, identity } from "@/lib/content";
+import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
 
-export const alt = `${profile.name} — ${profile.role}`;
+const fallbackProfile = getContent(defaultLocale).profile;
+
+// A static export, so it cannot vary by language — it describes the card in the
+// site's default one.
+export const alt = `${fallbackProfile.name} — ${fallbackProfile.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+/**
+ * Satori — what `next/og` renders with — ships Latin glyphs only, so Thai text
+ * comes out as empty boxes unless a font is handed to it. Google Fonts serves
+ * this family as a single unsubsetted TTF that also covers Latin, which is why
+ * one file is enough for the whole card.
+ *
+ * Wrapped in a try/catch because this runs at build time over the network: if
+ * the fetch fails the card falls back to English rather than the build failing
+ * or, worse, a Thai card full of tofu going out to every share of the link.
+ */
+async function loadThaiFont(): Promise<ArrayBuffer | null> {
+  try {
+    const css = await fetch(
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700",
+    );
+    if (!css.ok) return null;
+
+    const url = (await css.text()).match(
+      /src:\s*url\(([^)]+)\)\s*format\('truetype'\)/,
+    )?.[1];
+    if (!url) return null;
+
+    const font = await fetch(url);
+    return font.ok ? await font.arrayBuffer() : null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function OpengraphImage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const requested = (await params).locale;
+  let locale: Locale = isLocale(requested) ? requested : defaultLocale;
+
+  const thaiFont = locale === "th" ? await loadThaiFont() : null;
+  // No font, no Thai card. Better an English one than a grid of empty boxes.
+  if (locale === "th" && !thaiFont) locale = defaultLocale;
+
+  const { profile } = getContent(locale);
+  const fontFamily = thaiFont ? "Noto Sans Thai" : "sans-serif";
+
   return new ImageResponse(
     (
       <div
@@ -17,7 +69,7 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           background: "#ffffff",
           padding: "72px",
-          fontFamily: "sans-serif",
+          fontFamily,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -35,7 +87,7 @@ export default function OpengraphImage() {
               fontWeight: 700,
             }}
           >
-            {profile.initials}
+            {identity.initials}
           </div>
           <div style={{ display: "flex", fontSize: "22px", color: "#71717a" }}>
             {profile.location}
@@ -100,6 +152,11 @@ export default function OpengraphImage() {
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: thaiFont
+        ? [{ name: "Noto Sans Thai", data: thaiFont, weight: 700, style: "normal" }]
+        : undefined,
+    },
   );
 }

@@ -5,10 +5,11 @@ same stack the résumé claims: **Next.js 16 (App Router), TypeScript, Tailwind 
 v4** — so the site is its own evidence.
 
 - Homepage with hero, about, experience timeline, projects, skills and contact
-- A case-study page per project at `/projects/[slug]`, statically generated
+- English and Thai, each on its own URL (`/en`, `/th`) and statically generated
+- A case-study page per project at `/[locale]/projects/[slug]`
 - Working contact form backed by a Next.js Route Handler
-- SEO: per-page metadata, JSON-LD `Person` schema, `sitemap.xml`, `robots.txt`,
-  and a generated Open Graph image
+- SEO: per-page metadata, hreflang alternates, JSON-LD `Person` schema,
+  `sitemap.xml`, `robots.txt`, and a generated Open Graph image per language
 
 ## Getting started
 
@@ -31,12 +32,25 @@ Then open <http://localhost:3000>.
 
 ## Editing the content
 
-Everything you will realistically want to change lives in **`lib/data.ts`** —
-name, contact details, summary, experience, projects, skills, education. The
-components read from it, so you never have to touch JSX to update the copy.
+Everything you will realistically want to change lives in **`lib/content/`**.
+The components read from it, so you never have to touch JSX to update the copy.
 
-Fill in your **`socials`** URLs there. A social with an empty `href` is hidden
-everywhere automatically, which is why no broken links show up right now.
+- **`en.ts`** and **`th.ts`** — one file per language, holding every sentence on
+  the site: summary, experience, projects, skills, education, and the interface
+  labels under `ui`. The two are mirror images.
+- **`types.ts`** — the `Content` type both language files are checked against.
+  Add a field to one language and the build fails until the other has it too,
+  which is what stops an English sentence turning up on the Thai page.
+- **`shared.ts`** — the things that are the same in every language: email,
+  phone, social URLs, the monogram in the header, and the framework names in
+  the hero. Your written-out name is not one of them — it lives in each
+  language's `profile.name`, so the Thai page can spell it in Thai.
+
+Fill in your **`socials`** URLs in `shared.ts`. A social with an empty `href` is
+hidden everywhere automatically, which is why no broken links show up right now.
+
+Editing one language and not the other is fine for prose — nothing checks that a
+paragraph was actually translated, only that the field exists.
 
 ### Adding projects
 
@@ -94,6 +108,11 @@ throughout, so a recruiter's message is never lost to a misconfigured deploy.
 Validation failures and rate limiting still show as ordinary inline errors —
 those are worth retrying, so they get the red box.
 
+The endpoint answers with a `code` rather than a sentence, because it has no way
+to know which language the page is in. The wording lives with the rest of the
+copy, under `ui.form.errors` in each language file; the English sentence is sent
+alongside the code so a response read in a terminal or a log still makes sense.
+
 To turn it on:
 
 1. Create a free Resend account and generate an API key.
@@ -150,26 +169,61 @@ blanks as unset for that reason, but nothing else in the stack will.
 - [ ] Hit **Reply** on that test mail and check it addresses the sender rather
       than you — a wrong reply-to fails silently, and you only find out when a
       recruiter thinks you ignored them
+- [ ] Open `/th` as well as `/en` and read them both — nothing checks that a
+      paragraph was translated, only that the field exists, so a stale English
+      sentence on the Thai page will not fail the build
 
 ## Project structure
 
 ```
+proxy.ts                  Sends un-prefixed URLs to a language
 app/
-  layout.tsx              Root layout, fonts, metadata, header + footer
-  page.tsx                Homepage, composes the sections
   globals.css             Tailwind import and design tokens
   icon.svg                Favicon
-  opengraph-image.tsx     Generated 1200x630 social preview
   robots.ts, sitemap.ts   SEO routes
-  not-found.tsx           404 page
   api/contact/route.ts    Contact form handler
-  projects/[slug]/        Project case-study pages
+  [locale]/
+    layout.tsx            Root layout, fonts, metadata, header + footer
+    page.tsx              Homepage, composes the sections
+    not-found.tsx         404 page
+    [...rest]/            Catches unknown paths and 404s them
+    opengraph-image.tsx   Generated 1200x630 social preview
+    projects/[slug]/      Project case-study pages
 components/               Section and UI components
 lib/
-  data.ts                 All site content — edit here
+  i18n.ts                 Locales, cookie, path helpers
+  content/                All site content — edit here
   site.ts                 Canonical site URL
 public/projects/          Screenshots, one folder per project slug
 ```
+
+## Languages
+
+The site is bilingual: every page exists at `/en/...` and `/th/...`, both built
+ahead of time. A visitor who lands on a URL with no language in it — `/`, or a
+link to `/projects/x` — is redirected by `proxy.ts`, which picks a language from
+the `NEXT_LOCALE` cookie first and the browser's `Accept-Language` header
+second. The switcher in the header writes that cookie, so a deliberate choice
+survives the next visit even if it disagrees with the browser.
+
+Both languages are real links to real URLs, which is what lets a search engine
+index them separately and a recruiter share one directly. Each page declares the
+other as an `hreflang` alternate.
+
+To add a third language:
+
+1. Add its code to `locales` in `lib/i18n.ts`, along with a name, an
+   abbreviation and a BCP 47 tag.
+2. Copy `lib/content/en.ts` to `lib/content/<code>.ts` and translate it. The
+   `Content` type will tell you if you miss anything.
+3. Register it in the `content` map in `lib/content/index.ts`.
+
+Nothing else needs touching — the routes, sitemap, hreflang tags and the
+switcher are all generated from that list.
+
+Thai text renders in Noto Sans Thai, which sits behind Geist in the font stack
+in `app/globals.css`. Because browsers only download a font once a glyph needs
+it, the English pages never fetch it.
 
 ## Theming
 

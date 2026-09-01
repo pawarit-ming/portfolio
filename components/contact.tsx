@@ -2,22 +2,24 @@ import { Section } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
 import { Tag } from "@/components/tag";
 import { MailIcon, PhoneIcon, PinIcon, socialIcons } from "@/components/icons";
-import { profile, socials, targetRoles } from "@/lib/data";
+import type { Content } from "@/lib/content";
+import { identity, socials } from "@/lib/content";
 
-export function Contact() {
+export function Contact({ content }: { content: Content }) {
+  const { profile, targetRoles, ui } = content;
   const activeSocials = socials.filter((social) => social.href.trim() !== "");
 
   return (
     <Section
       id="contact"
-      eyebrow="Contact"
-      title="Let's talk"
-      description="I am open to developer roles in Bangkok, Chonburi, or remote. Drop me a line and I will reply."
+      eyebrow={ui.contact.eyebrow}
+      title={ui.contact.title}
+      description={ui.contact.description}
     >
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div className="lg:col-span-2">
           <h3 className="text-xs font-medium uppercase tracking-wider text-subtle">
-            Roles I am open to
+            {ui.contact.rolesHeading}
           </h3>
           <ul className="mt-3 flex flex-wrap gap-2">
             {targetRoles.map((role) => (
@@ -32,32 +34,32 @@ export function Contact() {
           <ul className="space-y-5">
             <li>
               <a
-                href={`mailto:${profile.email}`}
+                href={`mailto:${identity.email}`}
                 className="group flex items-start gap-3"
               >
                 <MailIcon className="mt-0.5 h-5 w-5 shrink-0 text-faint" />
                 <span>
                   <span className="block text-xs font-medium uppercase tracking-wider text-subtle">
-                    Email
+                    {ui.contact.emailLabel}
                   </span>
                   <span className="mt-0.5 block text-sm text-fg underline-offset-4 group-hover:underline">
-                    {profile.email}
+                    {identity.email}
                   </span>
                 </span>
               </a>
             </li>
             <li>
               <a
-                href={`tel:${profile.phoneHref}`}
+                href={`tel:${identity.phoneHref}`}
                 className="group flex items-start gap-3"
               >
                 <PhoneIcon className="mt-0.5 h-5 w-5 shrink-0 text-faint" />
                 <span>
                   <span className="block text-xs font-medium uppercase tracking-wider text-subtle">
-                    Phone
+                    {ui.contact.phoneLabel}
                   </span>
                   <span className="mt-0.5 block text-sm text-fg underline-offset-4 group-hover:underline">
-                    {profile.phone}
+                    {identity.phone}
                   </span>
                 </span>
               </a>
@@ -66,7 +68,7 @@ export function Contact() {
               <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-faint" />
               <span>
                 <span className="block text-xs font-medium uppercase tracking-wider text-subtle">
-                  Location
+                  {ui.contact.locationLabel}
                 </span>
                 <span className="mt-0.5 block text-sm text-fg">
                   {profile.location}
@@ -98,7 +100,7 @@ export function Contact() {
         </div>
 
         <div className="lg:col-span-3">
-          <ContactForm />
+          <ContactForm copy={ui.form} />
         </div>
       </div>
     </Section>

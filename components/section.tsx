@@ -2,7 +2,15 @@ import type { ReactNode } from "react";
 
 type SectionProps = {
   id: string;
-  eyebrow: string;
+  /**
+   * The small accent label above the heading.
+   *
+   * Optional: it exists to name the section when the heading itself is a phrase
+   * — "Experience" over "Where I have worked". A section whose heading is
+   * already the plain noun has nothing to put here, and repeating the word in
+   * two sizes would only look like a mistake.
+   */
+  eyebrow?: string;
   title: string;
   description?: string;
   children: ReactNode;
@@ -30,12 +38,16 @@ export function Section({
     >
       <div className="mx-auto w-full max-w-5xl px-6 py-20 sm:py-24 lg:px-8">
         <header className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            {eyebrow}
-          </p>
+          {eyebrow ? (
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+              {eyebrow}
+            </p>
+          ) : null}
           <h2
             id={`${id}-heading`}
-            className="mt-3 text-3xl font-semibold tracking-tight text-fg sm:text-4xl"
+            className={`text-3xl font-semibold tracking-tight text-fg sm:text-4xl ${
+              eyebrow ? "mt-3" : ""
+            }`}
           >
             {title}
           </h2>

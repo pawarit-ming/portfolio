@@ -2,15 +2,24 @@ import Link from "next/link";
 import { Section } from "@/components/section";
 import { TagList } from "@/components/tag";
 import { ArrowRightIcon } from "@/components/icons";
-import { experience } from "@/lib/data";
+import type { Content } from "@/lib/content";
+import { localePath, type Locale } from "@/lib/i18n";
 
-export function ExperienceSection() {
+export function ExperienceSection({
+  locale,
+  content,
+}: {
+  locale: Locale;
+  content: Content;
+}) {
+  const { experience, ui } = content;
+
   return (
     <Section
       id="experience"
-      eyebrow="Experience"
-      title="Where I have worked"
-      description="Two internships: one shipping a production frontend, one on the other side of it — writing and automating the tests."
+      eyebrow={ui.experience.eyebrow}
+      title={ui.experience.title}
+      description={ui.experience.description}
       tinted
     >
       <ol className="relative space-y-10 border-l border-line pl-6 sm:pl-8">
@@ -52,10 +61,10 @@ export function ExperienceSection() {
 
             {job.projectSlug ? (
               <Link
-                href={`/projects/${job.projectSlug}`}
+                href={localePath(locale, `/projects/${job.projectSlug}`)}
                 className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent underline-offset-4 transition-colors hover:text-accent-strong hover:underline"
               >
-                Read the case study
+                {ui.experience.readCaseStudy}
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             ) : null}

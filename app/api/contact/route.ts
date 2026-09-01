@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { profile } from "@/lib/data";
+import { identity } from "@/lib/content/shared";
+import type { ContactErrorCode } from "@/lib/content/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,13 +61,34 @@ function fromEnv(value: string | undefined, fallback: string): string {
   return value?.trim() || fallback;
 }
 
+/**
+ * The site is bilingual and this endpoint is not — it has no reliable way to
+ * know which language the visitor is reading. So it names the failure with a
+ * code the form looks up, and keeps the English sentence alongside it for
+ * anyone reading the response in a terminal or a server log.
+ *
+ * `fallback` marks the failures where retrying is pointless because delivery is
+ * broken at our end; the form then offers the mailto instead.
+ */
+function fail(
+  code: ContactErrorCode,
+  error: string,
+  status: number,
+  fallback = false,
+) {
+  return NextResponse.json(
+    fallback ? { code, error, fallback } : { code, error },
+    { status },
+  );
+}
+
 export async function POST(request: Request) {
   let body: unknown;
 
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return fail("invalid_body", "Invalid request body.", 400);
   }
 
   const { name, email, message, company } = (body ?? {}) as Record<
@@ -85,10 +107,7 @@ export async function POST(request: Request) {
   const cleanMessage = typeof message === "string" ? message.trim() : "";
 
   if (!cleanName || !cleanEmail || !cleanMessage) {
-    return NextResponse.json(
-      { error: "Name, email and message are all required." },
-      { status: 400 },
-    );
+    return fail("missing_fields", "Name, email and message are all required.", 400);
   }
 
   if (
@@ -96,25 +115,23 @@ export async function POST(request: Request) {
     cleanEmail.length > MAX_EMAIL ||
     cleanMessage.length > MAX_MESSAGE
   ) {
-    return NextResponse.json({ error: "That message is too long." }, { status: 400 });
+    return fail("too_long", "That message is too long.", 400);
   }
 
   if (!EMAIL_PATTERN.test(cleanEmail)) {
-    return NextResponse.json(
-      { error: "That email address does not look right." },
-      { status: 400 },
-    );
+    return fail("invalid_email", "That email address does not look right.", 400);
   }
 
   if (isRateLimited(clientKey(request))) {
-    return NextResponse.json(
-      { error: "Too many messages just now. Please try again in a minute." },
-      { status: 429 },
+    return fail(
+      "rate_limited",
+      "Too many messages just now. Please try again in a minute.",
+      429,
     );
   }
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
-  const to = fromEnv(process.env.CONTACT_TO_EMAIL, profile.email);
+  const to = fromEnv(process.env.CONTACT_TO_EMAIL, identity.email);
   const from = fromEnv(
     process.env.CONTACT_FROM_EMAIL,
     "Portfolio <onboarding@resend.dev>",
@@ -125,12 +142,11 @@ export async function POST(request: Request) {
     console.warn(
       "[contact] RESEND_API_KEY is not set — the message was not delivered.",
     );
-    return NextResponse.json(
-      {
-        error: "Email delivery is not configured on this deployment.",
-        fallback: true,
-      },
-      { status: 503 },
+    return fail(
+      "not_configured",
+      "Email delivery is not configured on this deployment.",
+      503,
+      true,
     );
   }
 
@@ -159,18 +175,17 @@ export async function POST(request: Request) {
     if (!response.ok) {
       const detail = await response.text().catch(() => "");
       console.error("[contact] Resend rejected the request:", response.status, detail);
-      return NextResponse.json(
-        { error: "The mail service rejected the message.", fallback: true },
-        { status: 502 },
+      return fail(
+        "provider_rejected",
+        "The mail service rejected the message.",
+        502,
+        true,
       );
     }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[contact] Unexpected failure:", error);
-    return NextResponse.json(
-      { error: "The message could not be delivered.", fallback: true },
-      { status: 500 },
-    );
+    return fail("delivery_failed", "The message could not be delivered.", 500, true);
   }
 }

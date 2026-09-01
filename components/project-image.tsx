@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ProjectImage as ProjectImageData } from "@/lib/data";
+import type { ProjectImage as ProjectImageData } from "@/lib/content";
 
 const aspectClass = {
   wide: "aspect-[16/10]",

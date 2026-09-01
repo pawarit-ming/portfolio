@@ -3,15 +3,24 @@ import { Section } from "@/components/section";
 import { TagList } from "@/components/tag";
 import { ProjectImageFrame } from "@/components/project-image";
 import { ArrowRightIcon } from "@/components/icons";
-import { otherProjects, projects } from "@/lib/data";
+import type { Content } from "@/lib/content";
+import { localePath, type Locale } from "@/lib/i18n";
 
-export function Projects() {
+export function Projects({
+  locale,
+  content,
+}: {
+  locale: Locale;
+  content: Content;
+}) {
+  const { projects, otherProjects, ui } = content;
+
   return (
     <Section
       id="projects"
-      eyebrow="Projects"
-      title="Things I have built"
-      description="Two projects that shaped how I work — a government asset platform in React and Next.js, and a Flutter app that identifies individual cattle from a photo."
+      eyebrow={ui.projects.eyebrow}
+      title={ui.projects.title}
+      description={ui.projects.description}
     >
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
@@ -32,7 +41,7 @@ export function Projects() {
 
               <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">
                 <Link
-                  href={`/projects/${project.slug}`}
+                  href={localePath(locale, `/projects/${project.slug}`)}
                   className="before:absolute before:inset-0 before:content-['']"
                 >
                   {project.title}
@@ -46,7 +55,13 @@ export function Projects() {
 
               <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4">
                 {project.metrics.slice(0, 4).map((metric) => (
-                  <div key={metric.label} className="flex flex-col-reverse">
+                  // Same reversal as the hero stats: value on top, dt still
+                  // first in the DOM, and `justify-end` keeping the values
+                  // level when one label wraps onto a second line.
+                  <div
+                    key={metric.label}
+                    className="flex flex-col-reverse justify-end"
+                  >
                     <dt className="mt-0.5 text-xs leading-snug text-subtle">
                       {metric.label}
                     </dt>
@@ -62,7 +77,7 @@ export function Projects() {
               </div>
 
               <p className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-medium text-accent">
-                Read the case study
+                {ui.projects.readCaseStudy}
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </p>
             </div>
@@ -73,7 +88,7 @@ export function Projects() {
       {otherProjects.length > 0 ? (
         <div className="mt-16">
           <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-subtle">
-            Other projects
+            {ui.projects.otherHeading}
           </h3>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

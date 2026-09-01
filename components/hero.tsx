@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { profile, socials, targetRoles } from "@/lib/data";
+import type { Content } from "@/lib/content";
+import { identity, primaryStack, socials } from "@/lib/content";
+import { localePath, type Locale } from "@/lib/i18n";
 import {
   ArrowRightIcon,
   MailIcon,
@@ -8,26 +10,14 @@ import {
   socialIcons,
 } from "@/components/icons";
 
-const primaryStack = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "Flutter",
-  "Dart",
-];
-
-// One stat per direction I am applying in: web, mobile, and test automation.
-const stats = [
-  { value: "22", label: "Production web screens shipped in an internship" },
-  { value: "25+", label: "Screens in a cross-platform Flutter app" },
-  {
-    value: "Appium",
-    label: "Android suite automated in Java, reported with Extent Reports",
-  },
-];
-
-export function Hero() {
+export function Hero({
+  locale,
+  content,
+}: {
+  locale: Locale;
+  content: Content;
+}) {
+  const { profile, targetRoles, ui } = content;
   const activeSocials = socials.filter((social) => social.href.trim() !== "");
 
   return (
@@ -61,8 +51,10 @@ export function Hero() {
           {profile.headline}
         </p>
 
+        {/* Thai puts no word after the list, so the suffix is allowed to be
+            empty and the space before it is dropped rather than left hanging. */}
         <p className="mt-5 max-w-2xl text-sm leading-relaxed text-subtle">
-          <span>Open to</span>{" "}
+          <span>{ui.hero.openToPrefix}</span>{" "}
           {targetRoles.map((role, index) => (
             <span key={role.label}>
               {index > 0 ? (
@@ -72,23 +64,23 @@ export function Hero() {
               ) : null}
               <span className="text-body">{role.short}</span>
             </span>
-          ))}{" "}
-          <span>roles</span>
+          ))}
+          {ui.hero.openToSuffix ? <span> {ui.hero.openToSuffix}</span> : null}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
-            href="/#projects"
+            href={localePath(locale, "#projects")}
             className="group inline-flex items-center gap-2 rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
           >
-            View projects
+            {ui.hero.viewProjects}
             <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
-            href="/#contact"
+            href={localePath(locale, "#contact")}
             className="inline-flex items-center gap-2 rounded-md border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-stronger hover:bg-surface"
           >
-            Get in touch
+            {ui.getInTouch}
           </Link>
 
           {activeSocials.length > 0 ? (
@@ -119,20 +111,20 @@ export function Hero() {
           </li>
           <li>
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${identity.email}`}
               className="inline-flex items-center gap-2 underline-offset-4 transition-colors hover:text-fg hover:underline"
             >
               <MailIcon className="h-4 w-4 text-faint" />
-              {profile.email}
+              {identity.email}
             </a>
           </li>
           <li>
             <a
-              href={`tel:${profile.phoneHref}`}
+              href={`tel:${identity.phoneHref}`}
               className="inline-flex items-center gap-2 underline-offset-4 transition-colors hover:text-fg hover:underline"
             >
               <PhoneIcon className="h-4 w-4 text-faint" />
-              {profile.phone}
+              {identity.phone}
             </a>
           </li>
         </ul>
@@ -149,11 +141,14 @@ export function Hero() {
         </ul>
 
         <dl className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
-          {stats.map((stat) => (
+          {ui.hero.stats.map((stat) => (
             // Reversed so the value sits on top, while the DOM keeps dt before dd.
+            // `justify-end` is the top here, because the main axis runs upward:
+            // without it a one-line label leaves its value hanging a line below
+            // its neighbours', since the cells all stretch to the tallest one.
             <div
               key={stat.label}
-              className="flex flex-col-reverse bg-card px-5 py-6"
+              className="flex flex-col-reverse justify-end bg-card px-5 py-6"
             >
               <dt className="mt-1.5 text-sm leading-snug text-muted">
                 {stat.label}
