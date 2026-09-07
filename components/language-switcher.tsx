@@ -57,6 +57,10 @@ export function LanguageSwitcher({
             key={item}
             href={withLocale(pathname, item)}
             hrefLang={item}
+            // Same page, same place, other language. Next.js scrolls to the
+            // top of a route change by default, which here would throw away
+            // whatever the reader was in the middle of reading.
+            scroll={false}
             // Marks the language in use, not the current page — `aria-current`
             // is the closest thing a two-state link group has to a pressed state.
             aria-current={active ? "true" : undefined}
