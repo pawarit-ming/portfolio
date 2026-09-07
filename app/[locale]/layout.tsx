@@ -118,6 +118,12 @@ export default async function RootLayout({
   return (
     <html
       lang={localeTags[locale]}
+      // Tells Next.js that the smooth scrolling in globals.css is deliberate,
+      // so it can switch to `auto` while it repositions the page on a route
+      // change. Without it that reposition inherits `smooth` and the reader
+      // watches the page glide instead of arriving. Hash links are exempt and
+      // keep gliding, which is the case the property was added for.
+      data-scroll-behavior="smooth"
       // next-themes writes the theme class here before paint, which the server
       // render cannot know about.
       suppressHydrationWarning
