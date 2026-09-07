@@ -148,7 +148,8 @@ export default async function RootLayout({
             locale={locale}
             ui={ui}
             navigation={navigation}
-            profile={profile}
+            name={profile.name}
+            role={profile.role}
           />
         </ThemeProvider>
       </body>

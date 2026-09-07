@@ -302,6 +302,41 @@ export type UiCopy = {
   };
 };
 
+/**
+ * A role the site can be re-aimed at, for a job application in a direction the
+ * default page does not lead with. `/[locale]/for/dba` is the DBA version.
+ */
+export const variants = ["dba"] as const;
+
+export type Variant = (typeof variants)[number];
+
+/**
+ * Everything a variant is allowed to change — and it is all framing: who the
+ * page says I am and what I am looking for. What I have actually done is not
+ * in here.
+ *
+ * Deliberately not a partial of `Content`. A variant that can override any
+ * field is a second site to keep in step with the first, and the two drift the
+ * moment either is edited alone. The experience, projects, skills and
+ * certificates below the hero are the same evidence whichever job is reading
+ * them, so they are shared rather than copied — which also means a variant
+ * cannot quietly claim something the default page does not.
+ */
+export type VariantOverride = {
+  /** Replaces `profile.role` — the hero's lead line and the page title. */
+  role: string;
+  /** Replaces `profile.headline`. */
+  headline: string;
+  /** Replaces `profile.availability`, which would otherwise still say developer. */
+  availability: string;
+  /** Replaces `profile.summary` — the About paragraph. */
+  summary: string;
+  /** Replaces `targetRoles`, so the role being applied for leads. */
+  targetRoles: TargetRole[];
+  /** Replaces `ui.hero.stats`. */
+  stats: Metric[];
+};
+
 export type Content = {
   profile: Profile;
   targetRoles: TargetRole[];

@@ -19,6 +19,12 @@ function alternates(path: string) {
   };
 }
 
+/**
+ * The role variants under `/[locale]/for/` are deliberately absent. They are
+ * the same page with a different heading, so listing them would offer a crawler
+ * two near-identical URLs per language; they carry `noindex` for the same
+ * reason. If you add one, do not add it here.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   const paths = ["", ...getProjectSlugs().map((slug) => `/projects/${slug}`)];

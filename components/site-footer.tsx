@@ -1,29 +1,46 @@
+"use client";
+
 import Link from "next/link";
-import type { NavItem, Profile, UiCopy } from "@/lib/content";
-import { identity, socials } from "@/lib/content";
-import { localePath, type Locale } from "@/lib/i18n";
+import { usePathname } from "next/navigation";
+// Leaf modules, not the `@/lib/content` barrel: the barrel imports every
+// language file and this is a Client Component.
+import type { NavItem, UiCopy } from "@/lib/content/types";
+import { identity, socials } from "@/lib/content/shared";
+import { sectionHref, type Locale } from "@/lib/i18n";
 import { socialIcons } from "@/components/icons";
+
+/**
+ * A Client Component only so that its section links can read the current path
+ * — see `sectionHref`. As with the header, it is handed the few strings it
+ * shows rather than the whole `ui` object, since every prop is serialised into
+ * the RSC payload and the contact form's copy has no business being here.
+ */
+type FooterCopy = Pick<UiCopy, "footerNavLabel" | "footer">;
 
 export function SiteFooter({
   locale,
   ui,
   navigation,
-  profile,
+  name,
+  role,
 }: {
   locale: Locale;
-  ui: UiCopy;
+  ui: FooterCopy;
   navigation: NavItem[];
-  profile: Profile;
+  /** Spelled in the current language, like the header's. */
+  name: string;
+  role: string;
 }) {
   const activeSocials = socials.filter((social) => social.href.trim() !== "");
+  const pathname = usePathname() ?? "/";
 
   return (
     <footer className="no-print border-t border-line bg-card">
       <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:px-8">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="text-sm font-semibold text-fg">{profile.name}</p>
-            <p className="mt-1 text-sm text-muted">{profile.role}</p>
+            <p className="text-sm font-semibold text-fg">{name}</p>
+            <p className="mt-1 text-sm text-muted">{role}</p>
             <a
               href={`mailto:${identity.email}`}
               className="mt-3 inline-block text-sm text-accent underline-offset-4 transition-colors hover:text-accent-strong hover:underline"
@@ -38,7 +55,7 @@ export function SiteFooter({
                 {navigation.map((item) => (
                   <li key={item.hash}>
                     <Link
-                      href={localePath(locale, item.hash)}
+                      href={sectionHref(pathname, locale, item.hash)}
                       className="text-sm text-muted underline-offset-4 transition-colors hover:text-fg hover:underline"
                     >
                       {item.label}
@@ -73,7 +90,7 @@ export function SiteFooter({
 
         <div className="mt-10 border-t border-line pt-6">
           <p className="text-xs text-subtle">
-            © {new Date().getFullYear()} {profile.name}. {ui.footer.builtWith}
+            © {new Date().getFullYear()} {name}. {ui.footer.builtWith}
           </p>
         </div>
       </div>

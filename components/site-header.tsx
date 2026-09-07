@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 // Leaf modules, not the `@/lib/content` barrel: the barrel imports every
 // language file and this is a Client Component.
 import type { NavItem, UiCopy } from "@/lib/content/types";
 import { identity } from "@/lib/content/shared";
-import { localePath, type Locale } from "@/lib/i18n";
+import { sectionHref, sectionsPath, type Locale } from "@/lib/i18n";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -55,11 +56,17 @@ export function SiteHeader({
 
   const close = () => setOpen(false);
 
+  // Section links resolve against the page they are on, so the navigation on a
+  // role variant keeps the reader on that variant instead of returning them to
+  // the default page.
+  const pathname = usePathname() ?? "/";
+  const href = (hash: string) => sectionHref(pathname, locale, hash);
+
   return (
     <header className="no-print sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 lg:px-8">
         <Link
-          href={localePath(locale)}
+          href={sectionsPath(pathname, locale)}
           onClick={close}
           className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-fg"
         >
@@ -76,7 +83,7 @@ export function SiteHeader({
           {navigation.map((item) => (
             <Link
               key={item.hash}
-              href={localePath(locale, item.hash)}
+              href={href(item.hash)}
               className="rounded-md px-3 py-2 text-sm text-muted transition-colors hover:bg-frame hover:text-fg"
             >
               {item.label}
@@ -90,7 +97,7 @@ export function SiteHeader({
               mail client configured gets nothing at all from a mailto, and this
               button shows no address to fall back on. */}
           <Link
-            href={localePath(locale, "#contact")}
+            href={href("#contact")}
             className="inline-flex items-center rounded-md bg-invert px-3.5 py-2 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
           >
             {ui.getInTouch}
@@ -133,7 +140,7 @@ export function SiteHeader({
             {navigation.map((item) => (
               <li key={item.hash}>
                 <Link
-                  href={localePath(locale, item.hash)}
+                  href={href(item.hash)}
                   onClick={close}
                   className="block rounded-md px-3 py-2.5 text-sm text-body transition-colors hover:bg-frame"
                 >
@@ -143,7 +150,7 @@ export function SiteHeader({
             ))}
             <li className="px-3 pt-2 pb-1">
               <Link
-                href={localePath(locale, "#contact")}
+                href={href("#contact")}
                 onClick={close}
                 className="inline-flex w-full items-center justify-center rounded-md bg-invert px-3.5 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
               >
