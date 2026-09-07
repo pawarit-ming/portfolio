@@ -86,6 +86,7 @@ export default async function VariantHome({
       locale={locale}
       content={getContent(locale, variant)}
       stack={variantDefinitions[variant].stack}
+      basePath={`/for/${variant}`}
     />
   );
 }

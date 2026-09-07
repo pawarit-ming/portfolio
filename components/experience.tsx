@@ -7,9 +7,12 @@ import { localePath, type Locale } from "@/lib/i18n";
 
 export function ExperienceSection({
   locale,
+  basePath = "",
   content,
 }: {
   locale: Locale;
+  /** `""` on the default site, `"/for/dba"` inside a role variant. */
+  basePath?: string;
   content: Content;
 }) {
   const { experience, ui } = content;
@@ -61,7 +64,7 @@ export function ExperienceSection({
 
             {job.projectSlug ? (
               <Link
-                href={localePath(locale, `/projects/${job.projectSlug}`)}
+                href={localePath(locale, `${basePath}/projects/${job.projectSlug}`)}
                 className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent underline-offset-4 transition-colors hover:text-accent-strong hover:underline"
               >
                 {ui.experience.readCaseStudy}

@@ -20,11 +20,17 @@ export function HomeSections({
   locale,
   content,
   stack,
+  basePath = "",
 }: {
   locale: Locale;
   content: Content;
   /** Hero chips; omitted on the default page, which uses the shared list. */
   stack?: string[];
+  /**
+   * `""` on the default page, `"/for/dba"` on a variant — so the project cards
+   * link to the case study inside the world the reader is already in.
+   */
+  basePath?: string;
 }) {
   return (
     <>
@@ -32,8 +38,8 @@ export function HomeSections({
           route that renders this component has the sections on it. */}
       <Hero content={content} stack={stack} />
       <About content={content} />
-      <ExperienceSection locale={locale} content={content} />
-      <Projects locale={locale} content={content} />
+      <ExperienceSection locale={locale} content={content} basePath={basePath} />
+      <Projects locale={locale} content={content} basePath={basePath} />
       <Skills content={content} />
       <Contact content={content} />
     </>

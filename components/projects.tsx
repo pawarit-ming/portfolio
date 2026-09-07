@@ -8,9 +8,12 @@ import { localePath, type Locale } from "@/lib/i18n";
 
 export function Projects({
   locale,
+  basePath = "",
   content,
 }: {
   locale: Locale;
+  /** `""` on the default site, `"/for/dba"` inside a role variant. */
+  basePath?: string;
   content: Content;
 }) {
   const { projects, otherProjects, ui } = content;
@@ -41,7 +44,7 @@ export function Projects({
 
               <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">
                 <Link
-                  href={localePath(locale, `/projects/${project.slug}`)}
+                  href={localePath(locale, `${basePath}/projects/${project.slug}`)}
                   className="before:absolute before:inset-0 before:content-['']"
                 >
                   {project.title}
