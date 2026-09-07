@@ -265,6 +265,13 @@ export const en: Content = {
    */
   otherProjects: [
     {
+      title: "E-commerce Analytics Dashboard",
+      description:
+        "Analysis of a public e-commerce dataset from Kaggle: cleaning and selection in Alteryx, then a Power BI dashboard over the result. Coursework, in a group of six.",
+      period: "Nov 2024",
+      stack: ["Alteryx", "Power BI", "ETL", "Data Visualisation"],
+    },
+    {
       title: "Retail Database Design",
       description:
         "A 13-table, 14-foreign-key schema for a clothing retailer — membership, branches, carts, orders, products, payments, shipping, employees, receipts and returns. Modelled from the business rules up: ER diagrams in Chen and Crow's Foot notation, a relational schema and a data dictionary, then the DDL and queries. Coursework in a group of five, with Uniqlo as the case study.",
