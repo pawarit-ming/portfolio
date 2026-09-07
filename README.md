@@ -136,6 +136,15 @@ a reader could not already verify further down the same page — a variant that
 claims more than the evidence under it will be found out in the interview it
 was meant to win.
 
+The case studies exist under a variant too, at
+`/[locale]/for/<variant>/projects/<slug>` — the same component and the same
+content as the default route, so nothing is duplicated but the URL. Without
+them a reader who followed "Read the case study" landed back on the default
+site and every link in the header kept them there, which is the one thing the
+variant is for. Links are built through `variantPrefix`, so they carry whichever
+world they are in; add a link with a bare `localePath` and it will quietly
+break that.
+
 Variants are `noindex` and stay out of `sitemap.ts`, since near-identical pages
 are what a search engine reads as duplicate content. They are unlisted, not
 secret: nothing links to one, and anyone with the URL can open it.

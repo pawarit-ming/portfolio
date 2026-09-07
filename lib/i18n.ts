@@ -84,17 +84,36 @@ export function withLocale(pathname: string, locale: Locale): string {
 }
 
 /**
- * Whether the page at `pathname` is one that carries the homepage sections.
+ * The role-variant prefix a path is standing in, or `""` for the default site.
  *
- * Two routes do: the homepage, and a role variant under `/for/`. Both render
- * the same sections from the same components, so a link to `#projects` has
- * somewhere to land on either.
+ *   /en                        -> ""
+ *   /en/for/dba                -> "/for/dba"
+ *   /en/for/dba/projects/x     -> "/for/dba"
+ *
+ * Every in-site link is built through this, which is what keeps a reader
+ * inside the variant they arrived in. The variant is a path segment rather
+ * than a query parameter for exactly this reason: it survives in
+ * `usePathname()`, so the header and footer can read it without
+ * `useSearchParams`, which on a prerendered route would push them — and every
+ * page they sit on — into client rendering.
+ */
+export function variantPrefix(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  if (!isLocale(segments[0])) return "";
+
+  return segments[1] === "for" && segments[2] ? `/for/${segments[2]}` : "";
+}
+
+/**
+ * Whether the page at `pathname` is one that carries the homepage sections:
+ * the homepage itself, or a variant's homepage. A case study is not one, even
+ * under a variant — its sections are elsewhere.
  */
 export function hasSections(pathname: string): boolean {
   const segments = pathname.split("/").filter(Boolean);
   if (!isLocale(segments[0])) return false;
 
-  // ["en"] is the homepage; ["en", "for", "dba"] is a role variant.
+  // ["en"] is the homepage; ["en", "for", "dba"] is a variant's homepage.
   return (
     segments.length === 1 || (segments.length === 3 && segments[1] === "for")
   );
@@ -104,27 +123,24 @@ export function hasSections(pathname: string): boolean {
  * Where a section link — `#about`, `#projects` — should point from `pathname`.
  *
  * A bare hash on a page that has the sections, which keeps the reader where
- * they are. Naming the homepage instead is what used to send someone reading
- * `/en/for/dba` back to `/en` the moment they touched the navigation, swapping
- * the pitch they were sent for the default one halfway through.
- *
- * From a project page the sections are genuinely elsewhere, so there the link
- * has to name the homepage.
+ * they are. From a case study the sections are genuinely elsewhere, so the
+ * link names the homepage — the variant's homepage when reading inside one,
+ * which is what stops a case study being a one-way door back to the default
+ * page.
  */
 export function sectionHref(
   pathname: string,
   locale: Locale,
   hash: string,
 ): string {
-  return hasSections(pathname) ? hash : localePath(locale, hash);
+  if (hasSections(pathname)) return hash;
+
+  return localePath(locale, `${variantPrefix(pathname)}${hash}`);
 }
 
-/**
- * The same rule for links that mean "the top of this page" rather than a
- * section of it — the masthead. From a variant it stays on the variant.
- */
+/** The homepage of whichever world `pathname` is in — the masthead's link. */
 export function sectionsPath(pathname: string, locale: Locale): string {
-  return hasSections(pathname) ? pathname : localePath(locale);
+  return localePath(locale, variantPrefix(pathname));
 }
 
 /**
