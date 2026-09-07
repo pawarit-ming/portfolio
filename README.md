@@ -116,6 +116,30 @@ Every entry needs a `file`. A certificate nobody can open is a claim, and the
 reason to list these at all is that they are checkable — so anything you add
 here is public, name and credential number included.
 
+## Role variants
+
+The site leads with development work. `/[locale]/for/dba` is the same site
+re-aimed at database roles — the link to put on that application, while the
+default page stays as it is for the rest.
+
+A variant lives in `lib/content/variants.ts` and may change six things: the
+role, headline, availability line and summary, the list of target roles, the
+hero stats, and the chips under the headline. That is the whole of it. Everything
+below — experience, projects, skills, certifications — is the same content the
+default page renders, so the two cannot tell different stories about what you
+have done, and a variant is a page of framing rather than a second portfolio to
+keep in step.
+
+To add one, extend `variants` in `types.ts` and add an entry to
+`variantDefinitions`; the route and both languages come for free. Write nothing
+a reader could not already verify further down the same page — a variant that
+claims more than the evidence under it will be found out in the interview it
+was meant to win.
+
+Variants are `noindex` and stay out of `sitemap.ts`, since near-identical pages
+are what a search engine reads as duplicate content. They are unlisted, not
+secret: nothing links to one, and anyone with the URL can open it.
+
 ## Contact form
 
 The form posts to `app/api/contact/route.ts`, which validates the input, applies a

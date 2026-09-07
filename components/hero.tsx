@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Content } from "@/lib/content";
 import { identity, primaryStack, socials } from "@/lib/content";
-import { localePath, type Locale } from "@/lib/i18n";
 import {
   ArrowRightIcon,
   MailIcon,
@@ -11,11 +10,16 @@ import {
 } from "@/components/icons";
 
 export function Hero({
-  locale,
   content,
+  /**
+   * The chips under the headline. Defaults to the shared list; a role variant
+   * passes its own, because six frontend frameworks sitting under a line about
+   * schema design undercuts the sentence above them.
+   */
+  stack = primaryStack,
 }: {
-  locale: Locale;
   content: Content;
+  stack?: string[];
 }) {
   const { profile, targetRoles, ui } = content;
   const activeSocials = socials.filter((social) => social.href.trim() !== "");
@@ -70,14 +74,14 @@ export function Hero({
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
-            href={localePath(locale, "#projects")}
+            href="#projects"
             className="group inline-flex items-center gap-2 rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
           >
             {ui.hero.viewProjects}
             <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
-            href={localePath(locale, "#contact")}
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-md border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-stronger hover:bg-surface"
           >
             {ui.getInTouch}
@@ -130,7 +134,7 @@ export function Hero({
         </ul>
 
         <ul className="mt-12 flex flex-wrap gap-2">
-          {primaryStack.map((item) => (
+          {stack.map((item) => (
             <li
               key={item}
               className="rounded-md border border-line bg-card px-2.5 py-1 font-mono text-xs text-muted"

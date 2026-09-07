@@ -84,6 +84,50 @@ export function withLocale(pathname: string, locale: Locale): string {
 }
 
 /**
+ * Whether the page at `pathname` is one that carries the homepage sections.
+ *
+ * Two routes do: the homepage, and a role variant under `/for/`. Both render
+ * the same sections from the same components, so a link to `#projects` has
+ * somewhere to land on either.
+ */
+export function hasSections(pathname: string): boolean {
+  const segments = pathname.split("/").filter(Boolean);
+  if (!isLocale(segments[0])) return false;
+
+  // ["en"] is the homepage; ["en", "for", "dba"] is a role variant.
+  return (
+    segments.length === 1 || (segments.length === 3 && segments[1] === "for")
+  );
+}
+
+/**
+ * Where a section link — `#about`, `#projects` — should point from `pathname`.
+ *
+ * A bare hash on a page that has the sections, which keeps the reader where
+ * they are. Naming the homepage instead is what used to send someone reading
+ * `/en/for/dba` back to `/en` the moment they touched the navigation, swapping
+ * the pitch they were sent for the default one halfway through.
+ *
+ * From a project page the sections are genuinely elsewhere, so there the link
+ * has to name the homepage.
+ */
+export function sectionHref(
+  pathname: string,
+  locale: Locale,
+  hash: string,
+): string {
+  return hasSections(pathname) ? hash : localePath(locale, hash);
+}
+
+/**
+ * The same rule for links that mean "the top of this page" rather than a
+ * section of it — the masthead. From a variant it stays on the variant.
+ */
+export function sectionsPath(pathname: string, locale: Locale): string {
+  return hasSections(pathname) ? pathname : localePath(locale);
+}
+
+/**
  * Picks the best locale from an `Accept-Language` header.
  *
  * Deliberately hand-rolled: the alternative is pulling in `negotiator` and

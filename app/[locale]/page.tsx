@@ -1,10 +1,5 @@
 import { notFound } from "next/navigation";
-import { Hero } from "@/components/hero";
-import { About } from "@/components/about";
-import { ExperienceSection } from "@/components/experience";
-import { Projects } from "@/components/projects";
-import { Skills } from "@/components/skills";
-import { Contact } from "@/components/contact";
+import { HomeSections } from "@/components/home-sections";
 import {
   getContent,
   identity,
@@ -69,12 +64,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         // Content is a constant defined above, not user input.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
-      <Hero locale={locale} content={content} />
-      <About content={content} />
-      <ExperienceSection locale={locale} content={content} />
-      <Projects locale={locale} content={content} />
-      <Skills content={content} />
-      <Contact content={content} />
+      <HomeSections locale={locale} content={content} />
     </>
   );
 }
