@@ -15,7 +15,7 @@ export const en: Content = {
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University with internship experience developing an asset management web application using React, Next.js, Tailwind CSS, and backend APIs. I also built a cross-platform Flutter application with Supabase, Google Maps API, QR-code profiles, and an AI-based cattle identification feature.",
+      "Recent Digital Science and Technology graduate from Mahidol University with internship experience developing an asset management web application using React, Next.js, Tailwind CSS, and backend APIs. I also built a cross-platform Flutter application with Supabase, Google Maps API, QR-code profiles, and an AI-based cattle identification feature, designing the Postgres data model behind the parts I built.",
   },
 
   /**
@@ -159,6 +159,7 @@ export const en: Content = {
         "Riverpod",
         "go_router",
         "Supabase",
+        "PostgreSQL",
         "Google Maps",
         "QR & Camera",
       ],
@@ -220,6 +221,7 @@ export const en: Content = {
       ],
       role: [
         "Built the marketplace: listings, filtering, seller and farm details, offer tracking, and the ownership-transfer flow including foster arrangements.",
+        "Designed the Supabase (Postgres) data model behind the features I built — owners, animals, listings, offers, ownership transfers and foster arrangements, and the activity history each animal carries.",
         "Implemented authentication end to end — login, registration, and password recovery with deep links back into the app.",
         "Built the QR passport: a public read-only cattle profile that opens straight from a scan, plus the in-app scanner and QR export to the photo library.",
         "Built the multi-step camera capture flow and image import used to register an animal's reference photos.",
@@ -261,7 +263,15 @@ export const en: Content = {
    * Add entries here; the section hides itself while the array is empty.
    * Remember to add the same entry to `th.ts`.
    */
-  otherProjects: [],
+  otherProjects: [
+    {
+      title: "Retail Database Design",
+      description:
+        "A 13-table, 14-foreign-key schema for a clothing retailer — membership, branches, carts, orders, products, payments, shipping, employees, receipts and returns. Modelled from the business rules up: ER diagrams in Chen and Crow's Foot notation, a relational schema and a data dictionary, then the DDL and queries. Coursework in a group of five, with Uniqlo as the case study.",
+      period: "Jul 2023",
+      stack: ["MySQL", "SQL", "ER Modelling", "Normalisation"],
+    },
+  ],
 
   skillGroups: [
     {
@@ -273,8 +283,19 @@ export const en: Content = {
       items: ["React", "Next.js", "Flutter", "Tailwind CSS", "Riverpod"],
     },
     {
-      title: "Backend & Databases",
-      items: ["Node.js", "REST APIs", "Supabase", "Firebase", "MySQL"],
+      title: "Databases",
+      items: [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase",
+        "Firebase",
+        "ER Modelling",
+        "Normalisation",
+      ],
+    },
+    {
+      title: "Backend",
+      items: ["Node.js", "REST APIs"],
     },
     {
       title: "Testing",
