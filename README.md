@@ -36,8 +36,8 @@ Everything you will realistically want to change lives in **`lib/content/`**.
 The components read from it, so you never have to touch JSX to update the copy.
 
 - **`en.ts`** and **`th.ts`** — one file per language, holding every sentence on
-  the site: summary, experience, projects, skills, education, and the interface
-  labels under `ui`. The two are mirror images.
+  the site: summary, experience, projects, skills, education, certifications,
+  and the interface labels under `ui`. The two are mirror images.
 - **`types.ts`** — the `Content` type both language files are checked against.
   Add a field to one language and the build fails until the other has it too,
   which is what stops an English sentence turning up on the Thai page.
@@ -90,6 +90,31 @@ Images go through `next/image`, so they are converted to WebP, resized per
 breakpoint, and lazy-loaded below the fold automatically.
 
 See `public/projects/README.md` for the full reference.
+
+### Adding certificates
+
+Drop the PDF in `public/certificates/`, then add an entry to `certifications` in
+both language files:
+
+```ts
+{
+  name: "CCNAv7: Introduction to Networks",
+  issuer: "Cisco Networking Academy",
+  date: "Dec 2023",
+  file: "/certificates/ccna-introduction-to-networks.pdf",
+},
+```
+
+They appear between Education and Languages in the About card, newest first,
+each name linking to its own PDF in a new tab — and in the page's `Person`
+structured data as `hasCredential`. Every field is written per language: a
+course name like CCNAv7 reads the same in both files, but a Thai employer's
+letter does not, and the date never does. The block hides itself while the
+array is empty.
+
+Every entry needs a `file`. A certificate nobody can open is a claim, and the
+reason to list these at all is that they are checkable — so anything you add
+here is public, name and credential number included.
 
 ## Contact form
 
@@ -195,6 +220,7 @@ lib/
   content/                All site content — edit here
   site.ts                 Canonical site URL
 public/projects/          Screenshots, one folder per project slug
+public/certificates/      Certificate PDFs, linked from the About card
 ```
 
 ## Languages

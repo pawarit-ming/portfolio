@@ -293,6 +293,37 @@ export const en: Content = {
     graduated: "Graduated Jun 2026",
   },
 
+  /**
+   * Newest first, the way the experience list runs. The PDFs sit in
+   * `public/certificates/` and each entry links straight to its own.
+   */
+  certifications: [
+    {
+      name: "Internship Certificate",
+      issuer: "Ministry of Public Health",
+      date: "Nov 2025",
+      file: "/certificates/internship-ministry-of-public-health.pdf",
+    },
+    {
+      name: "IoT Fundamentals: Connecting Things",
+      issuer: "Cisco Networking Academy",
+      date: "May 2024",
+      file: "/certificates/iot-fundamentals-connecting-things.pdf",
+    },
+    {
+      name: "CCNAv7: Introduction to Networks",
+      issuer: "Cisco Networking Academy",
+      date: "Dec 2023",
+      file: "/certificates/ccna-introduction-to-networks.pdf",
+    },
+    {
+      name: "Furukawa Cabling System (FCS)",
+      issuer: "Furukawa Electric",
+      date: "Oct 2023",
+      file: "/certificates/furukawa-cabling-system.pdf",
+    },
+  ],
+
   languages: [
     { name: "Thai", level: "Native" },
     { name: "English", level: "Intermediate — TOEIC 660, CEFR B1" },
@@ -333,6 +364,8 @@ export const en: Content = {
     about: {
       title: "About",
       educationHeading: "Education",
+      certificationsHeading: "Certifications",
+      certificateLinkLabel: "Open the {name} certificate (PDF)",
       languagesHeading: "Languages",
     },
 

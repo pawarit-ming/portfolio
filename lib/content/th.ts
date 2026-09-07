@@ -287,6 +287,36 @@ export const th: Content = {
     graduated: "จบการศึกษา มิ.ย. 2026",
   },
 
+  /** ชื่อหลักสูตรและผู้ออกคงไว้ตามต้นฉบับ มีแต่วันที่ที่เขียนแบบไทย ไฟล์ PDF เป็นไฟล์เดียวกับ `en.ts` */
+  certifications: [
+    {
+      // ออกโดยศูนย์เทคโนโลยีสารสนเทศและการสื่อสาร สำนักงานปลัดฯ — ย่อเหลือ
+      // แค่ชื่อกระทรวง ให้ตรงกับชื่อที่หัวข้อประสบการณ์ใช้ และเพราะการ์ดนี้แคบ
+      name: "หนังสือรับรองการฝึกงาน",
+      issuer: "กระทรวงสาธารณสุข",
+      date: "พ.ย. 2025",
+      file: "/certificates/internship-ministry-of-public-health.pdf",
+    },
+    {
+      name: "IoT Fundamentals: Connecting Things",
+      issuer: "Cisco Networking Academy",
+      date: "พ.ค. 2024",
+      file: "/certificates/iot-fundamentals-connecting-things.pdf",
+    },
+    {
+      name: "CCNAv7: Introduction to Networks",
+      issuer: "Cisco Networking Academy",
+      date: "ธ.ค. 2023",
+      file: "/certificates/ccna-introduction-to-networks.pdf",
+    },
+    {
+      name: "Furukawa Cabling System (FCS)",
+      issuer: "Furukawa Electric",
+      date: "ต.ค. 2023",
+      file: "/certificates/furukawa-cabling-system.pdf",
+    },
+  ],
+
   languages: [
     { name: "ไทย", level: "ภาษาแม่" },
     { name: "อังกฤษ", level: "ระดับกลาง — TOEIC 660, CEFR B1" },
@@ -326,6 +356,8 @@ export const th: Content = {
     about: {
       title: "เกี่ยวกับ",
       educationHeading: "การศึกษา",
+      certificationsHeading: "ใบรับรอง",
+      certificateLinkLabel: "เปิดใบรับรอง {name} (PDF)",
       languagesHeading: "ภาษา",
     },
 

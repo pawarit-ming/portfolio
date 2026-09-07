@@ -19,7 +19,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   if (!isLocale(locale)) notFound();
 
   const content = getContent(locale);
-  const { profile, education, targetRoles } = content;
+  const { profile, education, certifications, targetRoles } = content;
 
   /** Structured data so search engines and recruiters' tools read the profile correctly. */
   const personJsonLd = {
@@ -46,6 +46,19 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       "@type": "CollegeOrUniversity",
       name: education.school,
     },
+    // The certificates listed in the About card, so a parser reads them as
+    // credentials rather than three more links. `url` is the PDF itself —
+    // absolute, because structured data is consumed away from this page.
+    hasCredential: certifications.map((certification) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: certification.name,
+      credentialCategory: "certificate",
+      url: `${siteUrl}${certification.file}`,
+      recognizedBy: {
+        "@type": "Organization",
+        name: certification.issuer,
+      },
+    })),
     knowsAbout,
   };
 

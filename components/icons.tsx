@@ -56,6 +56,16 @@ export function ArrowLeftIcon(props: IconProps) {
   );
 }
 
+export function ExternalLinkIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M13.5 4.5H19.5V10.5" />
+      <path d="m11.5 12.5 8-8" />
+      <path d="M18 14.5v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6h4" />
+    </svg>
+  );
+}
+
 export function CheckIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
