@@ -140,6 +140,27 @@ export type Education = {
 /** A spoken language on the CV — unrelated to the site's own locales. */
 export type LanguageSkill = { name: string; level: string };
 
+/**
+ * A course or training certificate, listed under Education in the About card.
+ *
+ * `file` is the PDF itself, as a path from the site root — put the file in
+ * `public/certificates/` and point at `/certificates/<name>.pdf`. Every entry
+ * has one: a certificate nobody can open is a claim, and the whole reason to
+ * list these is that they are checkable.
+ *
+ * Every field is written per language, which is why this list lives here
+ * rather than in `shared.ts`. A course name like CCNAv7 is a proper noun and
+ * reads the same in both files; a Thai employer's letter does not, and `date`
+ * never does — Thai writes its own month abbreviations.
+ */
+export type Certification = {
+  name: string;
+  issuer: string;
+  date: string;
+  /** Path to the PDF in `public/`, e.g. `/certificates/ccna.pdf`. */
+  file: string;
+};
+
 export type SkillGroup = { title: string; items: string[] };
 
 /**
@@ -181,6 +202,14 @@ export type UiCopy = {
     /** The plain noun, used as the heading. This section has no eyebrow. */
     title: string;
     educationHeading: string;
+    certificationsHeading: string;
+    /**
+     * The accessible name of a certificate link, as a template over `{name}`.
+     * The visible text is the certificate's own name, which says nothing about
+     * where the link goes; this is what tells a screen-reader user that it
+     * opens a PDF in a new tab.
+     */
+    certificateLinkLabel: string;
     languagesHeading: string;
   };
 
@@ -281,6 +310,7 @@ export type Content = {
   otherProjects: SideProject[];
   skillGroups: SkillGroup[];
   education: Education;
+  certifications: Certification[];
   languages: LanguageSkill[];
   navigation: NavItem[];
   ui: UiCopy;
