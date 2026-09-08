@@ -311,16 +311,20 @@ export const variants = ["dba"] as const;
 export type Variant = (typeof variants)[number];
 
 /**
- * Everything a variant is allowed to change — and it is all framing: who the
- * page says I am and what I am looking for. What I have actually done is not
- * in here.
+ * Everything a variant is allowed to change — the framing at the top, plus the
+ * skills list. What I have actually done is not in here.
  *
  * Deliberately not a partial of `Content`. A variant that can override any
  * field is a second site to keep in step with the first, and the two drift the
- * moment either is edited alone. The experience, projects, skills and
- * certificates below the hero are the same evidence whichever job is reading
- * them, so they are shared rather than copied — which also means a variant
- * cannot quietly claim something the default page does not.
+ * moment either is edited alone. The experience, projects and certificates
+ * below the hero are the same evidence whichever job is reading them, so they
+ * are shared rather than copied — which also means a variant cannot quietly
+ * claim something the default page does not.
+ *
+ * `skillGroups` is the one exception, and it is a full replacement rather than
+ * a patch: a variant groups its skills the way the CV it is sent with does, and
+ * that is not how the default page groups them. It may still only list things
+ * the experience and projects below it already evidence.
  */
 export type VariantOverride = {
   /** Replaces `profile.role` — the hero's lead line and the page title. */
@@ -335,6 +339,13 @@ export type VariantOverride = {
   targetRoles: TargetRole[];
   /** Replaces `ui.hero.stats`. */
   stats: Metric[];
+  /**
+   * Replaces `skillGroups` outright, so the section reads the way the CV sent
+   * with the application does — its groups, its order, its wording. The default
+   * page keeps its own grouping, which leads with languages and frameworks
+   * rather than databases.
+   */
+  skillGroups: SkillGroup[];
 };
 
 export type Content = {

@@ -267,14 +267,14 @@ export const en: Content = {
     {
       title: "E-commerce Analytics Dashboard",
       description:
-        "Analysis of a public e-commerce dataset from Kaggle: cleaning and selection in Alteryx, then a Power BI dashboard over the result. Coursework, in a group of six.",
+        "The public Brazilian e-commerce dataset from Kaggle — six related tables, 1.4 million rows. Five Alteryx workflows filter, group and aggregate 99,440 orders into 13 reporting extracts, modelled into a four-page Power BI dashboard covering regional sales, underperforming states and payment behaviour. Coursework, in a group of six.",
       period: "Nov 2024",
       stack: ["Alteryx", "Power BI", "ETL", "Data Visualisation"],
     },
     {
       title: "Retail Database Design",
       description:
-        "A 13-table, 14-foreign-key schema for a clothing retailer — membership, branches, carts, orders, products, payments, shipping, employees, receipts and returns. Modelled from the business rules up: ER diagrams in Chen and Crow's Foot notation, a relational schema and a data dictionary, then the DDL and queries. Coursework in a group of five, with Uniqlo as the case study.",
+        "A 13-table, 14-foreign-key schema for a clothing retailer — membership, branches, carts, orders, products, payments, shipping, employees, receipts and returns. Modelled from the business rules up: ER diagrams in Chen and Crow's Foot notation, a relational schema and a data dictionary, then the DDL and queries. Coursework in a group of five, with Uniqlo as the case study; I owned the Customer and Account Member entities end to end, including their data dictionary and DDL.",
       period: "Jul 2023",
       stack: ["MySQL", "SQL", "ER Modelling", "Normalisation"],
     },
@@ -291,14 +291,7 @@ export const en: Content = {
     },
     {
       title: "Databases",
-      items: [
-        "MySQL",
-        "PostgreSQL",
-        "Supabase",
-        "Firebase",
-        "ER Modelling",
-        "Normalisation",
-      ],
+      items: ["MySQL", "Supabase", "Firebase"],
     },
     {
       title: "Backend",
