@@ -45,7 +45,7 @@ export const en: Content = {
     },
     {
       role: "Test Automation Intern",
-      company: "Celestica",
+      company: "Celestica (Thailand) Limited",
       period: "May 2024 — Jul 2024",
       stack: ["Java", "Appium", "Android", "Extent Reports"],
       highlights: [
@@ -369,6 +369,12 @@ export const en: Content = {
 
     hero: {
       viewProjects: "View projects",
+      // "Resume", not the accented "résumé". The accents are the formally
+      // correct spelling and they buy nothing here: every job board and every
+      // Thai job ad writes it plain, and nobody has ever read a button beside
+      // a CV as the verb.
+      resume: "Resume (PDF)",
+      resumeLinkLabel: "Open my resume (PDF, opens in a new tab)",
       openToPrefix: "Open to",
       openToSuffix: "roles",
       // One stat per direction I am applying in: web, mobile, test automation.
@@ -387,6 +393,8 @@ export const en: Content = {
       educationHeading: "Education",
       certificationsHeading: "Certifications",
       certificateLinkLabel: "Open the {name} certificate (PDF)",
+      transcript: "Transcript (PDF)",
+      transcriptLinkLabel: "Open my academic transcript (PDF, opens in a new tab)",
       languagesHeading: "Languages",
     },
 

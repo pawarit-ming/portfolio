@@ -36,7 +36,7 @@ export function SiteFooter({
 
   return (
     <footer className="no-print border-t border-line bg-card">
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-8">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="text-sm font-semibold text-fg">{name}</p>

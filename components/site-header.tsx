@@ -64,7 +64,7 @@ export function SiteHeader({
 
   return (
     <header className="no-print sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 lg:px-8">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
         <Link
           href={sectionsPath(pathname, locale)}
           onClick={close}
@@ -136,7 +136,7 @@ export function SiteHeader({
           aria-label={ui.mainNavLabel}
           className="border-t border-line bg-card md:hidden"
         >
-          <ul className="mx-auto w-full max-w-5xl px-4 py-3">
+          <ul className="mx-auto w-full max-w-6xl px-4 py-3">
             {navigation.map((item) => (
               <li key={item.hash}>
                 <Link

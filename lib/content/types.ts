@@ -192,6 +192,14 @@ export type UiCopy = {
 
   hero: {
     viewProjects: string;
+    /**
+     * The CV button beside it. The visible text names the format, because the
+     * link leaves the site for the browser's PDF viewer and a button that does
+     * that should say so before it is clicked.
+     */
+    resume: string;
+    /** Accessible name for the same button, spelling out the new tab. */
+    resumeLinkLabel: string;
     /** Wraps the list of target roles: "Open to" … "roles". */
     openToPrefix: string;
     openToSuffix: string;
@@ -210,6 +218,14 @@ export type UiCopy = {
      * opens a PDF in a new tab.
      */
     certificateLinkLabel: string;
+    /**
+     * The transcript link in the education card — the grades behind the degree
+     * printed two lines above it. Same PDF-in-a-new-tab treatment as the
+     * certificates, and named the same way, since it is the same promise: the
+     * claim above is checkable.
+     */
+    transcript: string;
+    transcriptLinkLabel: string;
     languagesHeading: string;
   };
 
