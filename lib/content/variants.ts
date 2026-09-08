@@ -26,6 +26,18 @@ export type VariantDefinition = {
    * `shared.ts` instead of in each language file.
    */
   stack: string[];
+  /**
+   * The PDF behind the hero's CV button, replacing `documents.resume`.
+   *
+   * Outside `copy` for the same reason `stack` is: both CVs are written in
+   * English, so there is nothing per-language to say here. Required rather
+   * than optional, because a variant is the link that goes on an application
+   * and the CV that application carries is the one document a reader holds
+   * beside this page — a variant happy with the default names
+   * `documents.resume` here instead, rather than letting a database
+   * application quietly arrive with a frontend CV.
+   */
+  resume: string;
   copy: Record<Locale, VariantOverride>;
 };
 
@@ -47,6 +59,11 @@ const dba: VariantDefinition = {
     "ER Modelling",
     "Normalisation",
   ],
+
+  // The data CV, not the development one: the schema work below is what this
+  // page leads with, and it is what the CV sent with the application leads
+  // with too.
+  resume: "/documents/pawarit-wang-data-resume.pdf",
 
   copy: {
     en: {

@@ -18,9 +18,16 @@ export function Hero({
    * schema design undercuts the sentence above them.
    */
   stack = primaryStack,
+  /**
+   * The CV behind the red button. Defaults to the development one; a role
+   * variant passes the CV that goes out with its own applications, so the page
+   * and the document attached to the same application say the same thing.
+   */
+  resume = documents.resume,
 }: {
   content: Content;
   stack?: string[];
+  resume?: string;
 }) {
   const { profile, targetRoles, ui } = content;
   const activeSocials = socials.filter((social) => social.href.trim() !== "");
@@ -99,7 +106,7 @@ export function Hero({
               A plain <a>, not next/link: the target is a file in `public/`,
               not a route, so there is nothing for the router to prefetch. */}
           <a
-            href={documents.resume}
+            href={resume}
             target="_blank"
             rel="noreferrer noopener"
             aria-label={ui.hero.resumeLinkLabel}

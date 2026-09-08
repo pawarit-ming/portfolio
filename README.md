@@ -118,18 +118,26 @@ here is public, name and credential number included.
 
 ### Resume and transcript
 
-Both PDFs live in `public/documents/` and their paths are set once, in
-`documents` in `lib/content/shared.ts`:
+The PDFs live in `public/documents/`. The default page's CV and the transcript
+are set once, in `documents` in `lib/content/shared.ts`:
 
 ```ts
 export const documents = {
-  resume: "/documents/pawarit-wang-resume.pdf",
+  resume: "/documents/pawarit-wang-dev-resume.pdf",
   transcript: "/documents/pawarit-wang-transcript.pdf",
 };
 ```
 
-To replace either, overwrite the file at that path — the filename is what a
-recruiter ends up with on disk, so keep it a name rather than `cv-final-2.pdf`.
+There are two CVs, because there are two ways in. `/[locale]` hands out the
+development one; the database variant at `/[locale]/for/dba` hands out the data
+one, which it names in its own `resume` field in `lib/content/variants.ts` and
+which the hero is given in place of the default. A visitor never sees the
+switch — same button, same place, same red, same label — but the page and the
+document arriving with the same application now say the same thing. See
+[Role variants](#role-variants).
+
+To replace any of them, overwrite the file at that path — the filename is what
+a recruiter ends up with on disk, so keep it a name rather than `cv-final-2.pdf`.
 
 The resume is a button in the hero, beside "View projects": someone arriving
 from an application is looking for it, and it belongs with the work rather than
@@ -165,8 +173,8 @@ would be the loudest thing on the page, and they are a list to read rather than
 a control to press.
 
 The paths are shared across languages rather than written per language, unlike
-`certifications`: there is one resume, in English, and a transcript is a scan of
-a document that exists in one form. The Thai button says so. If a Thai resume is
+`certifications`: both CVs are written in English, and a transcript is a scan of
+a document that exists in one form. The Thai button says so. If a Thai CV is
 ever written, move `documents` into `en.ts` / `th.ts` and take the labels with
 it.
 
@@ -180,16 +188,20 @@ The site leads with development work. `/[locale]/for/dba` is the same site
 re-aimed at database roles — the link to put on that application, while the
 default page stays as it is for the rest.
 
-A variant lives in `lib/content/variants.ts` and may change six things: the
-role, headline, availability line and summary, the list of target roles, the
-hero stats, and the chips under the headline. That is the whole of it. Everything
-below — experience, projects, skills, certifications — is the same content the
-default page renders, so the two cannot tell different stories about what you
-have done, and a variant is a page of framing rather than a second portfolio to
-keep in step.
+A variant lives in `lib/content/variants.ts` and may change the framing and
+nothing else: the role, headline, availability line and summary; the list of
+target roles; the hero stats and the chips under the headline; the skill
+groups, regrouped to read the way the CV it is sent with does; and the CV
+itself, behind the hero's red button. That is the whole of it. Everything else
+— experience, projects, certifications — is the same content the default page
+renders, so the two cannot tell different stories about what you have done, and
+a variant is a page of framing rather than a second portfolio to keep in step.
 
 To add one, extend `variants` in `types.ts` and add an entry to
-`variantDefinitions`; the route and both languages come for free. Write nothing
+`variantDefinitions`; the route and both languages come for free. `resume` is
+required rather than optional there — a variant that would rather send the
+default CV names `documents.resume` itself, so no application goes out with a
+CV nobody chose. Write nothing
 a reader could not already verify further down the same page — a variant that
 claims more than the evidence under it will be found out in the interview it
 was meant to win.
@@ -312,7 +324,7 @@ lib/
   site.ts                 Canonical site URL
 public/projects/          Screenshots, one folder per project slug
 public/certificates/      Certificate PDFs, linked from the About card
-public/documents/         Resume and transcript PDFs
+public/documents/         CV PDFs (dev and data) and the transcript
 ```
 
 ## Languages

@@ -20,12 +20,15 @@ export function HomeSections({
   locale,
   content,
   stack,
+  resume,
   basePath = "",
 }: {
   locale: Locale;
   content: Content;
   /** Hero chips; omitted on the default page, which uses the shared list. */
   stack?: string[];
+  /** The CV in the hero; omitted on the default page, which sends the dev one. */
+  resume?: string;
   /**
    * `""` on the default page, `"/for/dba"` on a variant — so the project cards
    * link to the case study inside the world the reader is already in.
@@ -36,7 +39,7 @@ export function HomeSections({
     <>
       {/* No `locale`: the hero's own links are bare hashes, because every
           route that renders this component has the sections on it. */}
-      <Hero content={content} stack={stack} />
+      <Hero content={content} stack={stack} resume={resume} />
       <About content={content} />
       <ExperienceSection locale={locale} content={content} basePath={basePath} />
       <Projects locale={locale} content={content} basePath={basePath} />
