@@ -21,20 +21,25 @@ export const identity = {
 };
 
 /**
- * The two PDFs behind the page: the CV this site is the long form of, and the
+ * The PDFs behind the page: the CV this site is the long form of, and the
  * transcript behind the degree in the About card.
  *
- * Paths only, and shared rather than per-language — unlike `certifications`,
- * where a Thai employer's letter really is a Thai document. There is one CV,
- * written in English, and a transcript is a scan of a document that exists in
- * a single form, so a Thai reader following either link gets the same file an
- * English one does. The labels are what differ, and those live in
- * `ui.hero.resume` and `ui.about.transcript` in each language file. Should a
- * Thai CV ever exist, this moves into `en.ts` / `th.ts` and takes the labels
- * with it.
+ * The `resume` here is the development CV — the one the default page hands
+ * out. A role variant is sent with a different document, so it names its own
+ * in `variants.ts` and the hero is given that path instead; nothing else about
+ * the button changes.
+ *
+ * Paths only, and shared across languages rather than written per language —
+ * unlike `certifications`, where a Thai employer's letter really is a Thai
+ * document. Both CVs are written in English, and a transcript is a scan of a
+ * document that exists in a single form, so a Thai reader following any of
+ * these links gets the same file an English one does. The labels are what
+ * differ, and those live in `ui.hero.resume` and `ui.about.transcript` in each
+ * language file. Should a Thai CV ever exist, the paths move into `en.ts` /
+ * `th.ts` and take the labels with them.
  */
 export const documents = {
-  resume: "/documents/pawarit-wang-resume.pdf",
+  resume: "/documents/pawarit-wang-dev-resume.pdf",
   transcript: "/documents/pawarit-wang-transcript.pdf",
 };
 
