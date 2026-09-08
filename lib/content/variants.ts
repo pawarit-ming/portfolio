@@ -6,10 +6,12 @@
  * keeping the pair side by side is what stops one being rewritten and the other
  * left behind.
  *
- * Nothing here may claim work that is not already on the default page. Only the
- * framing moves; the experience and projects underneath stay exactly as they
- * are, and a claim that cannot survive being read next to them does not belong
- * in this file.
+ * Nothing here may claim work that is not already on the default page. The
+ * framing moves, and `skillGroups` is regrouped to read the way the CV this
+ * variant is sent with does — but only over tools the projects underneath
+ * already evidence. Those projects and the experience above them stay exactly
+ * as they are, and a claim that cannot survive being read next to them does not
+ * belong in this file.
  */
 
 import type { Locale } from "@/lib/i18n";
@@ -75,6 +77,47 @@ const dba: VariantDefinition = {
           label: "Behind the asset management system I built 22 screens for",
         },
       ],
+      skillGroups: [
+        {
+          title: "Databases",
+          items: ["SQL", "MySQL", "PostgreSQL (Supabase)", "Firebase"],
+        },
+        {
+          title: "Database Skills",
+          items: [
+            "ER/EER Modelling (Chen and Crow's Foot)",
+            "Relational Schema Design",
+            "Data Dictionaries",
+            "DDL",
+            "Foreign Key Constraints",
+            "Join and Aggregate Queries",
+          ],
+        },
+        {
+          title: "Data & BI",
+          items: ["Alteryx", "Power BI"],
+        },
+        {
+          title: "Tools",
+          items: ["Git", "GitHub", "Postman"],
+        },
+        {
+          title: "Other Technical",
+          items: [
+            "Python",
+            "Java",
+            "JavaScript",
+            "TypeScript",
+            "Node.js",
+            "REST APIs",
+            "React",
+            "Next.js",
+            "Flutter",
+            "Appium",
+            "Selenium",
+          ],
+        },
+      ],
     },
 
     th: {
@@ -102,6 +145,47 @@ const dba: VariantDefinition = {
         {
           value: "MySQL",
           label: "เบื้องหลังระบบครุภัณฑ์ที่พัฒนาหน้าจอให้ 22 หน้า",
+        },
+      ],
+      skillGroups: [
+        {
+          title: "ฐานข้อมูล",
+          items: ["SQL", "MySQL", "PostgreSQL (Supabase)", "Firebase"],
+        },
+        {
+          title: "ทักษะฐานข้อมูล",
+          items: [
+            "ER/EER Modelling (Chen and Crow's Foot)",
+            "Relational Schema Design",
+            "Data Dictionaries",
+            "DDL",
+            "Foreign Key Constraints",
+            "Join and Aggregate Queries",
+          ],
+        },
+        {
+          title: "ข้อมูลและ BI",
+          items: ["Alteryx", "Power BI"],
+        },
+        {
+          title: "เครื่องมือ",
+          items: ["Git", "GitHub", "Postman"],
+        },
+        {
+          title: "ทักษะเทคนิคอื่น ๆ",
+          items: [
+            "Python",
+            "Java",
+            "JavaScript",
+            "TypeScript",
+            "Node.js",
+            "REST APIs",
+            "React",
+            "Next.js",
+            "Flutter",
+            "Appium",
+            "Selenium",
+          ],
         },
       ],
     },
