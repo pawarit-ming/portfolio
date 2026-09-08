@@ -21,6 +21,24 @@ export const identity = {
 };
 
 /**
+ * The two PDFs behind the page: the CV this site is the long form of, and the
+ * transcript behind the degree in the About card.
+ *
+ * Paths only, and shared rather than per-language — unlike `certifications`,
+ * where a Thai employer's letter really is a Thai document. There is one CV,
+ * written in English, and a transcript is a scan of a document that exists in
+ * a single form, so a Thai reader following either link gets the same file an
+ * English one does. The labels are what differ, and those live in
+ * `ui.hero.resume` and `ui.about.transcript` in each language file. Should a
+ * Thai CV ever exist, this moves into `en.ts` / `th.ts` and takes the labels
+ * with it.
+ */
+export const documents = {
+  resume: "/documents/pawarit-wang-resume.pdf",
+  transcript: "/documents/pawarit-wang-transcript.pdf",
+};
+
+/**
  * Add your profile URLs here and they appear in the header, hero and footer.
  * Leave `href` empty and that link is hidden automatically.
  */

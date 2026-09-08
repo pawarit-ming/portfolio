@@ -18,6 +18,9 @@
  *   line / -strong /      borders, from hairlines up to hover states
  *     -stronger
  *   invert / on-invert    primary buttons: inverted against the page
+ *   pdf / -hover /        the two PDF buttons, in the red the format is
+ *     on-pdf                recognised by. Same three roles as invert above,
+ *                           because they are the same kind of control
  */
 :root {
   --bg: #ffffff;
@@ -51,6 +54,29 @@
   --danger-soft: #fef2f2;
   --danger-line: #fecaca;
   --danger-fg: #991b1b;
+
+  /*
+   * Deliberately not the danger scale above, which the contact form uses to
+   * say something went wrong. These are the same hue and a completely
+   * different message — red here means "this is a PDF", the way the format's
+   * own icon has meant it for twenty years, and a button that borrows the
+   * error colour reads as a broken one.
+   *
+   * Adobe's #fa0f00 carries white text at only 4.09:1, under the 4.5:1 that
+   * 14px needs, so this is that red taken down until it passes: white on
+   * #c8130a is 5.91:1.
+   *
+   * The one scale on this page with no .dark override, and the only thing that
+   * looks identical in both themes. Every colour below it is text, or a surface
+   * text sits on, and those have to flip; a filled button brings its own
+   * background, so all it owes either theme is white at 4.5:1 (5.91:1) and an
+   * edge at 3:1 against what it sits on — 5.91:1 on the white card, 3.00:1 on
+   * the dark one. It clears both, and a red that shifts between themes is not
+   * quite the red the format is known by any more.
+   */
+  --pdf: #c8130a;
+  --pdf-hover: #a80f07;
+  --on-pdf: #ffffff;
 
   color-scheme: light;
 }
@@ -133,6 +159,10 @@
   --color-danger-soft: var(--danger-soft);
   --color-danger-line: var(--danger-line);
   --color-danger-fg: var(--danger-fg);
+
+  --color-pdf: var(--pdf);
+  --color-pdf-hover: var(--pdf-hover);
+  --color-on-pdf: var(--on-pdf);
 }
 
 html {

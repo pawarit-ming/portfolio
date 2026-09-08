@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { Content } from "@/lib/content";
-import { identity, primaryStack, socials } from "@/lib/content";
+import { documents, identity, primaryStack, socials } from "@/lib/content";
 import {
   ArrowRightIcon,
+  DocumentIcon,
   MailIcon,
   PhoneIcon,
   PinIcon,
@@ -37,7 +38,7 @@ export function Hero({
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-5xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 lg:px-8">
+      <div className="relative mx-auto w-full max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 lg:px-8">
         <p className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1 text-xs font-medium text-muted">
           <span
             aria-hidden
@@ -80,6 +81,33 @@ export function Hero({
             {ui.hero.viewProjects}
             <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
+          {/* The CV sits between the two, not after them: someone who came here
+              from an application is looking for it, and it belongs with "View
+              projects" — both are "show me the work" — rather than after the
+              contact button, which is the end of the sequence.
+
+              Solid PDF red, and the only colour on the page. Given the same
+              outline as "Get in touch" it was the same button twice, and the
+              one people arrive looking for lost the row.
+
+              Filled, so it outweighs the black "View projects" beside it —
+              deliberately. That button leads somewhere on this page, and a
+              visitor who misses it scrolls into the work anyway; the CV is the
+              one thing here that cannot be reached any other way, and it is
+              what someone arriving from an application came for.
+
+              A plain <a>, not next/link: the target is a file in `public/`,
+              not a route, so there is nothing for the router to prefetch. */}
+          <a
+            href={documents.resume}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={ui.hero.resumeLinkLabel}
+            className="inline-flex items-center gap-2 rounded-md bg-pdf px-4 py-2.5 text-sm font-medium text-on-pdf transition-colors hover:bg-pdf-hover"
+          >
+            <DocumentIcon className="h-4 w-4" />
+            {ui.hero.resume}
+          </a>
           <Link
             href="#contact"
             className="inline-flex items-center gap-2 rounded-md border border-line-strong bg-card px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-stronger hover:bg-surface"

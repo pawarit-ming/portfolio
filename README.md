@@ -116,6 +116,64 @@ Every entry needs a `file`. A certificate nobody can open is a claim, and the
 reason to list these at all is that they are checkable — so anything you add
 here is public, name and credential number included.
 
+### Resume and transcript
+
+Both PDFs live in `public/documents/` and their paths are set once, in
+`documents` in `lib/content/shared.ts`:
+
+```ts
+export const documents = {
+  resume: "/documents/pawarit-wang-resume.pdf",
+  transcript: "/documents/pawarit-wang-transcript.pdf",
+};
+```
+
+To replace either, overwrite the file at that path — the filename is what a
+recruiter ends up with on disk, so keep it a name rather than `cv-final-2.pdf`.
+
+The resume is a button in the hero, beside "View projects": someone arriving
+from an application is looking for it, and it belongs with the work rather than
+after the contact button. The transcript sits under the degree in the About
+card's education block, because it is the evidence for the lines directly above
+it. Both open in a new tab, like the certificates, and both say `(PDF)` in the
+visible label — the link leaves the site for the browser's PDF viewer, and a
+button that does that should say so before it is clicked. Their wording lives in
+`ui.hero.resume` and `ui.about.transcript` in each language file.
+
+Both are solid red, on the `--pdf` / `--pdf-hover` / `--on-pdf` scale in
+`app/globals.css` — the same three roles `--invert` has, because they are the
+same kind of control. Not the `--danger` scale beside it, which the contact form
+uses to report a failure: red here means "this is a PDF", and a button that
+borrows the error colour reads as a broken one.
+
+Filled red outweighs the black "View projects" next to it, which is the point.
+That button leads somewhere on the same page and a visitor who misses it scrolls
+into the work anyway; the CV is the one thing in the hero that cannot be reached
+any other way. Given the same outline as "Get in touch" it was the same button
+twice, and the one people arrive looking for lost the row.
+
+The value is Adobe's own red darkened until it carries white text at 4.5:1
+(#c8130a, 5.91:1). It is the one scale here with no `.dark` override: everything
+else in the palette is text or a surface text sits on, and those have to flip,
+but a filled button brings its own background, so all it owes either theme is
+white at 4.5:1 and an edge at 3:1 against what it sits on — 5.91:1 on the white
+card, 3.00:1 on the dark one. A red that shifts between themes also stops being
+quite the red the format is known by.
+
+The certificate names in the same section stay unstyled: four red rows there
+would be the loudest thing on the page, and they are a list to read rather than
+a control to press.
+
+The paths are shared across languages rather than written per language, unlike
+`certifications`: there is one resume, in English, and a transcript is a scan of
+a document that exists in one form. The Thai button says so. If a Thai resume is
+ever written, move `documents` into `en.ts` / `th.ts` and take the labels with
+it.
+
+Both files are public to anyone who finds the site — a transcript carries a
+student number and every grade you were given, so put one here only if you would
+hand it to a stranger.
+
 ## Role variants
 
 The site leads with development work. `/[locale]/for/dba` is the same site
@@ -254,6 +312,7 @@ lib/
   site.ts                 Canonical site URL
 public/projects/          Screenshots, one folder per project slug
 public/certificates/      Certificate PDFs, linked from the About card
+public/documents/         Resume and transcript PDFs
 ```
 
 ## Languages

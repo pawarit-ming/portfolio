@@ -46,7 +46,7 @@ export const th: Content = {
     },
     {
       role: "นักพัฒนา Test Automation (ฝึกงาน)",
-      company: "Celestica",
+      company: "Celestica (Thailand) Limited",
       period: "พ.ค. 2024 — ก.ค. 2024",
       stack: ["Java", "Appium", "Android", "Extent Reports"],
       highlights: [
@@ -362,6 +362,9 @@ export const th: Content = {
 
     hero: {
       viewProjects: "ดูผลงาน",
+      // เรซูเม่เป็นฉบับภาษาอังกฤษฉบับเดียว ปุ่มจึงบอกไว้ตรงนี้ ผู้อ่านจะได้รู้ก่อนกด
+      resume: "เรซูเม่ (PDF ภาษาอังกฤษ)",
+      resumeLinkLabel: "เปิดเรซูเม่ฉบับภาษาอังกฤษ (PDF เปิดในแท็บใหม่)",
       openToPrefix: "เปิดรับตำแหน่ง",
       openToSuffix: "",
       stats: [
@@ -379,6 +382,8 @@ export const th: Content = {
       educationHeading: "การศึกษา",
       certificationsHeading: "ใบรับรอง",
       certificateLinkLabel: "เปิดใบรับรอง {name} (PDF)",
+      transcript: "ใบแสดงผลการเรียน (PDF)",
+      transcriptLinkLabel: "เปิดใบแสดงผลการเรียน (PDF เปิดในแท็บใหม่)",
       languagesHeading: "ภาษา",
     },
 

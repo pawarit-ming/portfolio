@@ -66,6 +66,22 @@ export function ExternalLinkIcon(props: IconProps) {
   );
 }
 
+/**
+ * A page with a folded corner, used for the PDF links.
+ *
+ * Not a download arrow: these links open in the browser's PDF viewer rather
+ * than saving anything, and an icon that promises a file on disk would be
+ * describing something the link does not do.
+ */
+export function DocumentIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M13.5 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-5.5-5.5Z" />
+      <path d="M13.5 3.5V9H19" />
+    </svg>
+  );
+}
+
 export function CheckIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

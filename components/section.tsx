@@ -36,7 +36,7 @@ export function Section({
           : "border-t border-line bg-card"
       }
     >
-      <div className="mx-auto w-full max-w-5xl px-6 py-20 sm:py-24 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-24 lg:px-8">
         <header className="max-w-2xl">
           {eyebrow ? (
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
