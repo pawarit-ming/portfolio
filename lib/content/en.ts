@@ -66,7 +66,7 @@ export const en: Content = {
         "A business platform connecting quotations, purchasing, inventory, invoicing and payments. This case study focuses on the React branch: typed interfaces backed by company-scoped database workflows.",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       sourceNotice:
-        "Source code is private because this is a commercial project. This page covers the React branch only; the illustration is a workflow diagram, not a screenshot of customer or production data.",
+        "Commercial project — source code is private.",
       galleryTitle: "Business workflow",
       cover: {
         src: "/projects/fyt-sme-platform/workflow-en.svg",
