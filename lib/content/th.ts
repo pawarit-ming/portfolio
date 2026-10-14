@@ -67,7 +67,7 @@ export const th: Content = {
         "แพลตฟอร์มเชื่อมใบเสนอราคา การจัดซื้อ สต็อก ใบแจ้งหนี้ และการรับชำระเงิน กรณีศึกษานี้ครอบคลุมเฉพาะ branch React ซึ่งเชื่อมหน้าจอที่ตรวจชนิดข้อมูลกับขั้นตอนในฐานข้อมูลและสิทธิ์ของแต่ละบริษัท",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       sourceNotice:
-        "เก็บซอร์สโค้ดเป็น Private เพราะเป็นโปรเจกต์เชิงพาณิชย์ หน้านี้อ้างอิงเฉพาะ branch React ภาพประกอบเป็นแผนภาพขั้นตอนการทำงาน ไม่ใช่ภาพข้อมูลลูกค้าหรือระบบ Production",
+        "โปรเจกต์เชิงพาณิชย์ — เก็บซอร์สโค้ดเป็น Private",
       galleryTitle: "ขั้นตอนการทำงานของระบบ",
       cover: {
         src: "/projects/fyt-sme-platform/workflow-th.svg",
