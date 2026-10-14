@@ -55,6 +55,12 @@ export function ProjectCaseStudy({
             <TagList items={project.stack} />
           </div>
 
+          {project.sourceNotice ? (
+            <p className="mt-6 rounded-lg border border-line bg-card px-4 py-3 text-sm leading-relaxed text-body">
+              {project.sourceNotice}
+            </p>
+          ) : null}
+
           {project.links && project.links.length > 0 ? (
             <div className="mt-8 flex flex-wrap gap-3">
               {project.links.map((link) => (
@@ -166,7 +172,7 @@ export function ProjectCaseStudy({
               id="gallery-heading"
               className="text-xl font-semibold tracking-tight text-fg"
             >
-              {ui.project.screens}
+              {project.galleryTitle ?? ui.project.screens}
             </h2>
             {/* Phone shots are narrow enough to sit three across; browser
                 screenshots need the extra width to stay readable, and the

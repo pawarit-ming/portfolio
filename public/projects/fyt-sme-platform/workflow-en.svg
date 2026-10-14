@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">FYT React branch — business workflow</title>
+  <desc id="desc">A conceptual diagram connecting quotations to purchasing, inventory, invoicing and payments through a React application and company-scoped PostgreSQL workflows. No production data.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#1d4ed8" stroke-width="1.5"/></marker></defs>
+  <rect width="1200" height="750" fill="#fafafa"/>
+  <g font-family="Arial, sans-serif">
+    <text x="64" y="84" font-size="20" font-weight="700" fill="#1d4ed8">FYT / REACT BRANCH</text>
+    <text x="64" y="144" font-size="46" font-weight="700" fill="#18181b">One connected business workflow</text>
+    <text x="64" y="182" font-size="23" fill="#52525b">Documents move forward. The underlying records stay connected.</text>
+    <g fill="#fff" stroke="#e4e4e7" stroke-width="2">
+      <rect x="64" y="248" width="314" height="110" rx="16"/>
+      <rect x="444" y="248" width="314" height="110" rx="16"/>
+      <rect x="824" y="248" width="312" height="110" rx="16"/>
+      <rect x="444" y="412" width="314" height="110" rx="16"/>
+      <rect x="824" y="412" width="312" height="110" rx="16"/>
+    </g>
+    <g fill="#18181b" font-size="28" font-weight="700">
+      <text x="88" y="294">Quotations</text><text x="468" y="294">Purchasing</text><text x="848" y="294">Inventory</text>
+      <text x="468" y="458">Invoicing</text><text x="848" y="458">Payments</text>
+    </g>
+    <g fill="#52525b" font-size="19">
+      <text x="88" y="329">Customer + supplier documents</text><text x="468" y="329">Linked purchase orders</text><text x="848" y="329">Receipts + stock movements</text>
+      <text x="468" y="493">Connected document balances</text><text x="848" y="493">Receipts + expenses</text>
+    </g>
+    <g fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M384 303 H428"/><path d="M764 303 H808"/><path d="M601 366 V398"/><path d="M764 467 H808"/>
+    </g>
+    <rect x="64" y="578" width="1072" height="86" rx="16" fill="#eff4ff" stroke="#d4d4d8"/>
+    <text x="88" y="615" fill="#1d4ed8" font-size="23" font-weight="700">React + TypeScript</text>
+    <text x="88" y="644" fill="#3f3f46" font-size="18">Forms, lists, validation</text>
+    <text x="430" y="615" fill="#1d4ed8" font-size="23" font-weight="700">Supabase</text>
+    <text x="430" y="644" fill="#3f3f46" font-size="18">Authentication + company access</text>
+    <text x="812" y="615" fill="#1d4ed8" font-size="23" font-weight="700">PostgreSQL</text>
+    <text x="812" y="644" fill="#3f3f46" font-size="18">Transactional workflows</text>
+    <text x="64" y="710" fill="#6b6b74" font-size="18">Conceptual diagram · Commercial source code is private · No production data</text>
+  </g>
+</svg>

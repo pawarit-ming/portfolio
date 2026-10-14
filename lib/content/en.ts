@@ -9,13 +9,13 @@ import type { Content } from "./types";
 export const en: Content = {
   profile: {
     name: "Pawarit Wang",
-    role: "Web & Mobile Developer",
+    role: "Full-stack & Mobile Developer",
     headline:
-      "I build responsive web interfaces with React and Next.js, and cross-platform apps with Flutter.",
+      "I build web applications from React interfaces to database workflows, and cross-platform apps with Flutter.",
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University with internship experience developing an asset management web application using React, Next.js, Tailwind CSS, and backend APIs. I also built a cross-platform Flutter application with Supabase, Google Maps API, QR-code profiles, and an AI-based cattle identification feature, designing the Postgres data model behind the parts I built.",
+      "Recent Digital Science and Technology graduate from Mahidol University. I develop the React branch of FYT, a commercial SME business platform connecting TypeScript interfaces to Supabase and PostgreSQL workflows. My earlier work includes a React and Next.js asset management internship and a team Flutter cattle passport app, where I built marketplace, recovery and QR-scanning flows and designed the data model behind my contribution.",
   },
 
   /**
@@ -24,9 +24,9 @@ export const en: Content = {
    * Order matters — the first is the strongest claim.
    */
   targetRoles: [
+    { label: "Full-stack Developer", short: "Full-stack" },
     { label: "Frontend Developer", short: "Frontend" },
     { label: "Mobile Developer (Flutter)", short: "Mobile (Flutter)" },
-    { label: "Full-stack Developer", short: "Full-stack" },
     { label: "QA / Test Automation Engineer", short: "QA Automation" },
   ],
 
@@ -57,6 +57,53 @@ export const en: Content = {
   ],
 
   projects: [
+    {
+      slug: "fyt-sme-platform",
+      title: "FYT — SME Business Platform",
+      kind: "Commercial project · React branch",
+      period: "In development",
+      tagline:
+        "A business platform connecting quotations, purchasing, inventory, invoicing and payments. This case study focuses on the React branch: typed interfaces backed by company-scoped database workflows.",
+      stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
+      sourceNotice:
+        "Source code is private because this is a commercial project. This page covers the React branch only; the illustration is a workflow diagram, not a screenshot of customer or production data.",
+      galleryTitle: "Business workflow",
+      cover: {
+        src: "/projects/fyt-sme-platform/workflow-en.svg",
+        alt: "FYT workflow diagram linking quotations, purchasing, inventory, invoicing and payments, with a React interface and company-scoped PostgreSQL workflows",
+        aspect: "screen",
+      },
+      gallery: [{
+        src: "/projects/fyt-sme-platform/workflow-en.svg",
+        alt: "Conceptual business workflow and application layers for the FYT React branch",
+        aspect: "screen",
+        caption: "Conceptual workflow diagram — no customer records, source code or production screenshots",
+      }],
+      metrics: [
+        { value: "React", label: "Application branch" },
+        { value: "TypeScript", label: "Frontend language" },
+        { value: "PostgreSQL", label: "Database workflows" },
+        { value: "Private", label: "Commercial source code" },
+      ],
+      overview: [
+        "An SME needs to carry the same business information from a customer's request through quotations, supplier orders, stock receipts, invoices and payments. Separate screens have to preserve that chain without duplicating or losing records.",
+        "The React branch uses React and TypeScript for the application, Supabase for authentication and data access, and PostgreSQL functions for transactional business operations. Company-scoped permissions separate the data each user can access.",
+        "The product is being developed commercially. This write-up describes the React application's workflows and engineering approach without publishing the private repository or operational data.",
+      ],
+      role: [
+        "Develop the React and TypeScript application, including business forms, searchable lists, pagination and navigation across the workflows covered by the React branch.",
+        "Connect the interface to authenticated, company-scoped data operations and server-side transactional workflows instead of treating business writes as independent browser updates.",
+        "Work on validation, draft protection, refreshed report data and automated checks so related screens behave consistently as the application grows.",
+      ],
+      features: [
+        { title: "Customer and supplier workflows", description: "Directories, contacts, requests for quotation and supplier quotations keep the parties and source documents connected." },
+        { title: "Purchasing and inventory", description: "Purchase orders feed stock receipts and inventory movements. Partial receipts and corrections need to preserve the document chain." },
+        { title: "Invoicing and payments", description: "Invoices, incoming payments and expenses connect document balances to business reports, with transactional database operations behind writes." },
+        { title: "Company-scoped access", description: "Authentication, company membership and permission checks are paired with database access policies rather than relying on hidden UI controls alone." },
+        { title: "Consistent React forms", description: "React Hook Form and Zod support typed validation; shared list and navigation behavior and draft protection make longer workflows easier to complete." },
+        { title: "Verification during development", description: "The React branch includes TypeScript checks, linting, Vitest tests and production builds, alongside database assertions for the business workflows." },
+      ],
+    },
     {
       slug: "asset-management-system",
       title: "Asset Management System",
@@ -291,7 +338,7 @@ export const en: Content = {
     },
     {
       title: "Databases",
-      items: ["MySQL", "Supabase", "Firebase"],
+      items: ["MySQL", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
       title: "Backend",
@@ -410,7 +457,7 @@ export const en: Content = {
       eyebrow: "Projects",
       title: "Things I have built",
       description:
-        "Two projects that shaped how I work — a government asset platform in React and Next.js, and a Flutter app that identifies individual cattle from a photo.",
+        "A commercial business platform in React and PostgreSQL, a government asset system in Next.js, and a Flutter cattle passport app. Each case study explains my contribution and the workflows behind it.",
       readCaseStudy: "Read the case study",
       otherHeading: "Other projects",
     },
