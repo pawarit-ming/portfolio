@@ -25,7 +25,7 @@ export function Projects({
       title={ui.projects.title}
       description={ui.projects.description}
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <article
             key={project.slug}

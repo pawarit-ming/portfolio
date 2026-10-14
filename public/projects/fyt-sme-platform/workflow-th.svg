@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">ขั้นตอนธุรกิจ FYT — branch React</title>
+  <desc id="desc">แผนภาพแนวคิดเชื่อมใบเสนอราคา การจัดซื้อ สต็อก ใบแจ้งหนี้ และการรับชำระเงินผ่านแอป React และ PostgreSQL ที่แยกสิทธิ์ตามบริษัท ไม่มีข้อมูลจริง</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#1d4ed8" stroke-width="1.5"/></marker></defs>
+  <rect width="1200" height="750" fill="#fafafa"/>
+  <g font-family="Noto Sans Thai, Tahoma, Arial, sans-serif">
+    <text x="64" y="84" font-size="20" font-weight="700" fill="#1d4ed8">FYT / BRANCH REACT</text>
+    <text x="64" y="144" font-size="46" font-weight="700" fill="#18181b">เชื่อมขั้นตอนธุรกิจไว้ในระบบเดียว</text>
+    <text x="64" y="190" font-size="23" fill="#52525b">เอกสารเดินหน้า ข้อมูลต้นทางยังเชื่อมโยงกัน</text>
+    <g fill="#fff" stroke="#e4e4e7" stroke-width="2">
+      <rect x="64" y="248" width="314" height="110" rx="16"/>
+      <rect x="444" y="248" width="314" height="110" rx="16"/>
+      <rect x="824" y="248" width="312" height="110" rx="16"/>
+      <rect x="444" y="412" width="314" height="110" rx="16"/>
+      <rect x="824" y="412" width="312" height="110" rx="16"/>
+    </g>
+    <g fill="#18181b" font-size="28" font-weight="700">
+      <text x="88" y="294">ใบเสนอราคา</text><text x="468" y="294">การจัดซื้อ</text><text x="848" y="294">สต็อกสินค้า</text>
+      <text x="468" y="458">ใบแจ้งหนี้</text><text x="848" y="458">การรับชำระเงิน</text>
+    </g>
+    <g fill="#52525b" font-size="19">
+      <text x="88" y="330">เอกสารลูกค้าและผู้ขาย</text><text x="468" y="330">คำสั่งซื้อที่เชื่อมกับต้นทาง</text><text x="848" y="330">การรับและเคลื่อนไหวสินค้า</text>
+      <text x="468" y="494">ยอดเงินตามเอกสารที่เกี่ยวข้อง</text><text x="848" y="494">เงินรับและค่าใช้จ่าย</text>
+    </g>
+    <g fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M384 303 H428"/><path d="M764 303 H808"/><path d="M601 366 V398"/><path d="M764 467 H808"/>
+    </g>
+    <rect x="64" y="578" width="1072" height="86" rx="16" fill="#eff4ff" stroke="#d4d4d8"/>
+    <text x="88" y="615" fill="#1d4ed8" font-size="23" font-weight="700">React + TypeScript</text>
+    <text x="88" y="646" fill="#3f3f46" font-size="18">ฟอร์ม รายการ และการตรวจข้อมูล</text>
+    <text x="430" y="615" fill="#1d4ed8" font-size="23" font-weight="700">Supabase</text>
+    <text x="430" y="646" fill="#3f3f46" font-size="18">ยืนยันตัวตนและสิทธิ์ตามบริษัท</text>
+    <text x="812" y="615" fill="#1d4ed8" font-size="23" font-weight="700">PostgreSQL</text>
+    <text x="812" y="646" fill="#3f3f46" font-size="18">ขั้นตอนแบบธุรกรรม</text>
+    <text x="64" y="710" fill="#6b6b74" font-size="18">แผนภาพแนวคิด · ซอร์สโค้ดเชิงพาณิชย์เป็น Private · ไม่ใช้ข้อมูลจริง</text>
+  </g>
+</svg>

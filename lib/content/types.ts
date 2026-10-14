@@ -19,6 +19,7 @@ export type Social = {
  * one language file fails the build instead of 404ing in production.
  */
 export const projectSlugs = [
+  "fyt-sme-platform",
   "asset-management-system",
   "thai-cattle-passport",
 ] as const;
@@ -74,8 +75,12 @@ export type Project = {
   cover?: ProjectImage;
   /** Extra screenshots shown further down the case-study page. */
   gallery?: ProjectImage[];
+  /** A localized heading when the gallery contains diagrams rather than screens. */
+  galleryTitle?: string;
   /** Live demo / repository links, shown on the case-study page. */
   links?: ProjectLink[];
+  /** Public explanation for a commercial project whose source is private. */
+  sourceNotice?: string;
 };
 
 /**
