@@ -15,7 +15,7 @@ export const en: Content = {
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University. I develop the React branch of FYT, a commercial SME business platform connecting TypeScript interfaces to Supabase and PostgreSQL workflows. My earlier work includes a React and Next.js asset management internship and a team Flutter cattle passport app, where I built marketplace, recovery and QR-scanning flows and designed the data model behind my contribution.",
+      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: right now a production ERP for my family's trading company, and before that an internship at the Ministry of Public Health and a Flutter senior project.",
   },
 
   /**
@@ -32,26 +32,40 @@ export const en: Content = {
 
   experience: [
     {
+      // A family business, not a job with a contract. The company line says so
+      // rather than leaving a reader to assume employment and find out at the
+      // reference check.
+      role: "Full-stack Developer",
+      company: "FYT · Family business",
+      period: "Jun 2026 – Present",
+      stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "Vitest"],
+      projectSlug: "fyt-sme-platform",
+      // Two lines each where a case study carries the rest: the project card
+      // below says the same things again, so this list only has to hook.
+      highlights: [
+        "Building the company's ERP in React and TypeScript, on a live production database in Supabase and PostgreSQL.",
+        "Designed row-level security on 98 tables, and server-side transactions that block over-receiving and over-invoicing, even when two people save at once.",
+      ],
+    },
+    {
       role: "Frontend Developer Intern",
       company: "Ministry of Public Health",
-      period: "Jun 2025 — Nov 2025",
+      period: "Jun 2025 – Nov 2025",
       stack: ["Next.js", "React", "Tailwind CSS", "shadcn/ui", "Zod", "Figma"],
       projectSlug: "asset-management-system",
       highlights: [
-        "Built responsive interfaces for an asset management system using React, Next.js, and Tailwind CSS based on Figma designs.",
-        "Implemented search, filtering, pagination, and modal CRUD forms with React state across all asset management workflows.",
-        "Delivered 22 production-ready screens, including a five-step asset registration wizard, borrowing, repair, inspection, disposal, and reporting.",
+        "Contributed to 22 screens (primary author of 14) in React, Next.js and Tailwind CSS, including the five-step asset registration wizard.",
+        "Connected screens to the team's NestJS REST API and fixed the issues raised in two rounds of UAT.",
       ],
     },
     {
       role: "Test Automation Intern",
       company: "Celestica (Thailand) Limited",
-      period: "May 2024 — Jul 2024",
+      period: "May 2024 – Jul 2024",
       stack: ["Java", "Appium", "Android", "Extent Reports"],
       highlights: [
-        "Wrote the test plan and designed functional test cases for an Android Bluetooth motor-control app.",
-        "Automated the full suite in Java with Appium, running on Android emulators and physical devices.",
-        "Reported results via Extent Reports; the final regression run passed with zero failures.",
+        "Wrote the test plan for an Android Bluetooth motor-control app and automated the full suite in Java with Appium, on emulators and physical devices.",
+        "Reported each run through Extent Reports, giving the team a per-test pass/fail breakdown.",
       ],
     },
   ],
@@ -59,58 +73,70 @@ export const en: Content = {
   projects: [
     {
       slug: "fyt-sme-platform",
-      title: "FYT — SME Business Platform",
-      kind: "Commercial project · React branch",
-      period: "In development",
+      title: "FYT Trading ERP",
+      kind: "Family business · In production",
+      period: "Jun 2026 – Present",
       tagline:
-        "A business platform connecting quotations, purchasing, inventory, invoicing and payments. This case study focuses on the React branch: typed interfaces backed by company-scoped database workflows.",
+        "The ERP my family's trading company runs on, built in React and TypeScript with the business rules enforced in PostgreSQL.",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       sourceNotice:
-        "Commercial project — source code is private.",
-      galleryTitle: "Business workflow",
+        "Production system for a family business. Source code and company data are private.",
+      // Screens come from the app's demo company, filled with invented clients
+      // and RFQs, so no customer of the real business appears anywhere here.
       cover: {
-        src: "/projects/fyt-sme-platform/workflow-en.svg",
-        alt: "FYT workflow diagram linking quotations, purchasing, inventory, invoicing and payments, with a React interface and company-scoped PostgreSQL workflows",
+        src: "/projects/fyt-sme-platform/client-rfq-list.png",
+        alt: "The Client RFQ list in the FYT workspace: twenty requests for quotation with their date, channel, client, follow-up person, products, step badge and age in days",
         aspect: "screen",
       },
-      gallery: [{
-        src: "/projects/fyt-sme-platform/workflow-en.svg",
-        alt: "Conceptual business workflow and application layers for the FYT React branch",
-        aspect: "screen",
-        caption: "Conceptual workflow diagram — no customer records, source code or production screenshots",
-      }],
+      gallery: [
+        {
+          src: "/projects/fyt-sme-platform/client-rfq-list.png",
+          alt: "The Client RFQ list in the FYT workspace: twenty requests for quotation with their date, channel, client, follow-up person, products, step badge and age in days",
+          aspect: "screen",
+          caption: "Client RFQs, each tracked by step and age (demo company, sample data)",
+        },
+        {
+          src: "/projects/fyt-sme-platform/client-rfq-form.png",
+          alt: "The Create a new RFQ form: date, sequence, channel, client, contact, follow-up person and attachment, then a product row with SKU, client product name, brand, model, quantity and unit, followed by rows for a new vendor quote, quote history and our quote",
+          aspect: "screen",
+          caption: "Creating an RFQ: each product carries its vendor quotes, quote history and our own quote",
+        },
+        {
+          src: "/projects/fyt-sme-platform/wi-settings.png",
+          alt: "The WI Settings hub listing 27 settings, among them brands, channels, currencies, payment terms, SKU names, step process, units and VAT rates",
+          aspect: "screen",
+          caption: "27 settings each company keeps for its own documents, from units and VAT rates to workflow steps",
+        },
+      ],
+      // Counted from the repository in Oct 2026, not estimated. Recount before
+      // changing them: the app is still growing.
       metrics: [
-        { value: "React", label: "Application branch" },
-        { value: "TypeScript", label: "Frontend language" },
-        { value: "PostgreSQL", label: "Database workflows" },
-        { value: "Private", label: "Commercial source code" },
+        { value: "Live", label: "In production since Aug 2026" },
+        { value: "30+", label: "Feature modules in React" },
+        { value: "98", label: "Tables under row-level security" },
+        { value: "113", label: "Frontend test files" },
       ],
       overview: [
-        "An SME needs to carry the same business information from a customer's request through quotations, supplier orders, stock receipts, invoices and payments. Separate screens have to preserve that chain without duplicating or losing records.",
-        "The React branch uses React and TypeScript for the application, Supabase for authentication and data access, and PostgreSQL functions for transactional business operations. Company-scoped permissions separate the data each user can access.",
-        "The product is being developed commercially. This write-up describes the React application's workflows and engineering approach without publishing the private repository or operational data.",
+        "Quotations, purchase orders, stock, invoices and payments all build on each other, so no document may be duplicated or exceed the one before it. The app covers that whole chain, and the rules that keep it consistent live in the database rather than in the browser.",
       ],
       role: [
-        "Develop the React and TypeScript application, including business forms, searchable lists, pagination and navigation across the workflows covered by the React branch.",
-        "Connect the interface to authenticated, company-scoped data operations and server-side transactional workflows instead of treating business writes as independent browser updates.",
-        "Work on validation, draft protection, refreshed report data and automated checks so related screens behave consistently as the application grows.",
+        "Built 30+ React and TypeScript modules, from RFQs and purchase orders to invoices, payroll and reports.",
+        "Designed row-level security on 98 tables so each company sees only its own data.",
+        "Wrote database transactions that compute VAT on the server and block over-receiving and over-invoicing.",
       ],
       features: [
-        { title: "Customer and supplier workflows", description: "Directories, contacts, requests for quotation and supplier quotations keep the parties and source documents connected." },
-        { title: "Purchasing and inventory", description: "Purchase orders feed stock receipts and inventory movements. Partial receipts and corrections need to preserve the document chain." },
-        { title: "Invoicing and payments", description: "Invoices, incoming payments and expenses connect document balances to business reports, with transactional database operations behind writes." },
-        { title: "Company-scoped access", description: "Authentication, company membership and permission checks are paired with database access policies rather than relying on hidden UI controls alone." },
-        { title: "Consistent React forms", description: "React Hook Form and Zod support typed validation; shared list and navigation behavior and draft protection make longer workflows easier to complete." },
-        { title: "Verification during development", description: "The React branch includes TypeScript checks, linting, Vitest tests and production builds, alongside database assertions for the business workflows." },
+        { title: "Purchasing and inventory", description: "Partial stock receipts, with over-receiving refused by the database." },
+        { title: "Invoicing and payments", description: "Partial invoices and payments, with VAT and totals computed on the server." },
+        { title: "Set up per company", description: "27 settings and per-document workflow steps, so each company keeps its own catalogues and process." },
       ],
     },
     {
       slug: "asset-management-system",
       title: "Asset Management System",
       kind: "Internship · Ministry of Public Health",
-      period: "Jun 2025 — Nov 2025",
+      period: "Jun 2025 – Nov 2025",
       tagline:
-        "A government platform tracking equipment across its whole life — purchase, registration, borrowing, repair, inspection, disposal. Built by a team of six; I owned twenty-two of its screens.",
+        "A government system tracking equipment from purchase to disposal. Team of six; I worked on 22 screens, 14 as primary author.",
       stack: [
         "Next.js",
         "React",
@@ -138,7 +164,7 @@ export const en: Content = {
           alt: "The annual inspection screen, filtered to Buddhist-era budget year 2568, listing equipment with asset numbers, GFMIS codes, brand, model and location; each row carries a status badge and an inspection checkbox",
           aspect: "screen",
           caption:
-            "Annual inspection, ticked off row by row — filtered by พ.ศ. budget year",
+            "Annual inspection, ticked off row by row and filtered by พ.ศ. budget year",
         },
         {
           src: "/projects/asset-management-system/add-supplier.png",
@@ -148,43 +174,24 @@ export const en: Content = {
         },
       ],
       metrics: [
-        { value: "22", label: "Screens I built" },
-        { value: "7", label: "Workflow areas" },
+        // Matches the CV word for word: 22 contributed to, 14 as primary author.
+        { value: "22", label: "Screens I worked on" },
+        { value: "14", label: "As primary author" },
         { value: "6", label: "People on the project" },
         { value: "6 mo", label: "Internship" },
       ],
       overview: [
-        "The Ministry tracks a large volume of durable equipment — computers, medical devices, furniture — and every purchase, loan, repair, inspection and disposal has to be recorded, found again later, and reported on. The paperwork was the system.",
-        "The replacement was a monorepo: a Next.js frontend, a NestJS API over MySQL, and Docker Compose tying them together for local development. Six people worked on it across six months — two of us on the frontend, building from Figma designs.",
-        "It was the first time I worked inside a team large enough that my screens had to match someone else's without us checking with each other every day.",
+        "The Ministry tracked its equipment in Excel. The replacement is a Next.js frontend on a NestJS and MySQL API, built over six months by six people, two of us on the frontend.",
       ],
       role: [
-        "Built 22 of the application's screens across seven areas: asset registration, asset reporting, borrowing and returns, repair, inspection, disposal, and the reporting suite.",
-        "Built the whole five-step registration wizard — contract, attributes, purchasing, extra details, and a final review — plus the dialogs for adding a new project or supplier mid-flow.",
-        "Built the shared sidebar navigation that every screen in the application sits inside, and rebuilt it later as the app grew.",
-        "Added the search and filter controls the department actually files reports with, including a Buddhist-era year filter across all five report views.",
+        "Worked on 22 screens across seven areas, 14 of them as primary author.",
+        "Built the five-step asset registration wizard.",
+        "Connected screens to the team's NestJS REST API and fixed the issues raised in two rounds of UAT.",
       ],
       features: [
-        {
-          title: "Five-step registration wizard",
-          description:
-            "Registering an asset means capturing a contract, its attributes, the purchase, supporting details, and then checking the lot before committing. Each step is its own screen with a progress bar across the top, and a supplier or project missing from the dropdowns can be added without losing the half-filled form behind it.",
-        },
-        {
-          title: "Borrowing and returns",
-          description:
-            "Five screens covering internal and external borrowing, distribution, item registration and returns — recording who has a piece of equipment, when it went out and when it is due back.",
-        },
-        {
-          title: "Reporting suite",
-          description:
-            "Five report views: annual summary, damaged equipment, breakdown by budget type, by project, and disposal. Each one filters a large table down to the slice a department actually has to submit.",
-        },
-        {
-          title: "Inspection and disposal",
-          description:
-            "Scheduled condition checks, and the end-of-life flow that retires an asset along with the approval trail a government audit expects to find.",
-        },
+        { title: "Five-step registration wizard", description: "Contract, attributes, purchase, details and review, one step at a time." },
+        { title: "Borrowing and returns", description: "Records who has each item and when it is due back." },
+        { title: "Reporting suite", description: "Five filtered reports, including a Buddhist-era budget-year filter." },
       ],
       links: [
         {
@@ -197,9 +204,9 @@ export const en: Content = {
       slug: "thai-cattle-passport",
       title: "Thai Cattle Passport",
       kind: "Senior Project · Mahidol University",
-      period: "Sep 2025 — May 2026",
+      period: "Sep 2025 – May 2026",
       tagline:
-        "A cattle passport app giving every animal a verifiable identity and a health record that follows it to its next owner. I built the marketplace, the auth flow, and the QR-linked public profile.",
+        "An app that gives every cow a verifiable identity and a health record that follows it to its next owner. I built the marketplace, login and QR passport.",
       stack: [
         "Flutter",
         "Dart",
@@ -217,37 +224,37 @@ export const en: Content = {
       },
       gallery: [
         {
-          src: "/projects/thai-cattle-passport/herd-list.png",
+          src: "/projects/thai-cattle-passport/herd-list-screen.png",
           alt: "A list of the owner's cattle, each row showing a thumbnail, tag ID, name, breed, sex, age and a status badge such as fostered or deceased",
           aspect: "phone",
           caption: "The herd list, filtered by status",
         },
         {
-          src: "/projects/thai-cattle-passport/cow-profile.png",
+          src: "/projects/thai-cattle-passport/cow-profile-screen.png",
           alt: "An animal's profile page: a photo of the cow, its tag ID, name, breed, a healthy status badge, and tabs for general information and activity",
           aspect: "phone",
           caption: "The passport itself, in the owner's view",
         },
         {
-          src: "/projects/thai-cattle-passport/activity-log.png",
+          src: "/projects/thai-cattle-passport/activity-log-screen.png",
           alt: "A vertical timeline of an animal's activity: a pregnancy check by ultrasound, a breeding record naming the sire, and an edit history entry showing an ID being corrected",
           aspect: "phone",
           caption: "Health and activity history per animal",
         },
         {
-          src: "/projects/thai-cattle-passport/qr-passport.png",
+          src: "/projects/thai-cattle-passport/qr-passport-screen.png",
           alt: "A dialog showing an animal's tag ID above its QR code, with buttons to close or save the code to the phone's photo library",
           aspect: "phone",
           caption: "The QR code that opens the public passport",
         },
         {
-          src: "/projects/thai-cattle-passport/marketplace.png",
+          src: "/projects/thai-cattle-passport/marketplace-screen.png",
           alt: "The cattle marketplace: a search field, a result count, and a listing card showing the animal's photo, breed, sex, weight and province, with the seller's name blurred out, above an offer button",
           aspect: "phone",
           caption: "Marketplace listings with search and filters",
         },
         {
-          src: "/projects/thai-cattle-passport/seller-location.png",
+          src: "/projects/thai-cattle-passport/seller-location-screen.png",
           alt: "A bottom sheet titled seller and location, showing the farm plotted on a map above a blurred-out farm name and a masked phone number, with cancel and confirm-offer buttons",
           aspect: "phone",
           caption: "Seller details before an offer is confirmed",
@@ -262,39 +269,17 @@ export const en: Content = {
         { value: "3", label: "People on the team" },
       ],
       overview: [
-        "Cattle in Thailand change hands often, and the animal's history — vaccinations, treatments, previous owners — tends not to travel with it. A buyer takes the seller's word for it, because there is no record to check.",
-        "Thai Cattle Passport gives every animal a verifiable identity and a health record that follows it. The identity is the animal itself: a ConvNeXt-Tiny model served over REST decides whether two photos show the same cow, rather than trusting an ear tag that can be swapped or lost.",
-        "Three of us built it over the final year of the degree. My part was everything around the transaction — who owns the animal, who wants to buy it, and how a stranger checks its history before agreeing to anything.",
+        "In Thailand a cow's health history rarely travels with it when it is sold. Our three-person senior project identifies each animal from photos with an AI model and keeps its record in one place.",
       ],
       role: [
-        "Built the marketplace: listings, filtering, seller and farm details, offer tracking, and the ownership-transfer flow including foster arrangements.",
-        "Designed the Supabase (Postgres) data model behind the features I built — owners, animals, listings, offers, ownership transfers and foster arrangements, and the activity history each animal carries.",
-        "Implemented authentication end to end — login, registration, and password recovery with deep links back into the app.",
-        "Built the QR passport: a public read-only cattle profile that opens straight from a scan, plus the in-app scanner and QR export to the photo library.",
-        "Built the multi-step camera capture flow and image import used to register an animal's reference photos.",
-        "Worked on the identification model with the team — a ConvNeXt-Tiny trained on 1,026 images of 43 animals, averaging 94.6% accuracy and AUC above 0.94 over five folds.",
+        "Built the marketplace: listings, offers and ownership transfer.",
+        "Designed the Postgres data model behind my features, and built login and password recovery.",
+        "Built the QR passport, a public profile that opens straight from a scan.",
       ],
       features: [
-        {
-          title: "QR health passports",
-          description:
-            "Each animal carries a QR code that resolves to a read-only profile of its health record. A buyer or vet scans it and reads the history — no app install, no account, no permission from the seller.",
-        },
-        {
-          title: "Ownership-transfer marketplace",
-          description:
-            "Owners list cattle, receive offers, and transfer ownership — moving the animal's full record to the new owner along with it. Foster arrangements are handled as their own status, since an animal in someone else's care has not actually changed hands.",
-        },
-        {
-          title: "AI cattle identification",
-          description:
-            "Two photos go to the model and come back as a same-animal or different-animal answer. Because it compares learned embeddings rather than picking from a fixed list, it works on cattle it was never trained on — the only thing that can work on a farm that registers new animals every month.",
-        },
-        {
-          title: "Multi-step animal registration",
-          description:
-            "A guided capture flow walks the owner through photographing a new animal from the angles the identification model needs, with import from the gallery as a fallback.",
-        },
+        { title: "QR health passport", description: "Scan the code to read an animal's history, with no app or account." },
+        { title: "Ownership-transfer marketplace", description: "List, make offers and hand over an animal with its full record." },
+        { title: "AI identification", description: "A ConvNeXt-Tiny model, built with the team, tells whether two photos show the same cow, with 94.6% accuracy." },
       ],
       links: [
         {
@@ -310,20 +295,35 @@ export const en: Content = {
    * Add entries here; the section hides itself while the array is empty.
    * Remember to add the same entry to `th.ts`.
    */
+  // Newest first. A year on its own sorts after the months of that year.
   otherProjects: [
     {
       title: "E-commerce Analytics Dashboard",
       description:
-        "The public Brazilian e-commerce dataset from Kaggle — six related tables, 1.4 million rows. Five Alteryx workflows filter, group and aggregate 99,440 orders into 13 reporting extracts, modelled into a four-page Power BI dashboard covering regional sales, underperforming states and payment behaviour. Coursework, in a group of six.",
+        "A four-page Power BI dashboard on a 1.4-million-row Kaggle e-commerce dataset, prepared with five Alteryx workflows. Coursework, group of six.",
       period: "Nov 2024",
       stack: ["Alteryx", "Power BI", "ETL", "Data Visualisation"],
     },
     {
+      title: "Go Healthy",
+      description:
+        "A Flutter workout app on Firebase Cloud Firestore. I built the login, profile, workout selection and exercise timer screens. Coursework, group of three.",
+      period: "2024",
+      stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
+    },
+    {
       title: "Retail Database Design",
       description:
-        "A 13-table, 14-foreign-key schema for a clothing retailer — membership, branches, carts, orders, products, payments, shipping, employees, receipts and returns. Modelled from the business rules up: ER diagrams in Chen and Crow's Foot notation, a relational schema and a data dictionary, then the DDL and queries. Coursework in a group of five, with Uniqlo as the case study; I owned the Customer and Account Member entities end to end, including their data dictionary and DDL.",
+        "A 13-table MySQL schema for a clothing retailer, from ER diagrams through normalisation to DDL. I owned the Customer and Account Member entities. Coursework, group of five.",
       period: "Jul 2023",
       stack: ["MySQL", "SQL", "ER Modelling", "Normalisation"],
+    },
+    {
+      title: "Game Store Website",
+      description:
+        "A game shop site with an Express REST API over MySQL, using parameterized queries, plus storefront and admin pages. Coursework, group of three.",
+      period: "2023",
+      stack: ["Node.js", "Express", "MySQL", "REST API", "JavaScript", "HTML", "CSS"],
     },
   ],
 
@@ -333,8 +333,17 @@ export const en: Content = {
       items: ["JavaScript", "TypeScript", "Java", "Python", "Dart", "SQL", "HTML", "CSS"],
     },
     {
-      title: "Frameworks",
-      items: ["React", "Next.js", "Flutter", "Tailwind CSS", "Riverpod"],
+      title: "Frontend",
+      items: [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "React Hook Form",
+        "Zod",
+        "TanStack Query",
+        "Flutter",
+        "Riverpod",
+      ],
     },
     {
       title: "Databases",
@@ -342,7 +351,7 @@ export const en: Content = {
     },
     {
       title: "Backend",
-      items: ["Node.js", "REST APIs"],
+      items: ["Node.js", "Express", "REST APIs"],
     },
     {
       title: "Testing",
@@ -350,7 +359,7 @@ export const en: Content = {
     },
     {
       title: "Tools",
-      items: ["Git", "GitHub", "Figma", "Postman"],
+      items: ["Git", "GitHub", "Vite", "Figma", "Postman"],
     },
   ],
 
@@ -394,7 +403,7 @@ export const en: Content = {
 
   languages: [
     { name: "Thai", level: "Native" },
-    { name: "English", level: "Intermediate — TOEIC 660, CEFR B1" },
+    { name: "English", level: "Intermediate (TOEIC 660, CEFR B1)" },
   ],
 
   navigation: [
@@ -424,14 +433,12 @@ export const en: Content = {
       resumeLinkLabel: "Open my resume (PDF, opens in a new tab)",
       openToPrefix: "Open to",
       openToSuffix: "roles",
-      // One stat per direction I am applying in: web, mobile, test automation.
+      // Strongest work first: the ERP is the only one of these in production.
+      // Test automation lost its stat to make room; Celestica still says it.
       stats: [
-        { value: "22", label: "Production web screens shipped in an internship" },
+        { value: "Live", label: "Production ERP for my family's trading company" },
+        { value: "14", label: "Internship web screens as primary author, of 22" },
         { value: "25+", label: "Screens in a cross-platform Flutter app" },
-        {
-          value: "Appium",
-          label: "Android suite automated in Java, reported with Extent Reports",
-        },
       ],
     },
 
@@ -449,7 +456,7 @@ export const en: Content = {
       eyebrow: "Experience",
       title: "Where I have worked",
       description:
-        "Two internships: one shipping a production frontend, one on the other side of it — writing and automating the tests.",
+        "A production ERP for my family's business, and two internships: one building a frontend, and one on the other side of it, writing and automating the tests.",
       readCaseStudy: "Read the case study",
     },
 
@@ -457,7 +464,7 @@ export const en: Content = {
       eyebrow: "Projects",
       title: "Things I have built",
       description:
-        "A commercial business platform in React and PostgreSQL, a government asset system in Next.js, and a Flutter cattle passport app. Each case study explains my contribution and the workflows behind it.",
+        "A production ERP for my family's trading company in React and PostgreSQL, a government asset system in Next.js, and a Flutter cattle passport app. Each case study explains my contribution and the workflows behind it.",
       readCaseStudy: "Read the case study",
       otherHeading: "Other projects",
     },
@@ -492,11 +499,11 @@ export const en: Content = {
       submitting: "Sending…",
       successTitle: "Message sent",
       successBody:
-        "Thanks for reaching out — I will get back to you as soon as I can.",
+        "Thanks for reaching out. I will get back to you as soon as I can.",
       sendAnother: "Send another message",
       orEmailDirectly: "Or email me directly at",
       fallbackBody:
-        "Nothing is lost — your message is still in the box above. Send it straight to my inbox instead:",
+        "Nothing is lost: your message is still in the box above. Send it straight to my inbox instead:",
       openInMailApp: "Open in mail app",
       copyAddress: "Copy address",
       addressCopied: "Address copied",
@@ -532,6 +539,10 @@ export const en: Content = {
       whatIDid: "What I did",
       keyFeatures: "Key features",
       screens: "Screens",
+      closeImage: "Close image",
+      previousImage: "Previous image",
+      nextImage: "Next image",
+      imageCounter: "{current} of {total}",
       nextProject: "Next project",
       interested: "Interested in working together?",
       notFoundTitle: "Project not found",

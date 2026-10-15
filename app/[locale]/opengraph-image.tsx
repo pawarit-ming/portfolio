@@ -1,46 +1,18 @@
 import { ImageResponse } from "next/og";
 import { getContent, identity } from "@/lib/content";
 import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
+import { loadThaiFont, ogSize } from "@/lib/og";
 
 const fallbackProfile = getContent(defaultLocale).profile;
 
 // A static export, so it cannot vary by language — it describes the card in the
 // site's default one.
-export const alt = `${fallbackProfile.name} — ${fallbackProfile.role}`;
-export const size = { width: 1200, height: 630 };
+export const alt = `${fallbackProfile.name} | ${fallbackProfile.role}`;
+export const size = ogSize;
 export const contentType = "image/png";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
-}
-
-/**
- * Satori — what `next/og` renders with — ships Latin glyphs only, so Thai text
- * comes out as empty boxes unless a font is handed to it. Google Fonts serves
- * this family as a single unsubsetted TTF that also covers Latin, which is why
- * one file is enough for the whole card.
- *
- * Wrapped in a try/catch because this runs at build time over the network: if
- * the fetch fails the card falls back to English rather than the build failing
- * or, worse, a Thai card full of tofu going out to every share of the link.
- */
-async function loadThaiFont(): Promise<ArrayBuffer | null> {
-  try {
-    const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700",
-    );
-    if (!css.ok) return null;
-
-    const url = (await css.text()).match(
-      /src:\s*url\(([^)]+)\)\s*format\('truetype'\)/,
-    )?.[1];
-    if (!url) return null;
-
-    const font = await fetch(url);
-    return font.ok ? await font.arrayBuffer() : null;
-  } catch {
-    return null;
-  }
 }
 
 export default async function OpengraphImage({

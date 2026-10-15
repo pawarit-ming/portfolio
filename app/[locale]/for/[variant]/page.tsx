@@ -50,7 +50,7 @@ export async function generateMetadata({
   return {
     // `absolute` because the layout's template would otherwise append the name
     // a second time; the default page's title is built the same way round.
-    title: { absolute: `${profile.name} — ${profile.role}` },
+    title: { absolute: `${profile.name} | ${profile.role}` },
     description,
     keywords: [...targetRoles.map((role) => role.label), ...ui.metadata.keywords],
     // Metadata merges shallowly and the last segment wins, so this replaces the
@@ -68,7 +68,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: `${siteUrl}${localePath(locale, path)}`,
-      title: `${profile.name} — ${profile.role}`,
+      title: `${profile.name} | ${profile.role}`,
       description,
     },
     robots: { index: false, follow: false },

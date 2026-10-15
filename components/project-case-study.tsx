@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TagList } from "@/components/tag";
-import { ProjectImageFrame } from "@/components/project-image";
+import { ProjectGallery } from "@/components/project-gallery";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { getContent, type Project } from "@/lib/content";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -26,7 +26,6 @@ export function ProjectCaseStudy({
 }) {
   const { ui, projects } = getContent(locale);
   const otherProjects = projects.filter((item) => item.slug !== project.slug);
-  const phoneGallery = project.gallery?.[0]?.aspect === "phone";
 
   return (
     <article>
@@ -174,35 +173,15 @@ export function ProjectCaseStudy({
             >
               {project.galleryTitle ?? ui.project.screens}
             </h2>
-            {/* Phone shots are narrow enough to sit three across; browser
-                screenshots need the extra width to stay readable, and the
-                first of them leads at full width. */}
-            <div
-              className={
-                phoneGallery
-                  ? "mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3"
-                  : "mt-6 grid gap-5 sm:grid-cols-2"
-              }
-            >
-              {project.gallery.map((image, index) => {
-                const lead = !phoneGallery && index === 0;
-                return (
-                  <ProjectImageFrame
-                    key={image.src}
-                    image={image}
-                    className={lead ? "sm:col-span-2" : undefined}
-                    sizes={
-                      phoneGallery
-                        ? "(min-width: 640px) 33vw, 50vw"
-                        : lead
-                          ? "(min-width: 768px) 768px, 100vw"
-                          : "(min-width: 640px) 50vw, 100vw"
-                    }
-                    frameClassName="rounded-xl border border-line"
-                  />
-                );
-              })}
-            </div>
+            <ProjectGallery
+              images={project.gallery}
+              labels={{
+                closeImage: ui.project.closeImage,
+                previousImage: ui.project.previousImage,
+                nextImage: ui.project.nextImage,
+                imageCounter: ui.project.imageCounter,
+              }}
+            />
           </section>
         ) : null}
       </div>

@@ -47,12 +47,12 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: localePath(locale, `/projects/${project.slug}`),
-      title: `${project.title} — ${profile.name}`,
+      title: `${project.title} | ${profile.name}`,
       description: project.tagline,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} — ${profile.name}`,
+      title: `${project.title} | ${profile.name}`,
       description: project.tagline,
     },
   };

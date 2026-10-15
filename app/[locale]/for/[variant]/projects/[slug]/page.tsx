@@ -56,7 +56,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: localePath(locale, path),
-      title: `${project.title} — ${profile.name}`,
+      title: `${project.title} | ${profile.name}`,
       description: project.tagline,
     },
     robots: { index: false, follow: false },

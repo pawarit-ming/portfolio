@@ -217,6 +217,23 @@ body {
   border-radius: 3px;
 }
 
+/*
+ * A hairline around a screenshot, so a light app screen does not dissolve into
+ * the light frame behind it — the phone shots are #f3f3f3 on a #f4f4f5 frame.
+ *
+ * drop-shadow, not border: it follows the painted pixels, so it traces the
+ * rounded, transparent corners of a phone screen and the real edge of an
+ * object-contain image rather than the letterboxed box around it. Four 1px
+ * offsets with no blur make a crisp line; the last, softer one lifts it a touch.
+ */
+.screenshot-outline {
+  filter: drop-shadow(1px 0 0 var(--line-strong))
+    drop-shadow(-1px 0 0 var(--line-strong))
+    drop-shadow(0 1px 0 var(--line-strong))
+    drop-shadow(0 -1px 0 var(--line-strong))
+    drop-shadow(0 2px 6px rgb(0 0 0 / 0.06));
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
