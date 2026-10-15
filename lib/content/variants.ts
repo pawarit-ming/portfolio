@@ -69,10 +69,10 @@ const dba: VariantDefinition = {
     en: {
       role: "Database Administrator",
       headline:
-        "I design relational schemas — ER modelling, normalisation, and the SQL to build and query them.",
+        "I design relational schemas: ER modelling, normalisation, and the SQL to build and query them.",
       availability: "Open to database roles",
       summary:
-        "Recent Digital Science and Technology graduate from Mahidol University. I design relational schemas: the Postgres model behind a cross-platform Flutter app — owners, animals, listings, offers and ownership transfers — and a 13-table retail schema taken from business rules through ER diagrams, normalisation and DDL. My internship was on the frontend of a MySQL-backed asset management system, so I have also seen a schema from the side that has to query it.",
+        "Recent Digital Science and Technology graduate from Mahidol University. I design relational schemas: the Postgres model behind a cross-platform Flutter app (owners, animals, listings, offers and ownership transfers), and a 13-table retail schema taken from business rules through ER diagrams, normalisation and DDL. My internship was on the frontend of a MySQL-backed asset management system, so I have also seen a schema from the side that has to query it.",
       targetRoles: [
         { label: "Database Administrator", short: "Database Admin" },
         { label: "Database Developer", short: "Database Dev" },
@@ -91,7 +91,7 @@ const dba: VariantDefinition = {
         },
         {
           value: "MySQL",
-          label: "Behind the asset management system I built 22 screens for",
+          label: "Behind the asset management system I worked on 22 screens for",
         },
       ],
       skillGroups: [
@@ -161,7 +161,7 @@ const dba: VariantDefinition = {
         },
         {
           value: "MySQL",
-          label: "เบื้องหลังระบบครุภัณฑ์ที่พัฒนาหน้าจอให้ 22 หน้า",
+          label: "เบื้องหลังระบบครุภัณฑ์ที่ร่วมพัฒนาหน้าจอ 22 หน้า",
         },
       ],
       skillGroups: [

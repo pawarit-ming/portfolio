@@ -47,12 +47,28 @@ function ThemeClassRestore() {
   return null;
 }
 
+/**
+ * next-themes renders an inline <script> that sets the theme before first
+ * paint. That only matters in the server HTML, where it has already run by the
+ * time React hydrates — but React 19 sees the same <script> in the client
+ * render and logs "Encountered a script tag while rendering React component".
+ *
+ * In the browser it is marked as JSON, which React accepts as an inert data
+ * block. The server copy keeps its default type and still runs; the attribute
+ * difference is covered by the suppressHydrationWarning next-themes puts on
+ * the tag.
+ */
+const scriptProps =
+  typeof window === "undefined"
+    ? undefined
+    : ({ type: "application/json" } as const);
+
 export function ThemeProvider({
   children,
   ...props
 }: ComponentProps<typeof NextThemesProvider>) {
   return (
-    <NextThemesProvider {...props}>
+    <NextThemesProvider scriptProps={scriptProps} {...props}>
       <ThemeClassRestore />
       {children}
     </NextThemesProvider>

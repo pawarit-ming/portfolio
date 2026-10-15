@@ -306,6 +306,12 @@ export type UiCopy = {
     whatIDid: string;
     keyFeatures: string;
     screens: string;
+    /** Lightbox controls on a case-study gallery. */
+    closeImage: string;
+    previousImage: string;
+    nextImage: string;
+    /** `{current}` and `{total}` are filled in, e.g. "2 of 3". */
+    imageCounter: string;
     nextProject: string;
     interested: string;
     notFoundTitle: string;

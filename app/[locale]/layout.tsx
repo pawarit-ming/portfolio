@@ -62,13 +62,13 @@ export async function generateMetadata({
     .replace("{location}", profile.location)
     .replace("{headline}", profile.headline);
 
-  const title = `${profile.name} — ${profile.role}`;
+  const title = `${profile.name} | ${profile.role}`;
 
   return {
     metadataBase: new URL(siteUrl),
     title: {
       default: title,
-      template: `%s — ${profile.name}`,
+      template: `%s | ${profile.name}`,
     },
     description,
     keywords: [
