@@ -121,6 +121,8 @@ export type Profile = {
   role: string;
   headline: string;
   location: string;
+  /** Shown beside the location in the hero, e.g. a willingness to move. */
+  relocation: string;
   availability: string;
   /**
    * The whole of the About section's prose — one paragraph, sitting beside the

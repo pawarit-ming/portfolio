@@ -92,10 +92,11 @@ inside them.
 - **Header**: a clear-glass sticky bar (see Elevation). Wordmark (PW monogram
   and name), About, Projects, Experience, Skills, language and theme switches,
   Get in touch.
-- **Hero**: the name at display size on its own row. Below it, one left edge
-  holds the statement (lead size), the View projects and Resume actions and the
-  social links; the role, location and availability sit apart on the right as a
-  small facts block. On phones the facts come first. No picture in the hero.
+- **Hero**: everything on one left edge. The name at display size; one line of
+  facts under it (the role in the ink at body size, then location and
+  availability in grey); the statement at lead size; the View projects and
+  Resume actions; the social links. No picture and no side column: a facts
+  block parked on the right read as stranded.
 - **About** (grey): summary, certificates and languages on the left; the
   education panel in white on the right.
 - **Things I have built** (white): a one-sentence intro, the FYT ERP as a wide
