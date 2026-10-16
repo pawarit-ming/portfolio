@@ -63,16 +63,16 @@ export function SiteHeader({
   const href = (hash: string) => sectionHref(pathname, locale, hash);
 
   return (
-    <header className="no-print sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
+    <header className="site-header no-print sticky top-0 z-50">
+      <div className="page-wrap flex h-20 w-full items-center justify-between">
         <Link
           href={sectionsPath(pathname, locale)}
           onClick={close}
-          className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-fg"
+          className="site-wordmark flex items-center gap-3 text-base font-semibold tracking-tight text-fg"
         >
           <span
             aria-hidden
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-invert text-[11px] font-bold tracking-tight text-on-invert"
+            className="wordmark-monogram flex h-10 w-10 items-center justify-center bg-invert text-sm font-bold text-on-invert"
           >
             {identity.initials}
           </span>
@@ -84,7 +84,7 @@ export function SiteHeader({
             <Link
               key={item.hash}
               href={href(item.hash)}
-              className="rounded-md px-3 py-2 text-sm text-muted transition-colors hover:bg-frame hover:text-fg"
+              className="header-link px-3 py-3 text-sm text-fg transition-colors hover:text-accent"
             >
               {item.label}
             </Link>
@@ -98,7 +98,7 @@ export function SiteHeader({
               button shows no address to fall back on. */}
           <Link
             href={href("#contact")}
-            className="inline-flex items-center rounded-md bg-invert px-3.5 py-2 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
+            className="header-contact inline-flex items-center bg-invert px-4 py-3 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
           >
             {ui.getInTouch}
           </Link>
@@ -134,9 +134,9 @@ export function SiteHeader({
         <nav
           id="mobile-nav"
           aria-label={ui.mainNavLabel}
-          className="border-t border-line bg-card md:hidden"
+          className="mobile-navigation md:hidden"
         >
-          <ul className="mx-auto w-full max-w-6xl px-4 py-3">
+          <ul className="page-wrap w-full py-4">
             {navigation.map((item) => (
               <li key={item.hash}>
                 <Link

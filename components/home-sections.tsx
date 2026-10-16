@@ -25,7 +25,7 @@ export function HomeSections({
 }: {
   locale: Locale;
   content: Content;
-  /** Hero chips; omitted on the default page, which uses the shared list. */
+  /** Optional role-specific stack; the default page keeps this in Skills. */
   stack?: string[];
   /** The CV in the hero; omitted on the default page, which sends the dev one. */
   resume?: string;
@@ -37,13 +37,12 @@ export function HomeSections({
 }) {
   return (
     <>
-      {/* No `locale`: the hero's own links are bare hashes, because every
-          route that renders this component has the sections on it. */}
-      <Hero content={content} stack={stack} resume={resume} />
+      {/* Preview links follow the current language and role variant. */}
+      <Hero content={content} locale={locale} basePath={basePath} stack={stack} resume={resume} />
+      <Projects locale={locale} content={content} basePath={basePath} />
       <About content={content} />
       <ExperienceSection locale={locale} content={content} basePath={basePath} />
-      <Projects locale={locale} content={content} basePath={basePath} />
-      <Skills content={content} />
+      <Skills content={content} locale={locale} basePath={basePath} />
       <Contact content={content} />
     </>
   );

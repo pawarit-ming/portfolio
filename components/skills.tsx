@@ -1,35 +1,43 @@
+import Link from "next/link";
 import { Section } from "@/components/section";
-import type { Content } from "@/lib/content";
+import { ArrowRightIcon } from "@/components/icons";
+import type { Content, SkillGroup } from "@/lib/content";
+import { localePath, type Locale } from "@/lib/i18n";
 
-export function Skills({ content }: { content: Content }) {
-  const { skillGroups, ui } = content;
-
-  return (
-    <Section
-      id="skills"
-      eyebrow={ui.skills.eyebrow}
-      title={ui.skills.title}
-      description={ui.skills.description}
-      tinted
-    >
-      <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-        {skillGroups.map((group) => (
-          <div key={group.title} className="bg-card p-6">
-            <h3 className="text-sm font-semibold text-fg">
-              {group.title}
-            </h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {group.items.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-md border border-line bg-surface px-2.5 py-1 font-mono text-xs text-body"
-                >
-                  {item}
+export function Skills({ content, locale, basePath = "" }: { content: Content; locale: Locale; basePath?: string }) {
+  const { skillGroups, projects, ui } = content;
+  const evidencedGroups = skillGroups.filter((group) => group.projects?.length);
+  const referenceGroups = skillGroups.filter((group) => !group.projects?.length);
+  const renderGroup = (group: SkillGroup) => (
+    <div key={group.title}>
+      <dt>{group.title}</dt>
+      <dd>
+        <ul className="skill-items" role="list">
+          {group.items.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        {group.note ? <p className="skill-note">{group.note}</p> : null}
+        {group.projects?.length ? (
+          <ul className="skill-evidence">
+            {group.projects.map((slug) => {
+              const project = projects.find((item) => item.slug === slug);
+              return project ? (
+                <li key={slug}>
+                  <Link href={localePath(locale, `${basePath}/projects/${slug}`)}>
+                    {project.title}<ArrowRightIcon className="h-4 w-4 shrink-0" />
+                  </Link>
                 </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+              ) : null;
+            })}
+          </ul>
+        ) : null}
+      </dd>
+    </div>
+  );
+  return (
+    <Section id="skills" title={ui.skills.title} description={ui.skills.description}>
+      <div className={`skills-layout${evidencedGroups.length ? "" : " skills-layout-reference"}`}>
+        {evidencedGroups.length ? <dl className="skills-practice">{evidencedGroups.map(renderGroup)}</dl> : null}
+        <dl className="skills-reference">{referenceGroups.map(renderGroup)}</dl>
       </div>
     </Section>
   );

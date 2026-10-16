@@ -66,6 +66,10 @@ export type Project = {
   kind: string;
   period: string;
   tagline: string;
+  /** The actual business workflow, when a sequence helps explain this project. */
+  workflow?: string[];
+  /** One concrete engineering constraint used in the homepage project story. */
+  spotlight?: { title: string; description: string };
   stack: string[];
   metrics: Metric[];
   overview: string[];
@@ -126,9 +130,8 @@ export type Profile = {
    *
    * It repeats what Experience and Projects say further down, and that is
    * deliberate: it is the résumé summary, and someone skimming the top of the
-   * page may never reach either. It is also the only place above the fold where
-   * Supabase, the maps API, the QR profiles and the identification model are
-   * named at all — the hero chips stop at the six headline frameworks.
+   * page may never reach either. Keep the summary about concrete work rather
+   * than duplicating the complete technology list in Skills.
    */
   summary: string;
 };
@@ -166,7 +169,13 @@ export type Certification = {
   file: string;
 };
 
-export type SkillGroup = { title: string; items: string[] };
+export type SkillGroup = {
+  title: string;
+  items: string[];
+  /** Optional project evidence; no proficiency rating is inferred from it. */
+  projects?: ProjectSlug[];
+  note?: string;
+};
 
 /**
  * Every failure the contact endpoint can report, as a code rather than a
@@ -290,6 +299,8 @@ export type UiCopy = {
   };
 
   footer: {
+    navigationHeading: string;
+    socialsHeading: string;
     /** Follows "© 2026 Pawarit Wang." */
     builtWith: string;
   };
@@ -305,6 +316,7 @@ export type UiCopy = {
     overview: string;
     whatIDid: string;
     keyFeatures: string;
+    workflow: string;
     screens: string;
     /** Lightbox controls on a case-study gallery. */
     closeImage: string;

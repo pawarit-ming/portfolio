@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { projectImageAssets } from "@/lib/project-image-assets";
 import type { ProjectImage as ProjectImageData } from "@/lib/content";
 
 const aspectClass = {
@@ -23,6 +24,8 @@ type ProjectImageProps = {
   className?: string;
   /** Classes for the image frame itself — borders, rounding. */
   frameClassName?: string;
+  /** Border the actual screenshot using its intrinsic proportions. */
+  bordered?: boolean;
   /**
    * Makes the frame a button that opens the image full size. Only a client
    * component can pass one, which is why the gallery is one and the homepage
@@ -37,24 +40,28 @@ export function ProjectImageFrame({
   priority = false,
   className = "",
   frameClassName = "",
+  bordered = false,
   onOpen,
 }: ProjectImageProps) {
   const aspect = image.aspect ?? "wide";
   // A screenshot has to be shown whole — a crop loses a sidebar or a toolbar,
   // and the layout is the thing worth looking at. Photos may crop to fill.
   const uncropped = aspect === "phone" || aspect === "screen";
-  const frameClasses = `relative block w-full overflow-hidden bg-frame ${aspectClass[aspect]} ${frameClassName}`;
+  const intrinsicImage = bordered ? projectImageAssets[image.src] : undefined;
+  const frameClasses = `relative block w-full overflow-hidden rounded-lg bg-frame ${intrinsicImage ? "image-frame-natural" : aspectClass[aspect]} ${frameClassName}`;
 
   const picture = (
     <Image
-      src={image.src}
+      src={intrinsicImage ?? image.src}
       alt={image.alt}
-      fill
+      fill={intrinsicImage ? undefined : true}
       sizes={sizes}
-      priority={priority}
+      preload={priority}
       // `fill` ignores container padding, so the inset goes on the image.
       className={
-        uncropped
+        intrinsicImage
+          ? `gallery-image${aspect === "phone" ? " gallery-image-phone" : ""}`
+          : uncropped
           ? `object-contain screenshot-outline ${aspect === "phone" ? "p-4" : "p-2"}`
           : "object-cover"
       }
@@ -77,7 +84,7 @@ export function ProjectImageFrame({
         <div className={frameClasses}>{picture}</div>
       )}
       {image.caption ? (
-        <figcaption className="mt-2 text-xs leading-snug text-subtle">
+        <figcaption className="mt-3 text-sm leading-relaxed text-muted">
           {image.caption}
         </figcaption>
       ) : null}
