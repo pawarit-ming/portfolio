@@ -69,25 +69,25 @@ export const en: Content = {
       // Screens come from the app's demo company, filled with invented clients
       // and RFQs, so no customer of the real business appears anywhere here.
       cover: {
-        src: "/projects/fyt-sme-platform/client-rfq-list.png",
+        src: "/projects/fyt-sme-platform/client-rfq-list.webp",
         alt: "The Client RFQ list in the FYT workspace: twenty requests for quotation with their date, channel, client, follow-up person, products, step badge and age in days",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/fyt-sme-platform/client-rfq-list.png",
+          src: "/projects/fyt-sme-platform/client-rfq-list.webp",
           alt: "The Client RFQ list in the FYT workspace: twenty requests for quotation with their date, channel, client, follow-up person, products, step badge and age in days",
           aspect: "screen",
           caption: "Client RFQs, each tracked by step and age (demo company, sample data)",
         },
         {
-          src: "/projects/fyt-sme-platform/client-rfq-form.png",
+          src: "/projects/fyt-sme-platform/client-rfq-form.webp",
           alt: "The Create a new RFQ form: date, sequence, channel, client, contact, follow-up person and attachment, then a product row with SKU, client product name, brand, model, quantity and unit, followed by rows for a new vendor quote, quote history and our quote",
           aspect: "screen",
           caption: "Creating an RFQ: each product carries its vendor quotes, quote history and our own quote",
         },
         {
-          src: "/projects/fyt-sme-platform/wi-settings.png",
+          src: "/projects/fyt-sme-platform/wi-settings.webp",
           alt: "The WI Settings hub listing 27 settings, among them brands, channels, currencies, payment terms, SKU names, step process, units and VAT rates",
           aspect: "screen",
           caption: "27 settings each company keeps for its own documents, from units and VAT rates to workflow steps",
@@ -134,26 +134,26 @@ export const en: Content = {
         "Figma",
       ],
       cover: {
-        src: "/projects/asset-management-system/registration-wizard.png",
+        src: "/projects/asset-management-system/registration-wizard.webp",
         alt: "Step one of the asset registration wizard: a progress bar naming all five steps, above a contract form filled in with a project number, budget, contract number and Thai-format dates",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/asset-management-system/registration-wizard.png",
+          src: "/projects/asset-management-system/registration-wizard.webp",
           alt: "Step one of the asset registration wizard: a progress bar naming all five steps, above a contract form filled in with a project number, budget, contract number and Thai-format dates",
           aspect: "screen",
           caption: "Step one of the five-step registration wizard",
         },
         {
-          src: "/projects/asset-management-system/inspection.png",
+          src: "/projects/asset-management-system/inspection.webp",
           alt: "The annual inspection screen, filtered to Buddhist-era budget year 2568, listing equipment with asset numbers, GFMIS codes, brand, model and location; each row carries a status badge and an inspection checkbox",
           aspect: "screen",
           caption:
             "Annual inspection, ticked off row by row and filtered by พ.ศ. budget year",
         },
         {
-          src: "/projects/asset-management-system/add-supplier.png",
+          src: "/projects/asset-management-system/add-supplier.webp",
           alt: "The add-supplier form, filled in: tax ID and GFMIS code, seller and company name, then a Thai address split across building, room, floor, house number, soi, street, district and postcode",
           aspect: "screen",
           caption: "Adding a supplier without losing the half-filled form behind it",
@@ -205,43 +205,43 @@ export const en: Content = {
         "QR & Camera",
       ],
       cover: {
-        src: "/projects/thai-cattle-passport/cover.png",
+        src: "/projects/thai-cattle-passport/cover.webp",
         alt: "Three screens of the app side by side: the owner's herd list, an animal's QR code dialog, and a marketplace listing",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/thai-cattle-passport/herd-list-screen.png",
+          src: "/projects/thai-cattle-passport/herd-list-screen.webp",
           alt: "A list of the owner's cattle, each row showing a thumbnail, tag ID, name, breed, sex, age and a status badge such as fostered or deceased",
           aspect: "phone",
           caption: "The herd list, filtered by status",
         },
         {
-          src: "/projects/thai-cattle-passport/cow-profile-screen.png",
+          src: "/projects/thai-cattle-passport/cow-profile-screen.webp",
           alt: "An animal's profile page: a photo of the cow, its tag ID, name, breed, a healthy status badge, and tabs for general information and activity",
           aspect: "phone",
           caption: "The passport itself, in the owner's view",
         },
         {
-          src: "/projects/thai-cattle-passport/activity-log-screen.png",
+          src: "/projects/thai-cattle-passport/activity-log-screen.webp",
           alt: "A vertical timeline of an animal's activity: a pregnancy check by ultrasound, a breeding record naming the sire, and an edit history entry showing an ID being corrected",
           aspect: "phone",
           caption: "Health and activity history per animal",
         },
         {
-          src: "/projects/thai-cattle-passport/qr-passport-screen.png",
+          src: "/projects/thai-cattle-passport/qr-passport-screen.webp",
           alt: "A dialog showing an animal's tag ID above its QR code, with buttons to close or save the code to the phone's photo library",
           aspect: "phone",
           caption: "The QR code that opens the public passport",
         },
         {
-          src: "/projects/thai-cattle-passport/marketplace-screen.png",
+          src: "/projects/thai-cattle-passport/marketplace-screen.webp",
           alt: "The cattle marketplace: a search field, a result count, and a listing card showing the animal's photo, breed, sex, weight and province, with the seller's name blurred out, above an offer button",
           aspect: "phone",
           caption: "Marketplace listings with search and filters",
         },
         {
-          src: "/projects/thai-cattle-passport/seller-location-screen.png",
+          src: "/projects/thai-cattle-passport/seller-location-screen.webp",
           alt: "A bottom sheet titled seller and location, showing the farm plotted on a map above a blurred-out farm name and a masked phone number, with cancel and confirm-offer buttons",
           aspect: "phone",
           caption: "Seller details before an offer is confirmed",
