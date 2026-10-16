@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { TagList } from "@/components/tag";
 import { ProjectGallery } from "@/components/project-gallery";
 import { ProjectWorkflow } from "@/components/project-workflow";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
@@ -13,7 +12,6 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
 }) {
   const { ui, projects } = getContent(locale);
   const otherProjects = projects.filter((item) => item.slug !== project.slug);
-  const [leadMetric, ...supportingMetrics] = project.metrics;
 
   return (
     <article className="case-study">
@@ -22,32 +20,25 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
           <Link href={localePath(locale, `${basePath}#projects`)} className="text-action">
             <ArrowLeftIcon className="h-4 w-4" />{ui.project.allProjects}
           </Link>
-          <div className="case-study-summary">
-            <div className="case-study-introduction">
-              <h1>{project.title}</h1>
-              <p className="case-study-tagline">{project.tagline}</p>
-              <div className="case-study-meta"><p>{project.kind}</p><p>{project.period}</p></div>
-              <TagList items={project.stack} />
-            </div>
-            {leadMetric ? (
-              <div className="case-study-proof">
-                <dl className="case-study-stats">
-                  <div><dt>{leadMetric.label}</dt><dd>{leadMetric.value}</dd></div>
-                </dl>
-                {supportingMetrics.length ? (
-                  <dl className="case-study-support">
-                    {supportingMetrics.map((metric) => (
-                      <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>
-                    ))}
-                  </dl>
-                ) : null}
-              </div>
-            ) : null}
+          <h1 className="case-study-title">
+            <span className="case-study-title-mask"><span>{project.title}</span></span>
+          </h1>
+          {/* The header carries only what decides whether to read on: what it
+              is, its status, and the figures. Everything else is below. */}
+          <div className="case-study-lede">
+            <p className="case-study-tagline">{project.tagline}</p>
+            <p className="case-study-facts">
+              <span className="case-study-kind">{project.kind}</span>
+              <span>{project.period}</span>
+            </p>
           </div>
-          {project.workflow?.length ? (
-            <ProjectWorkflow steps={project.workflow} label={ui.project.workflow} />
+          {project.metrics.length ? (
+            <dl className="case-study-metrics">
+              {project.metrics.map((metric) => (
+                <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>
+              ))}
+            </dl>
           ) : null}
-          {project.sourceNotice ? <p className="source-notice">{project.sourceNotice}</p> : null}
           {project.links?.length ? (
             <div className="mt-6 flex flex-wrap gap-6">
               {project.links.map((link) => (
@@ -60,24 +51,8 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
       </header>
 
       <div className="case-study-wrap case-study-body">
-        <div className="case-study-context">
-          <section aria-labelledby="overview-heading" className="case-study-section case-study-panel">
-            <h2 id="overview-heading">{ui.project.overview}</h2>
-            <div className="case-study-prose">
-              {project.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            </div>
-          </section>
-
-          <section aria-labelledby="role-heading" className="case-study-section case-study-panel">
-            <h2 id="role-heading">{ui.project.whatIDid}</h2>
-            <div className="case-study-prose">
-              <ul>{project.role.map((item) => <li key={item}>{item}</li>)}</ul>
-            </div>
-          </section>
-        </div>
-
         {project.gallery?.length ? (
-          <section aria-labelledby="gallery-heading" className="case-study-section">
+          <section aria-labelledby="gallery-heading" className="case-study-section case-study-screens">
             <h2 id="gallery-heading">{project.galleryTitle ?? ui.project.screens}</h2>
             <ProjectGallery images={project.gallery} labels={{
               closeImage: ui.project.closeImage,
@@ -87,6 +62,31 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
             }} />
           </section>
         ) : null}
+
+        <div className="case-study-context">
+          <section aria-labelledby="overview-heading" className="case-study-section case-study-panel">
+            <h2 id="overview-heading">{ui.project.overview}</h2>
+            <div className="case-study-prose">
+              {project.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+            {project.workflow?.length ? (
+              <ProjectWorkflow steps={project.workflow} label={ui.project.workflow} />
+            ) : null}
+            {project.sourceNotice ? <p className="source-notice">{project.sourceNotice}</p> : null}
+          </section>
+
+          <section aria-labelledby="role-heading" className="case-study-section case-study-panel">
+            <h2 id="role-heading">{ui.project.whatIDid}</h2>
+            <div className="case-study-prose">
+              <ul>{project.role.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+            <p className="case-study-stack">
+              {project.stack.map((item, index) => (
+                <span key={item}>{index > 0 ? " · " : null}<span>{item}</span></span>
+              ))}
+            </p>
+          </section>
+        </div>
 
         <section aria-labelledby="features-heading" className="case-study-section">
           <h2 id="features-heading">{ui.project.keyFeatures}</h2>
@@ -102,7 +102,7 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
         <div className="case-study-wrap">
           {otherProjects.length ? (
             <div>
-              <h2 className="text-xl font-semibold">{ui.project.nextProject}</h2>
+              <h2 className="case-study-next-heading">{ui.project.nextProject}</h2>
               <ul className="case-study-next">
                 {otherProjects.map((other) => (
                   <li key={other.slug}>
@@ -115,7 +115,7 @@ export function ProjectCaseStudy({ locale, project, basePath = "" }: {
               </ul>
             </div>
           ) : null}
-          <div className="mt-10 flex flex-wrap items-center gap-5">
+          <div className="case-study-cta">
             <p>{ui.project.interested}</p>
             <Link href={localePath(locale, `${basePath}#contact`)} className="primary-action">
               {ui.getInTouch}

@@ -20,6 +20,13 @@ const CHOREOGRAPHY: [selector: string, kind: "rise" | "row" | "mask"][] = [
   [".skills-practice > div, .skills-reference > div", "row"],
   [".contact-information, .contact-form-panel", "rise"],
   [".footer-top", "rise"],
+  // Case studies: screens first, then the story, features and the way on.
+  [".case-study-section > h2, .case-study-prose", "rise"],
+  [".case-study-screens > div > *", "row"],
+  [".case-study-features > div", "row"],
+  [".case-study-next-heading", "rise"],
+  [".case-study-next > li", "row"],
+  [".case-study-cta", "rise"],
 ];
 
 const MAX_STEP = 4;

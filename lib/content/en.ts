@@ -15,7 +15,7 @@ export const en: Content = {
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: an internship at the Ministry of Public Health, a Flutter senior project, and an ERP I built to help with my family's trading business, which it now runs on while I keep building it.",
+      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: an internship at the Ministry of Public Health, a Flutter senior project, and an ERP for a trading company that is already in use while I keep building it.",
   },
 
   /**
@@ -58,18 +58,14 @@ export const en: Content = {
     {
       slug: "fyt-sme-platform",
       workflow: ["RFQs", "Purchase orders", "Stock receipts", "Invoices"],
-      spotlight: {
-        title: "Keeping orders consistent",
-        description: "Stock receipts and invoices cannot exceed the documents they refer to. The database enforces those limits, even when two people save at once.",
-      },
       title: "FYT Trading ERP",
-      kind: "Family business · In use, still in development",
+      kind: "Personal project · In use, still in development",
       period: "Jun 2026 – Present",
       tagline:
-        "The ERP my family's trading company runs on, built in React and TypeScript with the business rules enforced in PostgreSQL.",
+        "An ERP for a trading company, built in React and TypeScript with the business rules enforced in PostgreSQL.",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       sourceNotice:
-        "Production system for a family business. Source code and company data are private.",
+        "In use by a trading company. Source code and company data are private.",
       // Screens come from the app's demo company, filled with invented clients
       // and RFQs, so no customer of the real business appears anywhere here.
       cover: {
@@ -426,15 +422,6 @@ export const en: Content = {
       // a CV as the verb.
       resume: "Resume (PDF)",
       resumeLinkLabel: "Open my resume (PDF, opens in a new tab)",
-      openToPrefix: "Open to",
-      openToSuffix: "roles",
-      // Strongest work first: the ERP is the only one of these in production.
-      // Test automation lost its stat to make room; Celestica still says it.
-      stats: [
-        { value: "Live", label: "Production ERP for my family's trading company" },
-        { value: "14", label: "Internship web screens as primary author, of 22" },
-        { value: "25+", label: "Screens in a cross-platform Flutter app" },
-      ],
     },
 
     about: {
@@ -448,31 +435,27 @@ export const en: Content = {
     },
 
     experience: {
-      eyebrow: "Experience",
-      title: "Where I have worked",
+      title: "Experience",
       description:
-        "Two internships: one building a frontend, and one on the other side of it, writing and automating the tests.",
+        "Two internships: one building a frontend, one automating tests.",
       readCaseStudy: "Read the case study",
     },
 
     projects: {
-      eyebrow: "Projects",
       title: "Things I have built",
       description:
-        "A production ERP for my family's trading company in React and PostgreSQL, a government asset system in Next.js, and a Flutter cattle passport app. Each case study explains my contribution and the workflows behind it.",
+        "Each case study explains my part and the workflow behind it.",
       readCaseStudy: "Read the case study",
       otherHeading: "Other projects",
     },
 
     skills: {
-      eyebrow: "Skills",
       title: "What I work with",
       description:
         "Strongest in the React and Next.js side of the stack, comfortable enough on the backend and in mobile to build a feature end to end.",
     },
 
     contact: {
-      eyebrow: "Contact",
       title: "Let's talk",
       description:
         "I am open to developer roles in Bangkok, Chonburi, or remote. Drop me a line and I will reply.",

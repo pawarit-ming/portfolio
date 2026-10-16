@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 
 type SectionProps = {
   id: string;
-  /** Kept compatible with callers; headings now carry the section name. */
-  eyebrow?: string;
   title: string;
   description?: string;
   children: ReactNode;
