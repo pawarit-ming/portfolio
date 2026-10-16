@@ -18,22 +18,17 @@ export default async function NotFound() {
   const { ui } = getContent(isLocale(current) ? current : defaultLocale);
   const home = isLocale(current) ? current : defaultLocale;
 
+  // The code at display size, on the same left edge as the header, so the
+  // page reads like the rest of the site rather than a stray default.
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col items-start px-6 py-28 lg:px-8">
-      <p className="text-sm text-muted">404</p>
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
-        {ui.notFound.title}
-      </h1>
-      <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
-        {ui.notFound.description}
-      </p>
-      <Link
-        href={localePath(home)}
-        className="group mt-8 inline-flex items-center gap-2 rounded-md bg-invert px-4 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
-      >
-        <ArrowLeftIcon className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+    <section className="not-found page-wrap">
+      <p className="not-found-code" aria-hidden="true">404</p>
+      <h1 className="not-found-title">{ui.notFound.title}</h1>
+      <p className="not-found-text">{ui.notFound.description}</p>
+      <Link href={localePath(home)} className="primary-action not-found-action">
+        <ArrowLeftIcon className="h-4 w-4" />
         {ui.notFound.back}
       </Link>
-    </div>
+    </section>
   );
 }

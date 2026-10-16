@@ -24,12 +24,9 @@ type Labels = {
 export function ProjectGallery({
   images,
   labels,
-  spotlight = false,
 }: {
   images: ProjectImage[];
   labels: Labels;
-  /** One large, eagerly loaded frame for the homepage introduction. */
-  spotlight?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<number | null>(null);
@@ -98,9 +95,7 @@ export function ProjectGallery({
           readable, and the first of them leads at full width. */}
       <div
         className={
-          spotlight
-            ? "spotlight-gallery"
-            : phoneGallery
+          phoneGallery
             ? "mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
             : "mt-6 grid gap-5 sm:grid-cols-2"
         }
@@ -110,20 +105,17 @@ export function ProjectGallery({
           return (
             <ProjectImageFrame
               key={image.src}
-              image={spotlight ? { ...image, caption: undefined } : image}
-              priority={spotlight && index === 0}
-              bordered={!spotlight}
-              className={!spotlight && lead ? "sm:col-span-2" : undefined}
+              image={image}
+              bordered
+              className={lead ? "sm:col-span-2" : undefined}
               sizes={
-                spotlight
-                  ? "(min-width: 1280px) 780px, (min-width: 900px) 62vw, calc(100vw - 80px)"
-                  : phoneGallery
+                phoneGallery
                   ? "(min-width: 1280px) 190px, (min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
                   : lead
                     ? "(min-width: 1280px) 1216px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
                     : "(min-width: 1280px) 598px, (min-width: 640px) 50vw, 100vw"
               }
-              frameClassName={spotlight ? "spotlight-frame" : "gallery-frame"}
+              frameClassName="gallery-frame"
               onOpen={() => setOpen(index)}
             />
           );

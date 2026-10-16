@@ -4,21 +4,41 @@
 
 export const ogSize = { width: 1200, height: 630 };
 
+/** The site's own tokens, so a shared link looks like the page it opens. */
+export const ogColors = {
+  ground: "#ffffff",
+  ink: "#18181b",
+  muted: "#52525b",
+};
+
+export const latinFamily = "Schibsted Grotesk";
+export const thaiFamily = "Noto Sans Thai";
+
+export type OgFont = {
+  name: string;
+  data: ArrayBuffer;
+  weight: 400 | 600;
+  style: "normal";
+};
+
 /**
  * Satori — what `next/og` renders with — ships Latin glyphs only, so Thai text
- * comes out as empty boxes unless a font is handed to it. Google Fonts serves
- * this family as a single unsubsetted TTF that also covers Latin, which is why
- * one file is enough for the whole card.
+ * comes out as empty boxes unless a font is handed to it, and the Latin it does
+ * have is not the site's face. Google Fonts serves a single unsubsetted TTF per
+ * weight to a client it does not recognise, which is the format Satori reads.
  *
  * Returns null instead of throwing because this runs at build time over the
- * network: if the fetch fails the card falls back to English rather than the
- * build failing or, worse, a Thai card full of tofu going out to every share of
- * the link.
+ * network: if the fetch fails the card falls back rather than the build
+ * failing or, worse, a Thai card full of tofu going out to every share of the
+ * link.
  */
-export async function loadThaiFont(): Promise<ArrayBuffer | null> {
+async function loadGoogleFont(
+  family: string,
+  weight: OgFont["weight"],
+): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700",
+      `https://fonts.googleapis.com/css2?family=${family.replace(/ /g, "+")}:wght@${weight}`,
     );
     if (!css.ok) return null;
 
@@ -32,4 +52,19 @@ export async function loadThaiFont(): Promise<ArrayBuffer | null> {
   } catch {
     return null;
   }
+}
+
+/**
+ * The regular and semibold cuts of one family, whichever of them arrived.
+ * Noto Sans Thai covers Latin too, so a Thai card needs nothing else.
+ */
+export async function loadFamily(family: string): Promise<OgFont[]> {
+  const weights: OgFont["weight"][] = [400, 600];
+  const loaded = await Promise.all(
+    weights.map(async (weight) => {
+      const data = await loadGoogleFont(family, weight);
+      return data ? { name: family, data, weight, style: "normal" as const } : null;
+    }),
+  );
+  return loaded.filter((font): font is OgFont => font !== null);
 }

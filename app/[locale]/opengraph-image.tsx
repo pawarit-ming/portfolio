@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
-import { getContent, identity } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
-import { loadThaiFont, ogSize } from "@/lib/og";
+import { latinFamily, loadFamily, ogColors, ogSize, thaiFamily } from "@/lib/og";
 
 const fallbackProfile = getContent(defaultLocale).profile;
 
@@ -15,6 +15,10 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+/**
+ * The homepage hero, as a card: the name at display size, the one-line
+ * statement under it, and who and where along the bottom. No chips, no rules.
+ */
 export default async function OpengraphImage({
   params,
 }: {
@@ -23,12 +27,15 @@ export default async function OpengraphImage({
   const requested = (await params).locale;
   let locale: Locale = isLocale(requested) ? requested : defaultLocale;
 
-  const thaiFont = locale === "th" ? await loadThaiFont() : null;
+  let fonts = await loadFamily(locale === "th" ? thaiFamily : latinFamily);
   // No font, no Thai card. Better an English one than a grid of empty boxes.
-  if (locale === "th" && !thaiFont) locale = defaultLocale;
+  if (locale === "th" && !fonts.length) {
+    locale = defaultLocale;
+    fonts = await loadFamily(latinFamily);
+  }
 
   const { profile } = getContent(locale);
-  const fontFamily = thaiFont ? "Noto Sans Thai" : "sans-serif";
+  const fontFamily = fonts[0]?.name ?? "sans-serif";
 
   return new ImageResponse(
     (
@@ -39,41 +46,20 @@ export default async function OpengraphImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#ffffff",
+          background: ogColors.ground,
+          color: ogColors.ink,
           padding: "72px",
           fontFamily,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "56px",
-              height: "56px",
-              borderRadius: "14px",
-              background: "#18181b",
-              color: "#ffffff",
-              fontSize: "22px",
-              fontWeight: 700,
-            }}
-          >
-            {identity.initials}
-          </div>
-          <div style={{ display: "flex", fontSize: "22px", color: "#71717a" }}>
-            {profile.location}
-          </div>
-        </div>
-
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
-              fontSize: "80px",
-              fontWeight: 700,
-              color: "#18181b",
-              letterSpacing: "-2px",
+              fontSize: "132px",
+              fontWeight: 600,
+              letterSpacing: locale === "th" ? "-2px" : "-6px",
+              lineHeight: locale === "th" ? 1.2 : 0.95,
             }}
           >
             {profile.name}
@@ -81,54 +67,23 @@ export default async function OpengraphImage({
           <div
             style={{
               display: "flex",
-              marginTop: "16px",
-              fontSize: "36px",
-              color: "#2563eb",
-              fontWeight: 600,
-            }}
-          >
-            {profile.role}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              marginTop: "24px",
-              fontSize: "26px",
-              color: "#52525b",
+              marginTop: "40px",
               maxWidth: "900px",
-              lineHeight: 1.4,
+              fontSize: "34px",
+              fontWeight: 400,
+              lineHeight: 1.35,
             }}
           >
             {profile.headline}
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "12px" }}>
-          {["React", "Next.js", "TypeScript", "Tailwind CSS", "Flutter"].map(
-            (item) => (
-              <div
-                key={item}
-                style={{
-                  display: "flex",
-                  padding: "10px 18px",
-                  borderRadius: "999px",
-                  border: "1px solid #e4e4e7",
-                  fontSize: "22px",
-                  color: "#52525b",
-                }}
-              >
-                {item}
-              </div>
-            ),
-          )}
+        <div style={{ display: "flex", gap: "28px", fontSize: "26px" }}>
+          <div style={{ display: "flex", fontWeight: 600 }}>{profile.role}</div>
+          <div style={{ display: "flex", color: ogColors.muted }}>{profile.location}</div>
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: thaiFont
-        ? [{ name: "Noto Sans Thai", data: thaiFont, weight: 700, style: "normal" }]
-        : undefined,
-    },
+    { ...size, fonts: fonts.length ? fonts : undefined },
   );
 }

@@ -4,12 +4,15 @@ Personal portfolio site for a web and mobile developer job search, built with th
 same stack the résumé claims: **Next.js 16 (App Router), TypeScript, Tailwind CSS
 v4** — so the site is its own evidence.
 
-- Homepage with hero, about, experience timeline, projects, skills and contact
+- Homepage with hero, about, projects, experience, skills and contact
 - English and Thai, each on its own URL (`/en`, `/th`) and statically generated
 - A case-study page per project at `/[locale]/projects/[slug]`
 - Working contact form backed by a Next.js Route Handler
 - SEO: per-page metadata, hreflang alternates, JSON-LD `Person` schema,
   `sitemap.xml`, `robots.txt`, and a generated Open Graph image per language
+
+Design decisions and the house rules every page follows live in
+[`DESIGN.md`](DESIGN.md).
 
 ## Getting started
 
@@ -62,8 +65,8 @@ projects get room to breathe and the rest stay out of their way.
 this for work you want to be asked about in an interview: it has room for the
 problem, what you did, the features, and the technical decisions behind them.
 
-**`otherProjects`** — everything else, shown as a compact grid under the featured
-ones: title, a sentence or two, tech tags, and links. No detail page. Good for
+**`otherProjects`** — everything else, shown as an index in large type under the
+featured ones: title, a sentence or two, the stack as one line, and links. No detail page. Good for
 coursework, experiments and side builds. The whole section hides itself while the
 array is empty, so there is nothing to remove if you never use it.
 
@@ -83,8 +86,9 @@ cover: {
 
 Use `screen` for browser screenshots and `phone` for portrait mobile ones: both
 are shown whole, because cropping a screenshot costs you a sidebar or a toolbar.
-The gallery lays `phone` shots three across and `screen` shots two, with the
-first `screen` shot leading at full width.
+The gallery lays `phone` shots six across on a wide screen (three on a tablet,
+two on a phone) and `screen` shots two across, with the first `screen` shot
+leading at full width. Every frame opens full size in a lightbox.
 
 Images go through `next/image`, so they are converted to WebP, resized per
 breakpoint, and lazy-loaded below the fold automatically.
@@ -105,7 +109,7 @@ both language files:
 },
 ```
 
-They appear between Education and Languages in the About card, newest first,
+They appear under the summary in the About section, newest first,
 each name linking to its own PDF in a new tab — and in the page's `Person`
 structured data as `hasCredential`. Every field is written per language: a
 course name like CCNAv7 reads the same in both files, but a Thai employer's
@@ -132,7 +136,7 @@ There are two CVs, because there are two ways in. `/[locale]` hands out the
 development one; the database variant at `/[locale]/for/dba` hands out the data
 one, which it names in its own `resume` field in `lib/content/variants.ts` and
 which the hero is given in place of the default. A visitor never sees the
-switch — same button, same place, same red, same label — but the page and the
+switch — same link, same place, same label — but the page and the
 document arriving with the same application now say the same thing. See
 [Role variants](#role-variants).
 
@@ -148,29 +152,12 @@ visible label — the link leaves the site for the browser's PDF viewer, and a
 button that does that should say so before it is clicked. Their wording lives in
 `ui.hero.resume` and `ui.about.transcript` in each language file.
 
-Both are solid red, on the `--pdf` / `--pdf-hover` / `--on-pdf` scale in
-`app/globals.css` — the same three roles `--invert` has, because they are the
-same kind of control. Not the `--danger` scale beside it, which the contact form
-uses to report a failure: red here means "this is a PDF", and a button that
-borrows the error colour reads as a broken one.
-
-Filled red outweighs the black "View projects" next to it, which is the point.
-That button leads somewhere on the same page and a visitor who misses it scrolls
-into the work anyway; the CV is the one thing in the hero that cannot be reached
-any other way. Given the same outline as "Get in touch" it was the same button
-twice, and the one people arrive looking for lost the row.
-
-The value is Adobe's own red darkened until it carries white text at 4.5:1
-(#c8130a, 5.91:1). It is the one scale here with no `.dark` override: everything
-else in the palette is text or a surface text sits on, and those have to flip,
-but a filled button brings its own background, so all it owes either theme is
-white at 4.5:1 and an edge at 3:1 against what it sits on — 5.91:1 on the white
-card, 3.00:1 on the dark one. A red that shifts between themes also stops being
-quite the red the format is known by.
-
-The certificate names in the same section stay unstyled: four red rows there
-would be the loudest thing on the page, and they are a list to read rather than
-a control to press.
+Both are underlined text links with a document icon, not filled buttons. The
+one filled button in the hero is "View projects", in the site's only accent,
+and the design keeps the accent for primary actions; a second filled button
+beside it would compete for the same place. The `--pdf` tokens in
+`app/globals.css` now point at the accent, and `--on-pdf` is the text colour
+used on every accent fill.
 
 The paths are shared across languages rather than written per language, unlike
 `certifications`: both CVs are written in English, and a transcript is a scan of
@@ -190,9 +177,9 @@ default page stays as it is for the rest.
 
 A variant lives in `lib/content/variants.ts` and may change the framing and
 nothing else: the role, headline, availability line and summary; the list of
-target roles; the hero stats and the chips under the headline; the skill
+target roles; the stack line under the headline; the skill
 groups, regrouped to read the way the CV it is sent with does; and the CV
-itself, behind the hero's red button. That is the whole of it. Everything else
+itself, behind the hero's Resume link. That is the whole of it. Everything else
 — experience, projects, certifications — is the same content the default page
 renders, so the two cannot tell different stories about what you have done, and
 a variant is a page of framing rather than a second portfolio to keep in step.
@@ -351,7 +338,7 @@ To add a third language:
 Nothing else needs touching — the routes, sitemap, hreflang tags and the
 switcher are all generated from that list.
 
-Thai text renders in Noto Sans Thai, which sits behind Geist in the font stack
+Thai text renders in Noto Sans Thai, which sits behind Schibsted Grotesk in the font stack
 in `app/globals.css`. Because browsers only download a font once a glyph needs
 it, the English pages never fetch it.
 
