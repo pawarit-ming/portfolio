@@ -37,10 +37,9 @@ export function HomeSections({
 }) {
   return (
     <>
-      {/* Preview links follow the current language and role variant. */}
-      <Hero content={content} locale={locale} basePath={basePath} stack={stack} resume={resume} />
-      <Projects locale={locale} content={content} basePath={basePath} />
+      <Hero content={content} stack={stack} resume={resume} />
       <About content={content} />
+      <Projects locale={locale} content={content} basePath={basePath} />
       <ExperienceSection locale={locale} content={content} basePath={basePath} />
       <Skills content={content} locale={locale} basePath={basePath} />
       <Contact content={content} />

@@ -246,7 +246,7 @@ export function ContactForm({ copy }: { copy: UiCopy["form"] }) {
             </button>
           </div>
 
-          <p className="mt-3 select-all font-mono text-xs text-subtle">
+          <p className="mt-3 select-all text-sm text-muted">
             {identity.email}
           </p>
         </div>

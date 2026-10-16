@@ -6,7 +6,7 @@ import { documents } from "@/lib/content";
 export function About({ content }: { content: Content }) {
   const { profile, education, certifications, languages, ui } = content;
   return (
-    <Section id="about" title={ui.about.title}>
+    <Section id="about" title={ui.about.title} tinted>
       <div className="about-layout">
         <div className="about-story">
           <p>{profile.summary}</p>
