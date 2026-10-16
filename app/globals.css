@@ -7,6 +7,10 @@
   --card: #ffffff;
   --frame: #f4f4f5;
   --well: #e9e9ec;
+  --nav-glass-bg: rgb(255 255 255 / 0.68);
+  --nav-glass-border: rgb(24 24 27 / 0.08);
+  --nav-glass-highlight: rgb(255 255 255 / 0.8);
+  --nav-glass-shadow: rgb(24 24 27 / 0.035);
   --fg: #18181b;
   --body: #3f3f46;
   --muted: #52525b;
@@ -56,6 +60,10 @@
   --card: #18181b;
   --frame: #27272a;
   --well: #202024;
+  --nav-glass-bg: rgb(9 9 11 / 0.68);
+  --nav-glass-border: rgb(255 255 255 / 0.1);
+  --nav-glass-highlight: rgb(255 255 255 / 0.06);
+  --nav-glass-shadow: rgb(0 0 0 / 0.12);
   --fg: #fafafa;
   --body: #d4d4d8;
   --muted: #a1a1aa;
@@ -142,8 +150,22 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   margin-inline: auto;
   padding-inline: var(--margin);
 }
-.site-header { isolation: isolate; background-color: var(--bg); }
-.mobile-navigation { background: var(--bg); }
+/* The user asked for a clear-glass header: the one place the house rules allow
+   a blur, an edge and a shadow. Content panels stay flat. taste-skill-ignore */
+.site-header {
+  isolation: isolate;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--nav-glass-border); /* taste-skill-ignore */
+  box-shadow: 0 6px 24px var(--nav-glass-shadow), inset 0 1px 0 var(--nav-glass-highlight); /* taste-skill-ignore */
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    background-color: var(--nav-glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(140%); /* taste-skill-ignore */
+    backdrop-filter: blur(20px) saturate(140%); /* taste-skill-ignore */
+  }
+}
+.mobile-navigation { background: transparent; border-top: 1px solid var(--nav-glass-border); /* taste-skill-ignore */ }
 .site-header > .page-wrap { height: 84px; }
 .site-wordmark { font-size: var(--step-body); }
 .site-wordmark:hover { color: var(--fg); }
@@ -211,10 +233,6 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .hero-summary > .hero-links { margin-top: 0.5rem; font-size: var(--step-small); color: var(--muted); }
 .hero-links a { display: inline-flex; min-height: 44px; align-items: center; }
-.spotlight-gallery { display: block; }
-.spotlight-frame { aspect-ratio: 2 / 1; background: var(--card); border-radius: var(--corner-media); }
-.spotlight-frame img { padding: 0; transition: transform 400ms var(--ease-out); }
-.spotlight-frame:hover img { transform: scale(1.025); }
 .project-workflow { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem 0.75rem; padding: 1.125rem 0; margin-top: 0.5rem; }
 .project-information .project-workflow { margin-top: 0; padding-block: 0 0.25rem; max-width: 34rem; }
 .project-information .project-workflow > li { color: var(--fg); }
@@ -434,6 +452,12 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .case-study-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 1.75rem; margin-top: clamp(2.5rem, 5vw, 4rem); }
 .case-study-cta > p { font-size: var(--step-lead); letter-spacing: -0.02em; }
 
+.not-found { padding-block: clamp(4rem, 10vw, 8rem); }
+.not-found-code { font-size: var(--step-display); font-weight: 600; letter-spacing: -0.05em; line-height: 0.95; }
+.not-found-title { margin-top: clamp(1.5rem, 3vw, 2.5rem); font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.03em; line-height: 1.3; }
+.not-found-text { margin-top: 0.75rem; max-width: 45ch; }
+.not-found-action { margin-top: 2rem; gap: 0.75rem; }
+
 /* Thai needs room for marks above and below the baseline. */
 :lang(th) .hero-name { letter-spacing: -0.025em; line-height: 1.2; }
 :lang(th) .section-introduction h2 { line-height: 1.45; letter-spacing: -0.02em; }
@@ -559,6 +583,13 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background-color: var(--bg);
+    -webkit-backdrop-filter: none; /* taste-skill-ignore */
+    backdrop-filter: none; /* taste-skill-ignore */
+  }
 }
 @media print {
   .no-print { display: none !important; }
