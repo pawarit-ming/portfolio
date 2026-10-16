@@ -24,9 +24,12 @@ type Labels = {
 export function ProjectGallery({
   images,
   labels,
+  spotlight = false,
 }: {
   images: ProjectImage[];
   labels: Labels;
+  /** One large, eagerly loaded frame for the homepage introduction. */
+  spotlight?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<number | null>(null);
@@ -94,7 +97,9 @@ export function ProjectGallery({
           first of them leads at full width. */}
       <div
         className={
-          phoneGallery
+          spotlight
+            ? "spotlight-gallery"
+            : phoneGallery
             ? "mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3"
             : "mt-6 grid gap-5 sm:grid-cols-2"
         }
@@ -104,16 +109,20 @@ export function ProjectGallery({
           return (
             <ProjectImageFrame
               key={image.src}
-              image={image}
-              className={lead ? "sm:col-span-2" : undefined}
+              image={spotlight ? { ...image, caption: undefined } : image}
+              priority={spotlight && index === 0}
+              bordered={!spotlight}
+              className={!spotlight && lead ? "sm:col-span-2" : undefined}
               sizes={
-                phoneGallery
-                  ? "(min-width: 640px) 33vw, 50vw"
+                spotlight
+                  ? "(min-width: 1280px) 780px, (min-width: 900px) 62vw, calc(100vw - 80px)"
+                  : phoneGallery
+                  ? "(min-width: 1280px) 392px, (min-width: 640px) 33vw, 50vw"
                   : lead
-                    ? "(min-width: 768px) 768px, 100vw"
-                    : "(min-width: 640px) 50vw, 100vw"
+                    ? "(min-width: 1280px) 1216px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
+                    : "(min-width: 1280px) 598px, (min-width: 640px) 50vw, 100vw"
               }
-              frameClassName="rounded-xl border border-line"
+              frameClassName={spotlight ? "spotlight-frame" : "gallery-frame"}
               onOpen={() => setOpen(index)}
             />
           );
@@ -134,7 +143,7 @@ export function ProjectGallery({
         {current && open !== null ? (
           <div className="flex h-full flex-col px-4 py-4 sm:px-8">
             <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-xs text-white/70">
+              <p className="text-sm text-white/70">
                 {labels.imageCounter
                   .replace("{current}", String(open + 1))
                   .replace("{total}", String(count))}
@@ -162,7 +171,7 @@ export function ProjectGallery({
                 key={current.src}
                 src={current.src}
                 alt={current.alt}
-                className="max-h-full max-w-full rounded-md object-contain"
+                className={`gallery-lightbox-image max-h-full max-w-full object-contain${current.aspect === "phone" ? " gallery-image-phone" : ""}`}
               />
 
               {count > 1 ? (

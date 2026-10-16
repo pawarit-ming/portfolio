@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_Thai } from "next/font/google";
+import { Schibsted_Grotesk, Noto_Sans_Thai } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -15,14 +15,10 @@ import {
 } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const displaySans = Schibsted_Grotesk({
+  variable: "--font-display-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 /**
@@ -127,7 +123,7 @@ export default async function RootLayout({
       // next-themes writes the theme class here before paint, which the server
       // render cannot know about.
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansThai.variable} h-full antialiased`}
+      className={`${displaySans.variable} ${notoSansThai.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg font-sans">
         {/* `disableTransitionOnChange` is deliberately absent: it exists to

@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local agent tools and generated design reports are not application code.
+    ".agents/**",
+    ".taste-skill/**",
   ]),
 ]);
 

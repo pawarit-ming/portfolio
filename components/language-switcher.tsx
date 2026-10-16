@@ -47,7 +47,7 @@ export function LanguageSwitcher({
     <div
       role="group"
       aria-label={label}
-      className="inline-flex h-10 items-center rounded-md border border-line p-0.5"
+      className="inline-flex h-11 items-center gap-0.5"
     >
       {locales.map((item) => {
         const active = item === locale;
@@ -68,7 +68,7 @@ export function LanguageSwitcher({
               rememberLocale(item);
               onNavigate?.();
             }}
-            className={`inline-flex h-full items-center rounded-[0.3rem] px-2 text-xs font-medium transition-colors ${
+            className={`inline-flex h-full items-center rounded-md px-2.5 text-sm font-medium transition-colors ${
               active
                 ? "bg-frame text-fg"
                 : "text-subtle hover:text-fg"

@@ -11,7 +11,7 @@ export const en: Content = {
     name: "Pawarit Wang",
     role: "Full-stack & Mobile Developer",
     headline:
-      "I build web applications from React interfaces to database workflows, and cross-platform apps with Flutter.",
+      "I build the ERP my family's trading business runs on, from purchasing to invoices, alongside web and mobile projects.",
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
@@ -73,6 +73,11 @@ export const en: Content = {
   projects: [
     {
       slug: "fyt-sme-platform",
+      workflow: ["RFQs", "Purchase orders", "Stock receipts", "Invoices"],
+      spotlight: {
+        title: "Keeping orders consistent",
+        description: "Stock receipts and invoices cannot exceed the documents they refer to. The database enforces those limits, even when two people save at once.",
+      },
       title: "FYT Trading ERP",
       kind: "Family business · In production",
       period: "Jun 2026 – Present",
@@ -333,7 +338,9 @@ export const en: Content = {
       items: ["JavaScript", "TypeScript", "Java", "Python", "Dart", "SQL", "HTML", "CSS"],
     },
     {
-      title: "Frontend",
+      title: "Frontend & mobile",
+      note: "Asset registration on the web, and a cattle passport on mobile.",
+      projects: ["asset-management-system", "thai-cattle-passport"],
       items: [
         "React",
         "Next.js",
@@ -347,6 +354,8 @@ export const en: Content = {
     },
     {
       title: "Databases",
+      note: "Business rules and company-level data access in the production ERP.",
+      projects: ["fyt-sme-platform"],
       items: ["MySQL", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
@@ -407,9 +416,9 @@ export const en: Content = {
   ],
 
   navigation: [
+    { label: "Projects", hash: "#projects" },
     { label: "About", hash: "#about" },
     { label: "Experience", hash: "#experience" },
-    { label: "Projects", hash: "#projects" },
     { label: "Skills", hash: "#skills" },
   ],
 
@@ -523,6 +532,8 @@ export const en: Content = {
     },
 
     footer: {
+      navigationHeading: "Explore",
+      socialsHeading: "Find me online",
       builtWith: "Built with Next.js, TypeScript and Tailwind CSS.",
     },
 
@@ -538,6 +549,7 @@ export const en: Content = {
       overview: "Overview",
       whatIDid: "What I did",
       keyFeatures: "Key features",
+      workflow: "The business workflow",
       screens: "Screens",
       closeImage: "Close image",
       previousImage: "Previous image",

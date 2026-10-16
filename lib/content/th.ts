@@ -17,7 +17,7 @@ export const th: Content = {
     name: "ปวริศ ว่อง",
     role: "นักพัฒนา Full-stack และโมบาย",
     headline:
-      "พัฒนาเว็บตั้งแต่หน้าจอ React ไปจนถึงขั้นตอนการทำงานในฐานข้อมูล และแอปข้ามแพลตฟอร์มด้วย Flutter",
+      "พัฒนาระบบ ERP ที่ธุรกิจเทรดดิ้งของครอบครัวใช้งานจริง ตั้งแต่จัดซื้อจนถึงออกใบแจ้งหนี้ พร้อมผลงานเว็บและแอปโมบาย",
     location: "ศรีราชา ชลบุรี ประเทศไทย",
     availability: "เปิดรับงานสายพัฒนา",
     summary:
@@ -69,6 +69,11 @@ export const th: Content = {
   projects: [
     {
       slug: "fyt-sme-platform",
+      workflow: ["ขอใบเสนอราคา", "สั่งซื้อ", "รับสินค้า", "ออกใบแจ้งหนี้"],
+      spotlight: {
+        title: "ยอดเอกสารต้องตรงกัน",
+        description: "รับสินค้าและออกใบแจ้งหนี้ได้ไม่เกินยอดในเอกสารอ้างอิง ฐานข้อมูลตรวจเงื่อนไขนี้แม้มีผู้ใช้สองคนบันทึกพร้อมกัน",
+      },
       title: "FYT ระบบ ERP สำหรับธุรกิจเทรดดิ้ง",
       kind: "ธุรกิจครอบครัว · ใช้งานจริง",
       period: "มิ.ย. 2026 – ปัจจุบัน",
@@ -316,7 +321,9 @@ export const th: Content = {
       items: ["JavaScript", "TypeScript", "Java", "Python", "Dart", "SQL", "HTML", "CSS"],
     },
     {
-      title: "หน้าบ้าน",
+      title: "หน้าบ้านและโมบาย",
+      note: "ตั้งแต่ลงทะเบียนครุภัณฑ์บนเว็บ ไปจนถึงพาสปอร์ตโคบนมือถือ",
+      projects: ["asset-management-system", "thai-cattle-passport"],
       items: [
         "React",
         "Next.js",
@@ -330,6 +337,8 @@ export const th: Content = {
     },
     {
       title: "ฐานข้อมูล",
+      note: "เงื่อนไขเอกสารและสิทธิ์เข้าถึงข้อมูลแยกบริษัทใน ERP ที่ใช้งานจริง",
+      projects: ["fyt-sme-platform"],
       items: ["MySQL", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
@@ -389,9 +398,9 @@ export const th: Content = {
   ],
 
   navigation: [
+    { label: "ผลงาน", hash: "#projects" },
     { label: "เกี่ยวกับ", hash: "#about" },
     { label: "ประสบการณ์", hash: "#experience" },
-    { label: "ผลงาน", hash: "#projects" },
     { label: "ทักษะ", hash: "#skills" },
   ],
 
@@ -499,6 +508,8 @@ export const th: Content = {
     },
 
     footer: {
+      navigationHeading: "สำรวจเว็บไซต์",
+      socialsHeading: "ช่องทางอื่น",
       builtWith: "สร้างด้วย Next.js, TypeScript และ Tailwind CSS",
     },
 
@@ -514,6 +525,7 @@ export const th: Content = {
       overview: "ภาพรวม",
       whatIDid: "สิ่งที่รับผิดชอบ",
       keyFeatures: "ฟีเจอร์สำคัญ",
+      workflow: "ขั้นตอนการทำงานของธุรกิจ",
       screens: "หน้าจอ",
       closeImage: "ปิดภาพ",
       previousImage: "ภาพก่อนหน้า",

@@ -10,7 +10,7 @@ import { CheckIcon, MailIcon } from "@/components/icons";
 type Status = "idle" | "submitting" | "success" | "error" | "fallback";
 
 const fieldClass =
-  "block w-full rounded-md border border-line-strong bg-card px-3.5 py-2.5 text-sm text-fg placeholder:text-faint transition-colors hover:border-line-stronger focus:border-accent focus:outline-none";
+  "contact-field block w-full rounded-md border border-line-strong bg-card px-3.5 py-2.5 text-sm text-fg placeholder:text-faint transition-colors hover:border-line-stronger";
 
 const labelClass = "block text-sm font-medium text-fg";
 
@@ -128,7 +128,7 @@ export function ContactForm({ copy }: { copy: UiCopy["form"] }) {
   )}&body=${encodeURIComponent(draft.message)}`;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
+    <form onSubmit={handleSubmit} className="contact-form space-y-5" noValidate={false}>
       <div>
         <label htmlFor="name" className={labelClass}>
           {copy.nameLabel}
@@ -182,7 +182,7 @@ export function ContactForm({ copy }: { copy: UiCopy["form"] }) {
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="contact-form-actions">
         <button
           type="submit"
           disabled={submitting}
