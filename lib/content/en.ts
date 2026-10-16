@@ -13,6 +13,7 @@ export const en: Content = {
     headline:
       "I build web apps in React and mobile apps in Flutter, and test them the way a test automation internship taught me to.",
     location: "Si Racha, Chonburi, Thailand",
+    relocation: "Available to relocate to Bangkok",
     availability: "Open to developer roles",
     summary:
       "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: an internship at the Ministry of Public Health, a Flutter senior project, and an ERP for a trading company that is already in use while I keep building it.",

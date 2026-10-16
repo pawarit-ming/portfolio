@@ -19,7 +19,16 @@ export function Hero({
           <h1 id="intro-heading" className="hero-name">
             <span className="hero-name-mask"><span>{profile.name}</span></span>
           </h1>
+          {/* One left edge from top to bottom: the name, the role, the details
+              as one quiet line, then the statement and the actions. */}
           <div className="hero-copy">
+            <div className="hero-identity">
+              <p className="hero-role">{profile.role}</p>
+              <p className="hero-details">
+                <span>{profile.location} ({profile.relocation})</span>
+                <span className="hero-availability">{profile.availability}</span>
+              </p>
+            </div>
             <div className="hero-summary">
               <p className="hero-description">{profile.headline}</p>
               <div className="hero-actions">
@@ -38,13 +47,6 @@ export function Hero({
                   </a>
                 ))}
                 <a href={`mailto:${identity.email}`}>{ui.contact.emailLabel}</a>
-              </div>
-            </div>
-            <div className="hero-identity">
-              <p className="hero-role">{profile.role}</p>
-              <div className="hero-location">
-                <p>{profile.location}</p>
-                <p>{profile.availability}</p>
               </div>
             </div>
           </div>
