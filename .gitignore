@@ -43,3 +43,6 @@ next-env.d.ts
 
 # claude code
 .claude/
+
+# local design review artifacts
+/.taste-skill/
