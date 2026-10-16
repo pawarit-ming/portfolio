@@ -68,25 +68,25 @@ export const th: Content = {
       sourceNotice:
         "มีบริษัทเทรดดิ้งใช้งานจริง ซอร์สโค้ดและข้อมูลบริษัทเป็น Private",
       cover: {
-        src: "/projects/fyt-sme-platform/client-rfq-list.png",
+        src: "/projects/fyt-sme-platform/client-rfq-list.webp",
         alt: "รายการ Client RFQ ในระบบ FYT แสดงคำขอใบเสนอราคา 20 รายการ พร้อมวันที่ ช่องทาง ลูกค้า ผู้ติดตาม สินค้า ขั้นตอน และจำนวนวัน",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/fyt-sme-platform/client-rfq-list.png",
+          src: "/projects/fyt-sme-platform/client-rfq-list.webp",
           alt: "รายการ Client RFQ ในระบบ FYT แสดงคำขอใบเสนอราคา 20 รายการ พร้อมวันที่ ช่องทาง ลูกค้า ผู้ติดตาม สินค้า ขั้นตอน และจำนวนวัน",
           aspect: "screen",
           caption: "รายการ RFQ ของลูกค้า ติดตามตามขั้นตอนและจำนวนวัน (บริษัทตัวอย่าง ข้อมูลสมมติ)",
         },
         {
-          src: "/projects/fyt-sme-platform/client-rfq-form.png",
+          src: "/projects/fyt-sme-platform/client-rfq-form.webp",
           alt: "ฟอร์มสร้าง RFQ ใหม่ มีวันที่ ลำดับ ช่องทาง ลูกค้า ผู้ติดต่อ ผู้ติดตาม และไฟล์แนบ ตามด้วยรายการสินค้าที่มี SKU ชื่อสินค้าของลูกค้า แบรนด์ รุ่น จำนวน และหน่วย และแถวใบเสนอราคาจากผู้ขาย ประวัติราคา และราคาที่เราเสนอ",
           aspect: "screen",
           caption: "สร้าง RFQ โดยสินค้าแต่ละรายการมีใบเสนอราคาจากผู้ขาย ประวัติราคา และราคาที่เราเสนอ",
         },
         {
-          src: "/projects/fyt-sme-platform/wi-settings.png",
+          src: "/projects/fyt-sme-platform/wi-settings.webp",
           alt: "หน้า WI Settings แสดงการตั้งค่า 27 หมวด เช่น แบรนด์ ช่องทาง สกุลเงิน เงื่อนไขการชำระเงิน ชื่อ SKU ขั้นตอนงาน หน่วย และอัตรา VAT",
           aspect: "screen",
           caption: "การตั้งค่า 27 หมวดที่แต่ละบริษัทกำหนดเองสำหรับเอกสารของตัวเอง ตั้งแต่หน่วยและอัตรา VAT ไปจนถึงขั้นตอนงาน",
@@ -131,25 +131,25 @@ export const th: Content = {
         "Figma",
       ],
       cover: {
-        src: "/projects/asset-management-system/registration-wizard.png",
+        src: "/projects/asset-management-system/registration-wizard.webp",
         alt: "ขั้นตอนแรกของวิซาร์ดลงทะเบียนครุภัณฑ์ แถบความคืบหน้าแสดงครบทั้งห้าขั้นตอน เหนือฟอร์มสัญญาที่กรอกเลขที่โครงการ งบประมาณ เลขที่สัญญา และวันที่รูปแบบไทยไว้แล้ว",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/asset-management-system/registration-wizard.png",
+          src: "/projects/asset-management-system/registration-wizard.webp",
           alt: "ขั้นตอนแรกของวิซาร์ดลงทะเบียนครุภัณฑ์ แถบความคืบหน้าแสดงครบทั้งห้าขั้นตอน เหนือฟอร์มสัญญาที่กรอกเลขที่โครงการ งบประมาณ เลขที่สัญญา และวันที่รูปแบบไทยไว้แล้ว",
           aspect: "screen",
           caption: "ขั้นตอนแรกของวิซาร์ดลงทะเบียนห้าขั้นตอน",
         },
         {
-          src: "/projects/asset-management-system/inspection.png",
+          src: "/projects/asset-management-system/inspection.webp",
           alt: "หน้าจอตรวจสอบครุภัณฑ์ประจำปี กรองด้วยปีงบประมาณ พ.ศ. 2568 แสดงรายการครุภัณฑ์พร้อมเลขครุภัณฑ์ รหัส GFMIS ยี่ห้อ รุ่น และสถานที่ตั้ง แต่ละแถวมีป้ายสถานะและช่องติ๊กสำหรับการตรวจสอบ",
           aspect: "screen",
           caption: "ตรวจสอบประจำปี ติ๊กทีละรายการ กรองตามปีงบประมาณ พ.ศ.",
         },
         {
-          src: "/projects/asset-management-system/add-supplier.png",
+          src: "/projects/asset-management-system/add-supplier.webp",
           alt: "ฟอร์มเพิ่มผู้ขายที่กรอกข้อมูลแล้ว ทั้งเลขประจำตัวผู้เสียภาษีและรหัส GFMIS ชื่อผู้ขายและชื่อบริษัท ตามด้วยที่อยู่แบบไทยที่แยกเป็นอาคาร ห้อง ชั้น บ้านเลขที่ ซอย ถนน อำเภอ และรหัสไปรษณีย์",
           aspect: "screen",
           caption: "เพิ่มผู้ขายได้โดยไม่ทำให้ฟอร์มที่กรอกค้างไว้ข้างหลังหายไป",
@@ -200,43 +200,43 @@ export const th: Content = {
         "QR & Camera",
       ],
       cover: {
-        src: "/projects/thai-cattle-passport/cover.png",
+        src: "/projects/thai-cattle-passport/cover.webp",
         alt: "หน้าจอแอปสามหน้าเรียงข้างกัน ได้แก่ รายการโคของเจ้าของ กล่องแสดง QR code ของโคหนึ่งตัว และประกาศขายในตลาด",
         aspect: "screen",
       },
       gallery: [
         {
-          src: "/projects/thai-cattle-passport/herd-list-screen.png",
+          src: "/projects/thai-cattle-passport/herd-list-screen.webp",
           alt: "รายการโคของเจ้าของ แต่ละแถวแสดงรูปย่อ หมายเลขประจำตัว ชื่อ สายพันธุ์ เพศ อายุ และป้ายสถานะ เช่น ฝากเลี้ยง หรือ ตายแล้ว",
           aspect: "phone",
           caption: "รายการโคในฝูง กรองตามสถานะ",
         },
         {
-          src: "/projects/thai-cattle-passport/cow-profile-screen.png",
+          src: "/projects/thai-cattle-passport/cow-profile-screen.webp",
           alt: "หน้าโปรไฟล์ของโคหนึ่งตัว แสดงรูปโค หมายเลขประจำตัว ชื่อ สายพันธุ์ ป้ายสถานะสุขภาพดี และแท็บข้อมูลทั่วไปกับกิจกรรม",
           aspect: "phone",
           caption: "ตัวสมุดประจำตัว ในมุมมองของเจ้าของ",
         },
         {
-          src: "/projects/thai-cattle-passport/activity-log-screen.png",
+          src: "/projects/thai-cattle-passport/activity-log-screen.webp",
           alt: "ไทม์ไลน์แนวตั้งของกิจกรรมประจำตัวโค ทั้งการตรวจการตั้งท้องด้วยอัลตราซาวด์ บันทึกการผสมพันธุ์ที่ระบุพ่อพันธุ์ และประวัติการแก้ไขที่แสดงการแก้หมายเลขประจำตัว",
           aspect: "phone",
           caption: "ประวัติสุขภาพและกิจกรรมรายตัว",
         },
         {
-          src: "/projects/thai-cattle-passport/qr-passport-screen.png",
+          src: "/projects/thai-cattle-passport/qr-passport-screen.webp",
           alt: "กล่องโต้ตอบแสดงหมายเลขประจำตัวโคเหนือ QR code พร้อมปุ่มปิดหรือบันทึกรหัสลงคลังภาพของเครื่อง",
           aspect: "phone",
           caption: "QR code ที่เปิดสมุดประจำตัวแบบสาธารณะ",
         },
         {
-          src: "/projects/thai-cattle-passport/marketplace-screen.png",
+          src: "/projects/thai-cattle-passport/marketplace-screen.webp",
           alt: "ตลาดซื้อขายโค มีช่องค้นหา จำนวนผลลัพธ์ และการ์ดประกาศที่แสดงรูปโค สายพันธุ์ เพศ น้ำหนัก และจังหวัด โดยชื่อผู้ขายถูกเบลอไว้ เหนือปุ่มยื่นข้อเสนอ",
           aspect: "phone",
           caption: "ประกาศในตลาดพร้อมการค้นหาและตัวกรอง",
         },
         {
-          src: "/projects/thai-cattle-passport/seller-location-screen.png",
+          src: "/projects/thai-cattle-passport/seller-location-screen.webp",
           alt: "แผงด้านล่างหัวข้อผู้ขายและที่ตั้ง แสดงตำแหน่งฟาร์มบนแผนที่ เหนือชื่อฟาร์มที่เบลอไว้และเบอร์โทรที่ปิดบางส่วน พร้อมปุ่มยกเลิกและยืนยันข้อเสนอ",
           aspect: "phone",
           caption: "ข้อมูลผู้ขายก่อนยืนยันข้อเสนอ",

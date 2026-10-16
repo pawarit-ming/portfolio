@@ -78,7 +78,7 @@ project takes an optional `cover` — the thumbnail on its homepage card — and
 
 ```ts
 cover: {
-  src: "/projects/asset-management-system/registration-wizard.jpeg",
+  src: "/projects/asset-management-system/registration-wizard.webp",
   alt: "Step one of the asset registration wizard, with a progress bar",
   aspect: "screen",   // screen | phone | wide | tall | square
 },

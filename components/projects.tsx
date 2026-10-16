@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
-import rfqPreview from "@/public/projects/fyt-sme-platform/client-rfq-form.png";
-import assetPreview from "@/public/projects/asset-management-system/registration-wizard.png";
-import herdPreview from "@/public/projects/thai-cattle-passport/herd-list-screen.png";
-import qrPreview from "@/public/projects/thai-cattle-passport/qr-passport-screen.png";
-import marketplacePreview from "@/public/projects/thai-cattle-passport/marketplace-screen.png";
+import rfqPreview from "@/public/projects/fyt-sme-platform/client-rfq-form.webp";
+import assetPreview from "@/public/projects/asset-management-system/registration-wizard.webp";
+import herdPreview from "@/public/projects/thai-cattle-passport/herd-list-screen.webp";
+import qrPreview from "@/public/projects/thai-cattle-passport/qr-passport-screen.webp";
+import marketplacePreview from "@/public/projects/thai-cattle-passport/marketplace-screen.webp";
 import { Section } from "@/components/section";
 import { ProjectImageFrame } from "@/components/project-image";
 import { ArrowRightIcon } from "@/components/icons";
@@ -12,15 +12,18 @@ import { ProjectWorkflow } from "@/components/project-workflow";
 import type { Content } from "@/lib/content";
 import { localePath, type Locale } from "@/lib/i18n";
 
-// Static imports reserve each screenshot's real proportions before it loads.
+// Static imports reserve each screenshot's real proportions before it loads,
+// and give each a tiny blurred preview to show until the real one arrives.
+// The cards load eagerly: About now sits above them, so by the time a reader
+// scrolls here a lazy image would only just be starting.
 const previewImages: Record<string, StaticImageData> = {
-  "/projects/fyt-sme-platform/client-rfq-form.png": rfqPreview,
-  "/projects/asset-management-system/registration-wizard.png": assetPreview,
+  "/projects/fyt-sme-platform/client-rfq-form.webp": rfqPreview,
+  "/projects/asset-management-system/registration-wizard.webp": assetPreview,
 };
 const phonePreviewImages: Record<string, StaticImageData> = {
-  "/projects/thai-cattle-passport/herd-list-screen.png": herdPreview,
-  "/projects/thai-cattle-passport/qr-passport-screen.png": qrPreview,
-  "/projects/thai-cattle-passport/marketplace-screen.png": marketplacePreview,
+  "/projects/thai-cattle-passport/herd-list-screen.webp": herdPreview,
+  "/projects/thai-cattle-passport/qr-passport-screen.webp": qrPreview,
+  "/projects/thai-cattle-passport/marketplace-screen.webp": marketplacePreview,
 };
 
 export function Projects({ locale, basePath = "", content }: {
@@ -75,6 +78,8 @@ export function Projects({ locale, basePath = "", content }: {
                         src={phonePreviewImages[image.src]}
                         alt={image.alt}
                         sizes="(min-width: 1280px) 160px, (min-width: 900px) 14vw, (min-width: 600px) 180px, 26vw"
+                        loading="eager"
+                        placeholder="blur"
                         className="project-phone-image"
                       />
                     ))}
@@ -84,6 +89,8 @@ export function Projects({ locale, basePath = "", content }: {
                     src={previewImage}
                     alt={preview.alt}
                     sizes={index === 0 ? "(min-width: 1280px) 620px, (min-width: 900px) 50vw, calc(100vw - 80px)" : "(min-width: 1280px) 540px, (min-width: 900px) 42vw, calc(100vw - 80px)"}
+                    loading="eager"
+                    placeholder="blur"
                     className="project-preview-image"
                   />
                 ) : (

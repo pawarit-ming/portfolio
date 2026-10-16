@@ -42,7 +42,7 @@ export type ProjectLink = { label: string; href: string };
 
 /**
  * Images live in `public/`, so `src` is a path from the site root —
- * e.g. `/projects/my-app/dashboard.png`.
+ * e.g. `/projects/my-app/dashboard.webp`.
  *
  * `aspect` controls how the shot is framed. Screenshots are shown whole, since
  * cropping one costs you a sidebar or a toolbar; photos may crop to fill.
