@@ -42,10 +42,6 @@ export function getContent(locale: Locale, variant?: Variant): Content {
     },
     targetRoles: override.targetRoles,
     skillGroups: override.skillGroups,
-    ui: {
-      ...base.ui,
-      hero: { ...base.ui.hero, stats: override.stats },
-    },
   };
 }
 

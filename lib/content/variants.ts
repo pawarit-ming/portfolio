@@ -79,21 +79,6 @@ const dba: VariantDefinition = {
         { label: "Full-stack Developer", short: "Full-stack" },
         { label: "Frontend Developer", short: "Frontend" },
       ],
-      stats: [
-        {
-          value: "13",
-          label:
-            "Tables, 14 foreign keys, in a schema modelled from business rules",
-        },
-        {
-          value: "Postgres",
-          label: "Data model I designed behind a cross-platform Flutter app",
-        },
-        {
-          value: "MySQL",
-          label: "Behind the asset management system I worked on 22 screens for",
-        },
-      ],
       skillGroups: [
         {
           title: "Databases",
@@ -149,20 +134,6 @@ const dba: VariantDefinition = {
         { label: "นักพัฒนาฐานข้อมูล", short: "Database Dev" },
         { label: "นักพัฒนา Full-stack", short: "Full-stack" },
         { label: "นักพัฒนา Frontend", short: "Frontend" },
-      ],
-      stats: [
-        {
-          value: "13",
-          label: "ตาราง 14 foreign key ในสคีมาที่ออกแบบจากกฎเกณฑ์ทางธุรกิจ",
-        },
-        {
-          value: "Postgres",
-          label: "โครงสร้างข้อมูลที่ออกแบบให้แอป Flutter ข้ามแพลตฟอร์ม",
-        },
-        {
-          value: "MySQL",
-          label: "เบื้องหลังระบบครุภัณฑ์ที่ร่วมพัฒนาหน้าจอ 22 หน้า",
-        },
       ],
       skillGroups: [
         {

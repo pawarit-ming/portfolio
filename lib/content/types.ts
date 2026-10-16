@@ -68,8 +68,6 @@ export type Project = {
   tagline: string;
   /** The actual business workflow, when a sequence helps explain this project. */
   workflow?: string[];
-  /** One concrete engineering constraint used in the homepage project story. */
-  spotlight?: { title: string; description: string };
   stack: string[];
   metrics: Metric[];
   overview: string[];
@@ -214,14 +212,10 @@ export type UiCopy = {
     resume: string;
     /** Accessible name for the same button, spelling out the new tab. */
     resumeLinkLabel: string;
-    /** Wraps the list of target roles: "Open to" … "roles". */
-    openToPrefix: string;
-    openToSuffix: string;
-    stats: Metric[];
   };
 
   about: {
-    /** The plain noun, used as the heading. This section has no eyebrow. */
+    /** The plain noun, used as the heading. */
     title: string;
     educationHeading: string;
     certificationsHeading: string;
@@ -244,14 +238,12 @@ export type UiCopy = {
   };
 
   experience: {
-    eyebrow: string;
     title: string;
     description: string;
     readCaseStudy: string;
   };
 
   projects: {
-    eyebrow: string;
     title: string;
     description: string;
     readCaseStudy: string;
@@ -259,13 +251,11 @@ export type UiCopy = {
   };
 
   skills: {
-    eyebrow: string;
     title: string;
     description: string;
   };
 
   contact: {
-    eyebrow: string;
     title: string;
     description: string;
     rolesHeading: string;
@@ -376,8 +366,6 @@ export type VariantOverride = {
   summary: string;
   /** Replaces `targetRoles`, so the role being applied for leads. */
   targetRoles: TargetRole[];
-  /** Replaces `ui.hero.stats`. */
-  stats: Metric[];
   /**
    * Replaces `skillGroups` outright, so the section reads the way the CV sent
    * with the application does — its groups, its order, its wording. The default

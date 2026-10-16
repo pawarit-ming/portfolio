@@ -92,15 +92,16 @@ export function ProjectGallery({
 
   return (
     <>
-      {/* Phone shots are narrow enough to sit three across; browser
-          screenshots need the extra width to stay readable, and the
-          first of them leads at full width. */}
+      {/* Phone shots sit six across on a wide screen, so the set reads as one
+          row and each opens full size on a click; three across on a tablet,
+          two on a phone. Browser screenshots need the extra width to stay
+          readable, and the first of them leads at full width. */}
       <div
         className={
           spotlight
             ? "spotlight-gallery"
             : phoneGallery
-            ? "mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3"
+            ? "mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
             : "mt-6 grid gap-5 sm:grid-cols-2"
         }
       >
@@ -117,7 +118,7 @@ export function ProjectGallery({
                 spotlight
                   ? "(min-width: 1280px) 780px, (min-width: 900px) 62vw, calc(100vw - 80px)"
                   : phoneGallery
-                  ? "(min-width: 1280px) 392px, (min-width: 640px) 33vw, 50vw"
+                  ? "(min-width: 1280px) 190px, (min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
                   : lead
                     ? "(min-width: 1280px) 1216px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
                     : "(min-width: 1280px) 598px, (min-width: 640px) 50vw, 100vw"
