@@ -11,11 +11,11 @@ export const en: Content = {
     name: "Pawarit Wang",
     role: "Full-stack & Mobile Developer",
     headline:
-      "I build the ERP my family's trading business runs on, from purchasing to invoices, alongside web and mobile projects.",
+      "I build web apps in React and mobile apps in Flutter, and test them the way a test automation internship taught me to.",
     location: "Si Racha, Chonburi, Thailand",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: right now a production ERP for my family's trading company, and before that an internship at the Ministry of Public Health and a Flutter senior project.",
+      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: an internship at the Ministry of Public Health, a Flutter senior project, and an ERP I built to help with my family's trading business, which it now runs on while I keep building it.",
   },
 
   /**
@@ -31,22 +31,6 @@ export const en: Content = {
   ],
 
   experience: [
-    {
-      // A family business, not a job with a contract. The company line says so
-      // rather than leaving a reader to assume employment and find out at the
-      // reference check.
-      role: "Full-stack Developer",
-      company: "FYT · Family business",
-      period: "Jun 2026 – Present",
-      stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "Vitest"],
-      projectSlug: "fyt-sme-platform",
-      // Two lines each where a case study carries the rest: the project card
-      // below says the same things again, so this list only has to hook.
-      highlights: [
-        "Building the company's ERP in React and TypeScript, on a live production database in Supabase and PostgreSQL.",
-        "Designed row-level security on 98 tables, and server-side transactions that block over-receiving and over-invoicing, even when two people save at once.",
-      ],
-    },
     {
       role: "Frontend Developer Intern",
       company: "Ministry of Public Health",
@@ -79,7 +63,7 @@ export const en: Content = {
         description: "Stock receipts and invoices cannot exceed the documents they refer to. The database enforces those limits, even when two people save at once.",
       },
       title: "FYT Trading ERP",
-      kind: "Family business · In production",
+      kind: "Family business · In use, still in development",
       period: "Jun 2026 – Present",
       tagline:
         "The ERP my family's trading company runs on, built in React and TypeScript with the business rules enforced in PostgreSQL.",
@@ -137,6 +121,7 @@ export const en: Content = {
     },
     {
       slug: "asset-management-system",
+      workflow: ["Registration", "Borrowing", "Inspection", "Disposal"],
       title: "Asset Management System",
       kind: "Internship · Ministry of Public Health",
       period: "Jun 2025 – Nov 2025",
@@ -207,6 +192,7 @@ export const en: Content = {
     },
     {
       slug: "thai-cattle-passport",
+      workflow: ["Identity", "Health passport", "Marketplace", "New owner"],
       title: "Thai Cattle Passport",
       kind: "Senior Project · Mahidol University",
       period: "Sep 2025 – May 2026",
@@ -416,8 +402,8 @@ export const en: Content = {
   ],
 
   navigation: [
-    { label: "Projects", hash: "#projects" },
     { label: "About", hash: "#about" },
+    { label: "Projects", hash: "#projects" },
     { label: "Experience", hash: "#experience" },
     { label: "Skills", hash: "#skills" },
   ],
@@ -465,7 +451,7 @@ export const en: Content = {
       eyebrow: "Experience",
       title: "Where I have worked",
       description:
-        "A production ERP for my family's business, and two internships: one building a frontend, and one on the other side of it, writing and automating the tests.",
+        "Two internships: one building a frontend, and one on the other side of it, writing and automating the tests.",
       readCaseStudy: "Read the case study",
     },
 

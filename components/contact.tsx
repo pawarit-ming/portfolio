@@ -1,5 +1,5 @@
 import { ContactForm } from "@/components/contact-form";
-import { ArrowRightIcon, ExternalLinkIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
+import { ArrowRightIcon, ExternalLinkIcon } from "@/components/icons";
 import type { Content } from "@/lib/content";
 import { identity, socials } from "@/lib/content";
 
@@ -16,21 +16,21 @@ export function Contact({ content }: { content: Content }) {
             </header>
             <dl className="contact-details">
               <div>
-                <dt><MailIcon className="contact-detail-icon" />{ui.contact.emailLabel}</dt>
+                <dt>{ui.contact.emailLabel}</dt>
                 <dd><a className="contact-email" href={`mailto:${identity.email}`}><span>{identity.email}</span><ArrowRightIcon /></a></dd>
               </div>
               <div>
-                <dt><PhoneIcon className="contact-detail-icon" />{ui.contact.phoneLabel}</dt>
+                <dt>{ui.contact.phoneLabel}</dt>
                 <dd><a href={`tel:${identity.phoneHref}`}>{identity.phone}</a></dd>
               </div>
               <div>
-                <dt><PinIcon className="contact-detail-icon" />{ui.contact.locationLabel}</dt>
+                <dt>{ui.contact.locationLabel}</dt>
                 <dd>{profile.location}</dd>
               </div>
             </dl>
             <div className="contact-roles">
               <h3>{ui.contact.rolesHeading}</h3>
-              <ul>{targetRoles.map((role) => <li key={role.label}>{role.label}</li>)}</ul>
+              <p>{targetRoles.map((role) => role.label).join(" · ")}</p>
             </div>
             <div className="contact-socials">
               {socials.filter((social) => social.href.trim()).map((social) => (

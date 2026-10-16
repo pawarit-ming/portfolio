@@ -6,9 +6,9 @@ import herdPreview from "@/public/projects/thai-cattle-passport/herd-list-screen
 import qrPreview from "@/public/projects/thai-cattle-passport/qr-passport-screen.png";
 import marketplacePreview from "@/public/projects/thai-cattle-passport/marketplace-screen.png";
 import { Section } from "@/components/section";
-import { TagList } from "@/components/tag";
 import { ProjectImageFrame } from "@/components/project-image";
 import { ArrowRightIcon } from "@/components/icons";
+import { ProjectWorkflow } from "@/components/project-workflow";
 import type { Content } from "@/lib/content";
 import { localePath, type Locale } from "@/lib/i18n";
 
@@ -30,7 +30,7 @@ export function Projects({ locale, basePath = "", content }: {
 }) {
   const { projects, otherProjects, ui } = content;
   return (
-    <Section id="projects" title={ui.projects.title} description={ui.projects.description} tinted>
+    <Section id="projects" title={ui.projects.title} description={ui.projects.description}>
       <div className="project-ledger">
         {projects.map((project, index) => {
           const preview = index === 0 ? project.gallery?.[1] ?? project.cover : project.cover;
@@ -39,15 +39,16 @@ export function Projects({ locale, basePath = "", content }: {
           return (
           <article key={project.slug} className={`project-entry${index === 0 ? " project-entry-featured" : ""}`}>
             <div className="project-information">
-              <p className="project-period">{project.period}</p>
               <h3>
                 <Link href={localePath(locale, `${basePath}/projects/${project.slug}`)}>
                   {project.title}
                 </Link>
               </h3>
-              <p className="project-kind">{project.kind}</p>
+              <p className="project-kind">{project.kind} · {project.period}</p>
               <p className="project-description">{project.tagline}</p>
-              <TagList items={project.stack.slice(0, 3)} />
+              {project.workflow?.length ? (
+                <ProjectWorkflow steps={project.workflow} label={ui.project.workflow} />
+              ) : null}
               <dl className="project-metrics">
                 {project.metrics.slice(0, 2).map((metric) => (
                   <div key={metric.label}>
@@ -55,7 +56,8 @@ export function Projects({ locale, basePath = "", content }: {
                   </div>
                 ))}
               </dl>
-              <Link className="project-action"
+              <p className="project-stack">{project.stack.slice(0, 3).join(" · ")}</p>
+              <Link className="text-action project-action"
                 href={localePath(locale, `${basePath}/projects/${project.slug}`)}>
                 {ui.projects.readCaseStudy}
                 <ArrowRightIcon className="h-4 w-4" />
@@ -122,9 +124,7 @@ export function Projects({ locale, basePath = "", content }: {
                     </ul>
                   ) : null}
                 </div>
-                <div className="other-work-stack">
-                  <TagList items={project.stack} />
-                </div>
+                <p className="other-work-stack">{project.stack.join(" · ")}</p>
               </article>
             ))}
           </div>

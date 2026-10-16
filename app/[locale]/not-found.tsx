@@ -20,7 +20,7 @@ export default async function NotFound() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-start px-6 py-28 lg:px-8">
-      <p className="font-mono text-sm text-subtle">404</p>
+      <p className="text-sm text-muted">404</p>
       <h1 className="mt-4 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
         {ui.notFound.title}
       </h1>

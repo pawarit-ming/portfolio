@@ -5,6 +5,7 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { MotionObserver } from "@/components/motion-observer";
 import { getContent } from "@/lib/content";
 import {
   isLocale,
@@ -153,6 +154,7 @@ export default async function RootLayout({
             name={profile.name}
             role={profile.role}
           />
+          <MotionObserver />
         </ThemeProvider>
       </body>
     </html>
