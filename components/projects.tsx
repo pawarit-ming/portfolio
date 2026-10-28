@@ -8,7 +8,6 @@ import marketplacePreview from "@/public/projects/thai-cattle-passport/marketpla
 import { Section } from "@/components/section";
 import { ProjectImageFrame } from "@/components/project-image";
 import { ArrowRightIcon } from "@/components/icons";
-import { ProjectWorkflow } from "@/components/project-workflow";
 import type { Content } from "@/lib/content";
 import { localePath, type Locale } from "@/lib/i18n";
 
@@ -47,11 +46,7 @@ export function Projects({ locale, basePath = "", content }: {
                   {project.title}
                 </Link>
               </h3>
-              <p className="project-kind">{project.kind} · {project.period}</p>
               <p className="project-description">{project.tagline}</p>
-              {project.workflow?.length ? (
-                <ProjectWorkflow steps={project.workflow} label={ui.project.workflow} />
-              ) : null}
               <dl className="project-metrics">
                 {project.metrics.slice(0, 2).map((metric) => (
                   <div key={metric.label}>
@@ -59,7 +54,6 @@ export function Projects({ locale, basePath = "", content }: {
                   </div>
                 ))}
               </dl>
-              <p className="project-stack">{project.stack.slice(0, 3).join(" · ")}</p>
               <Link className="text-action project-action"
                 href={localePath(locale, `${basePath}/projects/${project.slug}`)}>
                 {ui.projects.readCaseStudy}
@@ -115,23 +109,10 @@ export function Projects({ locale, basePath = "", content }: {
                   <h4>{project.title}</h4>
                   {project.period ? <p>{project.period}</p> : null}
                 </div>
-                <div className="other-work-description">
-                  {project.image ? (
-                    <ProjectImageFrame image={project.image}
-                      sizes="(min-width: 1280px) 540px, (min-width: 768px) 55vw, 100vw" />
-                  ) : null}
-                  <p>{project.description}</p>
-                  {project.links?.length ? (
-                    <ul className="mt-3 flex flex-wrap gap-5">
-                      {project.links.map((link) => <li key={link.href}>
-                        <a className="text-action" href={link.href} target="_blank" rel="noreferrer noopener">
-                          {link.label}
-                        </a>
-                      </li>)}
-                    </ul>
-                  ) : null}
+                <div>
+                  <p className="other-work-description">{project.description}</p>
+                  <p className="other-work-stack">{project.stack.join(" · ")}</p>
                 </div>
-                <p className="other-work-stack">{project.stack.join(" · ")}</p>
               </article>
             ))}
           </div>

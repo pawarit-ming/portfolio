@@ -17,7 +17,7 @@ const CHOREOGRAPHY: [selector: string, kind: "rise" | "row" | "mask"][] = [
   [".about-story > p, .certifications li", "row"],
   [".education-panel", "rise"],
   [".experience-list > li", "row"],
-  [".skills-practice > div, .skills-reference > div", "row"],
+  [".skills-reference > div", "row"],
   [".contact-information, .contact-form-panel", "rise"],
   [".footer-top", "rise"],
   // Case studies: screens first, then the story, features and the way on.

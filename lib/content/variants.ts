@@ -72,7 +72,7 @@ const dba: VariantDefinition = {
         "I design relational schemas: ER modelling, normalisation, and the SQL to build and query them.",
       availability: "Open to database roles",
       summary:
-        "Recent Digital Science and Technology graduate from Mahidol University. I design relational schemas: the Postgres model behind a cross-platform Flutter app (owners, animals, listings, offers and ownership transfers), and a 13-table retail schema taken from business rules through ER diagrams, normalisation and DDL. My internship was on the frontend of a MySQL-backed asset management system, so I have also seen a schema from the side that has to query it.",
+        "Recent Digital Science and Technology graduate from Mahidol University, looking for database work.",
       targetRoles: [
         { label: "Database Administrator", short: "Database Admin" },
         { label: "Database Developer", short: "Database Dev" },
@@ -128,7 +128,7 @@ const dba: VariantDefinition = {
         "ออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์ ทั้ง ER Diagram การทำ normalization และ SQL ที่ใช้สร้างและค้นข้อมูล",
       availability: "เปิดรับงานสายฐานข้อมูล",
       summary:
-        "บัณฑิตจบใหม่สาขาวิทยาการและเทคโนโลยีดิจิทัล มหาวิทยาลัยมหิดล ถนัดออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์ ทั้งโครงสร้างข้อมูล Postgres ที่รองรับแอป Flutter ข้ามแพลตฟอร์ม ครอบคลุมเจ้าของ โค ประกาศขาย ข้อเสนอ และการโอนกรรมสิทธิ์ และสคีมาธุรกิจค้าปลีก 13 ตารางที่ออกแบบจากกฎเกณฑ์ทางธุรกิจ ผ่าน ER Diagram การทำ normalization จนถึง DDL ส่วนงานฝึกงานอยู่ฝั่งหน้าบ้านของระบบครุภัณฑ์ที่ใช้ MySQL จึงเห็นสคีมาจากมุมของคนที่ต้องเรียกใช้ข้อมูลด้วย",
+        "บัณฑิตจบใหม่สาขาวิทยาการและเทคโนโลยีดิจิทัล มหาวิทยาลัยมหิดล กำลังมองหางานสายฐานข้อมูล",
       targetRoles: [
         { label: "ผู้ดูแลฐานข้อมูล", short: "ฐานข้อมูล" },
         { label: "นักพัฒนาฐานข้อมูล", short: "Database Dev" },

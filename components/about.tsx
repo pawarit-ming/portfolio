@@ -20,8 +20,7 @@ export function About({ content }: { content: Content }) {
                       aria-label={ui.about.certificateLinkLabel.replace("{name}", certification.name)}>
                       {certification.name}<ExternalLinkIcon className="ml-2 inline h-3.5 w-3.5" />
                     </a>
-                    <p>{certification.issuer}</p>
-                    <p>{certification.date}</p>
+                    <p>{certification.issuer} · {certification.date}</p>
                   </li>
                 ))}
               </ul>
@@ -31,11 +30,11 @@ export function About({ content }: { content: Content }) {
         <aside className="education-panel">
           <h3>{ui.about.educationHeading}</h3>
           <p className="education-school">{education.school}</p>
-          <p className="mt-5">{education.degree}</p>
-          <p className="mt-2">{education.faculty}</p>
-          <p className="mt-5 text-sm">{education.graduated}</p>
+          <p>{education.degree}</p>
+          <p>{education.faculty}</p>
+          <p>{education.graduated}</p>
           <a href={documents.transcript} target="_blank" rel="noreferrer noopener"
-            aria-label={ui.about.transcriptLinkLabel} className="text-action mt-6">
+            aria-label={ui.about.transcriptLinkLabel} className="text-action mt-3">
             <DocumentIcon className="h-4 w-4" />{ui.about.transcript}
           </a>
           <div className="education-languages">

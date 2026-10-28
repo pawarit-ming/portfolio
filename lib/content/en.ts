@@ -16,7 +16,7 @@ export const en: Content = {
     relocation: "Available to relocate to Bangkok",
     availability: "Open to developer roles",
     summary:
-      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work. I build web apps from the React interface down to the database: an internship at the Ministry of Public Health, a Flutter senior project, and an ERP for a trading company that is already in use while I keep building it.",
+      "Recent Digital Science and Technology graduate from Mahidol University, looking for full-stack work.",
   },
 
   /**
@@ -40,7 +40,6 @@ export const en: Content = {
       projectSlug: "asset-management-system",
       highlights: [
         "Contributed to 22 screens (primary author of 14) in React, Next.js and Tailwind CSS, including the five-step asset registration wizard.",
-        "Connected screens to the team's NestJS REST API and fixed the issues raised in two rounds of UAT.",
       ],
     },
     {
@@ -287,29 +286,25 @@ export const en: Content = {
   otherProjects: [
     {
       title: "E-commerce Analytics Dashboard",
-      description:
-        "A four-page Power BI dashboard on a 1.4-million-row Kaggle e-commerce dataset, prepared with five Alteryx workflows. Coursework, group of six.",
+      description: "A Power BI dashboard on 1.4 million rows of Kaggle data, prepared in Alteryx.",
       period: "Nov 2024",
       stack: ["Alteryx", "Power BI", "ETL", "Data Visualisation"],
     },
     {
       title: "Go Healthy",
-      description:
-        "A Flutter workout app on Firebase Cloud Firestore. I built the login, profile, workout selection and exercise timer screens. Coursework, group of three.",
+      description: "A Flutter workout app. I built the login, profile and exercise timer.",
       period: "2024",
       stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     },
     {
       title: "Retail Database Design",
-      description:
-        "A 13-table MySQL schema for a clothing retailer, from ER diagrams through normalisation to DDL. I owned the Customer and Account Member entities. Coursework, group of five.",
+      description: "A 13-table MySQL schema for a clothing retailer, from ER diagram to DDL.",
       period: "Jul 2023",
       stack: ["MySQL", "SQL", "ER Modelling", "Normalisation"],
     },
     {
       title: "Game Store Website",
-      description:
-        "A game shop site with an Express REST API over MySQL, using parameterized queries, plus storefront and admin pages. Coursework, group of three.",
+      description: "A game shop with an Express REST API over MySQL.",
       period: "2023",
       stack: ["Node.js", "Express", "MySQL", "REST API", "JavaScript", "HTML", "CSS"],
     },
@@ -322,8 +317,6 @@ export const en: Content = {
     },
     {
       title: "Frontend & mobile",
-      note: "Asset registration on the web, and a cattle passport on mobile.",
-      projects: ["asset-management-system", "thai-cattle-passport"],
       items: [
         "React",
         "Next.js",
@@ -337,8 +330,6 @@ export const en: Content = {
     },
     {
       title: "Databases",
-      note: "Business rules and company-level data access in the production ERP.",
-      projects: ["fyt-sme-platform"],
       items: ["MySQL", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
@@ -460,7 +451,6 @@ export const en: Content = {
       title: "Let's talk",
       description:
         "I am open to developer roles in Bangkok, Chonburi, or remote. Drop me a line and I will reply.",
-      rolesHeading: "Roles I am open to",
       emailLabel: "Email",
       phoneLabel: "Phone",
       locationLabel: "Location",

@@ -4,7 +4,7 @@ import type { Content } from "@/lib/content";
 import { identity, socials } from "@/lib/content";
 
 export function Contact({ content }: { content: Content }) {
-  const { profile, targetRoles, ui } = content;
+  const { profile, ui } = content;
   return (
     <section id="contact" aria-labelledby="contact-heading" className="portfolio-section section-tinted">
       <div className="page-wrap">
@@ -28,10 +28,6 @@ export function Contact({ content }: { content: Content }) {
                 <dd>{profile.location}</dd>
               </div>
             </dl>
-            <div className="contact-roles">
-              <h3>{ui.contact.rolesHeading}</h3>
-              <p>{targetRoles.map((role) => role.label).join(" · ")}</p>
-            </div>
             <div className="contact-socials">
               {socials.filter((social) => social.href.trim()).map((social) => (
                 <a key={social.label} href={social.href} target="_blank" rel="noreferrer noopener">

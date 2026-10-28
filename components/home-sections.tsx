@@ -41,7 +41,7 @@ export function HomeSections({
       <About content={content} />
       <Projects locale={locale} content={content} basePath={basePath} />
       <ExperienceSection locale={locale} content={content} basePath={basePath} />
-      <Skills content={content} locale={locale} basePath={basePath} />
+      <Skills content={content} />
       <Contact content={content} />
     </>
   );

@@ -22,7 +22,7 @@ export const th: Content = {
     relocation: "พร้อมย้ายไปทำงานที่กรุงเทพฯ",
     availability: "เปิดรับงานสายพัฒนา",
     summary:
-      "บัณฑิตจบใหม่สาขาวิทยาการและเทคโนโลยีดิจิทัล มหาวิทยาลัยมหิดล กำลังมองหางานสาย Full-stack พัฒนาเว็บตั้งแต่หน้าจอ React ไปจนถึงฐานข้อมูล มีผลงานจากการฝึกงานที่กระทรวงสาธารณสุข โครงงานปริญญานิพนธ์ด้วย Flutter และระบบ ERP สำหรับบริษัทเทรดดิ้งที่ใช้งานจริงแล้ว และยังพัฒนาต่ออยู่",
+      "บัณฑิตจบใหม่สาขาวิทยาการและเทคโนโลยีดิจิทัล มหาวิทยาลัยมหิดล กำลังมองหางานสาย Full-stack",
   },
 
   targetRoles: [
@@ -41,7 +41,6 @@ export const th: Content = {
       projectSlug: "asset-management-system",
       highlights: [
         "ร่วมพัฒนาหน้าจอ 22 หน้า (เป็นผู้เขียนหลัก 14 หน้า) ด้วย React, Next.js และ Tailwind CSS รวมถึงวิซาร์ดลงทะเบียนครุภัณฑ์ 5 ขั้นตอน",
-        "เชื่อมหน้าจอกับ REST API ของ NestJS ที่ทีมพัฒนา และแก้ปัญหาที่พบจาก UAT สองรอบ",
       ],
     },
     {
@@ -275,29 +274,25 @@ export const th: Content = {
   otherProjects: [
     {
       title: "แดชบอร์ดวิเคราะห์ข้อมูลอีคอมเมิร์ซ",
-      description:
-        "แดชบอร์ด Power BI 4 หน้า จากชุดข้อมูลอีคอมเมิร์ซของ Kaggle 1.4 ล้านแถว เตรียมข้อมูลด้วย Alteryx workflow 5 ชุด งานวิชาเรียน กลุ่ม 6 คน",
+      description: "แดชบอร์ด Power BI จากข้อมูล Kaggle 1.4 ล้านแถว เตรียมข้อมูลด้วย Alteryx",
       period: "พ.ย. 2024",
       stack: ["Alteryx", "Power BI", "ETL", "Data Visualisation"],
     },
     {
       title: "Go Healthy",
-      description:
-        "แอปออกกำลังกายด้วย Flutter บน Firebase Cloud Firestore พัฒนาหน้าเข้าสู่ระบบ โปรไฟล์ การเลือกท่าออกกำลังกาย และตัวจับเวลา งานวิชาเรียน กลุ่ม 3 คน",
+      description: "แอปออกกำลังกายด้วย Flutter ทำหน้าเข้าสู่ระบบ โปรไฟล์ และตัวจับเวลา",
       period: "2024",
       stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     },
     {
       title: "ออกแบบฐานข้อมูลธุรกิจค้าปลีก",
-      description:
-        "สคีมา MySQL 13 ตารางสำหรับร้านค้าปลีกเสื้อผ้า ตั้งแต่ ER Diagram การทำ normalization จนถึง DDL รับผิดชอบเอนทิตี Customer และ Account Member งานวิชาเรียน กลุ่ม 5 คน",
+      description: "สคีมา MySQL 13 ตารางสำหรับร้านเสื้อผ้า ตั้งแต่ ER Diagram ถึง DDL",
       period: "ก.ค. 2023",
       stack: ["MySQL", "SQL", "ER Modelling", "Normalisation"],
     },
     {
       title: "เว็บไซต์ร้านขายเกม",
-      description:
-        "เว็บร้านขายเกมที่มี REST API ด้วย Express บน MySQL ใช้ parameterized query พร้อมหน้าร้านและหน้าผู้ดูแล งานวิชาเรียน กลุ่ม 3 คน",
+      description: "เว็บร้านขายเกม มี REST API ด้วย Express บน MySQL",
       period: "2023",
       stack: ["Node.js", "Express", "MySQL", "REST API", "JavaScript", "HTML", "CSS"],
     },
@@ -310,8 +305,6 @@ export const th: Content = {
     },
     {
       title: "หน้าบ้านและโมบาย",
-      note: "ตั้งแต่ลงทะเบียนครุภัณฑ์บนเว็บ ไปจนถึงพาสปอร์ตโคบนมือถือ",
-      projects: ["asset-management-system", "thai-cattle-passport"],
       items: [
         "React",
         "Next.js",
@@ -325,8 +318,6 @@ export const th: Content = {
     },
     {
       title: "ฐานข้อมูล",
-      note: "เงื่อนไขเอกสารและสิทธิ์เข้าถึงข้อมูลแยกบริษัทใน ERP ที่ใช้งานจริง",
-      projects: ["fyt-sme-platform"],
       items: ["MySQL", "PostgreSQL", "Supabase", "Firebase"],
     },
     {
@@ -444,7 +435,6 @@ export const th: Content = {
       title: "คุยกันได้เลย",
       description:
         "เปิดรับงานสายพัฒนาในกรุงเทพฯ ชลบุรี หรือทำงานทางไกล ทักมาได้เลยแล้วจะรีบตอบกลับ",
-      rolesHeading: "ตำแหน่งที่เปิดรับ",
       emailLabel: "อีเมล",
       phoneLabel: "โทรศัพท์",
       locationLabel: "ที่อยู่",

@@ -92,11 +92,10 @@ export type Project = {
  */
 export type SideProject = {
   title: string;
+  /** One short line; the stack sits under it. */
   description: string;
   period?: string;
   stack: string[];
-  image?: ProjectImage;
-  links?: ProjectLink[];
 };
 
 /**
@@ -172,9 +171,6 @@ export type Certification = {
 export type SkillGroup = {
   title: string;
   items: string[];
-  /** Optional project evidence; no proficiency rating is inferred from it. */
-  projects?: ProjectSlug[];
-  note?: string;
 };
 
 /**
@@ -260,7 +256,6 @@ export type UiCopy = {
   contact: {
     title: string;
     description: string;
-    rolesHeading: string;
     emailLabel: string;
     phoneLabel: string;
     locationLabel: string;
