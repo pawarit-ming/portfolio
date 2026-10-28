@@ -38,8 +38,8 @@ export function HomeSections({
   return (
     <>
       <Hero content={content} stack={stack} resume={resume} />
-      <About content={content} />
       <Projects locale={locale} content={content} basePath={basePath} />
+      <About content={content} />
       <ExperienceSection locale={locale} content={content} basePath={basePath} />
       <Skills content={content} />
       <Contact content={content} />

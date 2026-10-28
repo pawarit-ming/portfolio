@@ -4,7 +4,6 @@ import {
   getContent,
   identity,
   knowsAbout,
-  postalAddress,
 } from "@/lib/content";
 import { isLocale, localePath, localeTags, locales } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
@@ -33,10 +32,6 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
     // claim to be the same resource.
     url: `${siteUrl}${localePath(locale)}`,
     inLanguage: localeTags[locale],
-    address: {
-      "@type": "PostalAddress",
-      ...postalAddress,
-    },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: education.school,

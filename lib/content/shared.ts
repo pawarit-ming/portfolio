@@ -84,9 +84,3 @@ export const knowsAbout = [
   "Test Automation",
 ];
 
-/** Structured-data address, which stays in English for the crawlers. */
-export const postalAddress = {
-  addressLocality: "Si Racha",
-  addressRegion: "Chonburi",
-  addressCountry: "TH",
-};

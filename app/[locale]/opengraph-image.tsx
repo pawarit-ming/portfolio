@@ -80,7 +80,6 @@ export default async function OpengraphImage({
 
         <div style={{ display: "flex", gap: "28px", fontSize: "26px" }}>
           <div style={{ display: "flex", fontWeight: 600 }}>{profile.role}</div>
-          <div style={{ display: "flex", color: ogColors.muted }}>{profile.location}</div>
         </div>
       </div>
     ),

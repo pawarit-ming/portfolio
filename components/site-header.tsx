@@ -10,6 +10,7 @@ import { identity } from "@/lib/content/shared";
 import { sectionHref, sectionsPath, type Locale } from "@/lib/i18n";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SectionLink } from "@/components/section-link";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 /**
@@ -81,13 +82,13 @@ export function SiteHeader({
 
         <nav aria-label={ui.mainNavLabel} className="hidden items-center gap-1 md:flex">
           {navigation.map((item) => (
-            <Link
+            <SectionLink
               key={item.hash}
               href={href(item.hash)}
-              className="header-link px-3 py-3 text-sm text-fg transition-colors hover:text-accent"
+              className="header-link px-3 py-3 text-fg transition-colors hover:text-accent"
             >
               {item.label}
-            </Link>
+            </SectionLink>
           ))}
           <span className="mx-1 flex items-center gap-1">
             <LanguageSwitcher locale={locale} label={ui.languageLabel} />
@@ -96,12 +97,12 @@ export function SiteHeader({
           {/* The contact form, not a mailto: — a visitor whose machine has no
               mail client configured gets nothing at all from a mailto, and this
               button shows no address to fall back on. */}
-          <Link
+          <SectionLink
             href={href("#contact")}
             className="header-contact inline-flex items-center bg-invert px-4 py-3 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
           >
             {ui.getInTouch}
-          </Link>
+          </SectionLink>
         </nav>
 
         <div className="-mr-2 flex items-center gap-1 md:hidden">
@@ -139,23 +140,23 @@ export function SiteHeader({
           <ul className="page-wrap w-full py-4">
             {navigation.map((item) => (
               <li key={item.hash}>
-                <Link
+                <SectionLink
                   href={href(item.hash)}
                   onClick={close}
                   className="block rounded-md px-3 py-2.5 text-sm text-body transition-colors hover:bg-frame"
                 >
                   {item.label}
-                </Link>
+                </SectionLink>
               </li>
             ))}
             <li className="px-3 pt-2 pb-1">
-              <Link
+              <SectionLink
                 href={href("#contact")}
                 onClick={close}
                 className="inline-flex w-full items-center justify-center rounded-md bg-invert px-3.5 py-2.5 text-sm font-medium text-on-invert transition-colors hover:bg-invert-hover"
               >
                 {ui.getInTouch}
-              </Link>
+              </SectionLink>
             </li>
           </ul>
         </nav>

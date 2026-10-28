@@ -5,7 +5,7 @@ import assetPreview from "@/public/projects/asset-management-system/registration
 import herdPreview from "@/public/projects/thai-cattle-passport/herd-list-screen.webp";
 import qrPreview from "@/public/projects/thai-cattle-passport/qr-passport-screen.webp";
 import marketplacePreview from "@/public/projects/thai-cattle-passport/marketplace-screen.webp";
-import { Section } from "@/components/section";
+import { Section, sectionLabel } from "@/components/section";
 import { ProjectImageFrame } from "@/components/project-image";
 import { ArrowRightIcon } from "@/components/icons";
 import type { Content } from "@/lib/content";
@@ -32,69 +32,70 @@ export function Projects({ locale, basePath = "", content }: {
 }) {
   const { projects, otherProjects, ui } = content;
   return (
-    <Section id="projects" title={ui.projects.title} description={ui.projects.description}>
+    <Section id="projects" title={ui.projects.title} label={sectionLabel(content, 1, "#projects")} description={ui.projects.description}>
       <div className="project-ledger">
         {projects.map((project, index) => {
+          const href = localePath(locale, `${basePath}/projects/${project.slug}`);
           const preview = index === 0 ? project.gallery?.[1] ?? project.cover : project.cover;
           const previewImage = preview ? previewImages[preview.src] : undefined;
           const phonePreviews = project.gallery?.filter((image) => phonePreviewImages[image.src]) ?? [];
+          const [headline] = project.metrics;
           return (
-          <article key={project.slug} className={`project-entry${index === 0 ? " project-entry-featured" : ""}`}>
-            <div className="project-information">
-              <h3>
-                <Link href={localePath(locale, `${basePath}/projects/${project.slug}`)}>
-                  {project.title}
-                </Link>
-              </h3>
-              <p className="project-description">{project.tagline}</p>
-              <dl className="project-metrics">
-                {project.metrics.slice(0, 2).map((metric) => (
-                  <div key={metric.label}>
-                    <dt>{metric.label}</dt><dd>{metric.value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <Link className="text-action project-action"
-                href={localePath(locale, `${basePath}/projects/${project.slug}`)}>
-                {ui.projects.readCaseStudy}
-                <ArrowRightIcon className="h-4 w-4" />
-              </Link>
-            </div>
-            {project.cover ? (
-              <Link className="project-preview"
-                href={localePath(locale, `${basePath}/projects/${project.slug}`)}
-                aria-label={`${ui.projects.readCaseStudy}: ${project.title}`}>
+          <article key={project.slug} className="project-entry">
+            <Link className="project-preview" href={href}
+              aria-label={`${ui.projects.readCaseStudy}: ${project.title}`}>
+              <span className="project-preview-top" aria-hidden="true">
+                <span className="project-preview-name">{project.title}</span>
+                {headline ? <span>{headline.value} · {headline.label}</span> : null}
+              </span>
+              <span className="project-preview-media">
                 {phonePreviews.length ? (
-                  <div className="project-phone-previews">
+                  <span className="project-phone-previews">
                     {phonePreviews.map((image) => (
                       <Image
                         key={image.src}
                         src={phonePreviewImages[image.src]}
                         alt={image.alt}
-                        sizes="(min-width: 1280px) 160px, (min-width: 900px) 14vw, (min-width: 600px) 180px, 26vw"
+                        sizes="(min-width: 900px) 200px, 28vw"
                         loading="eager"
                         placeholder="blur"
                         className="project-phone-image"
                       />
                     ))}
-                  </div>
+                  </span>
                 ) : previewImage && preview ? (
                   <Image
                     src={previewImage}
                     alt={preview.alt}
-                    sizes={index === 0 ? "(min-width: 1280px) 620px, (min-width: 900px) 50vw, calc(100vw - 80px)" : "(min-width: 1280px) 540px, (min-width: 900px) 42vw, calc(100vw - 80px)"}
+                    sizes="(min-width: 1280px) 960px, 80vw"
                     loading="eager"
                     placeholder="blur"
                     className="project-preview-image"
                   />
-                ) : (
+                ) : project.cover ? (
                   <ProjectImageFrame
                     image={{ ...project.cover, caption: undefined }}
-                    sizes="(min-width: 1280px) 620px, (min-width: 900px) 50vw, calc(100vw - 80px)"
+                    sizes="(min-width: 1280px) 960px, 80vw"
                     frameClassName="project-cover-frame" />
-                )}
+                ) : null}
+              </span>
+              <span className="project-preview-arrow" aria-hidden="true"><ArrowRightIcon className="h-4 w-4" /></span>
+            </Link>
+            {/* Index, name and line on one row; the stack and the kind of work below. */}
+            <div className="project-information">
+              <p className="project-index" aria-hidden="true">/{String(index + 1).padStart(2, "0")}</p>
+              <div className="project-heading">
+                <h3><Link href={href}>{project.title}</Link></h3>
+                <p className="project-description">{project.tagline}</p>
+              </div>
+              <Link className="project-open" href={href} aria-label={`${ui.projects.readCaseStudy}: ${project.title}`}>
+                <ArrowRightIcon className="h-4 w-4" />
               </Link>
-            ) : null}
+              <p className="project-meta">
+                <span>{project.stack.slice(0, 3).join(" · ")}</span>
+                <span>{project.kind.split(" · ")[0]} · {project.period}</span>
+              </p>
+            </div>
           </article>
           );
         })}

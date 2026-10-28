@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Noto_Sans_Thai } from "next/font/google";
+import { Manrope, Noto_Sans_Thai } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -16,7 +16,7 @@ import {
 } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
-const displaySans = Schibsted_Grotesk({
+const displaySans = Manrope({
   variable: "--font-display-sans",
   subsets: ["latin"],
   display: "swap",
@@ -56,7 +56,6 @@ export async function generateMetadata({
 
   const description = ui.metadata.descriptionTemplate
     .replace("{role}", profile.role)
-    .replace("{location}", profile.location)
     .replace("{headline}", profile.headline);
 
   const title = `${profile.name} | ${profile.role}`;

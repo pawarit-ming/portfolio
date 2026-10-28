@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { NavItem, UiCopy } from "@/lib/content/types";
 import { identity, socials } from "@/lib/content/shared";
 import { sectionHref, type Locale } from "@/lib/i18n";
 import { ArrowRightIcon, ExternalLinkIcon } from "@/components/icons";
+import { SectionLink } from "@/components/section-link";
 
 type FooterCopy = Pick<UiCopy, "footerNavLabel" | "footer">;
 
@@ -33,7 +33,7 @@ export function SiteFooter({ locale, ui, navigation, name, role }: {
             <h2>{ui.footer.navigationHeading}</h2>
             <nav aria-label={ui.footerNavLabel}>
               {navigation.map((item) => (
-                <Link key={item.hash} href={sectionHref(pathname, locale, item.hash)}>{item.label}</Link>
+                <SectionLink key={item.hash} href={sectionHref(pathname, locale, item.hash)}>{item.label}</SectionLink>
               ))}
             </nav>
           </div>

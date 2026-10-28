@@ -2,15 +2,17 @@ import { ContactForm } from "@/components/contact-form";
 import { ArrowRightIcon, ExternalLinkIcon } from "@/components/icons";
 import type { Content } from "@/lib/content";
 import { identity, socials } from "@/lib/content";
+import { sectionLabel } from "@/components/section";
 
 export function Contact({ content }: { content: Content }) {
-  const { profile, ui } = content;
+  const { ui } = content;
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="portfolio-section section-tinted">
+    <section id="contact" aria-labelledby="contact-heading" className="portfolio-section section-accent">
       <div className="page-wrap">
         <div className="contact-layout">
           <div className="contact-information">
             <header className="section-introduction">
+              <p className="section-label">{sectionLabel(content, 5, "#contact")}</p>
               <h2 id="contact-heading">{ui.contact.title}</h2>
               <p>{ui.contact.description}</p>
             </header>
@@ -22,10 +24,6 @@ export function Contact({ content }: { content: Content }) {
               <div>
                 <dt>{ui.contact.phoneLabel}</dt>
                 <dd><a href={`tel:${identity.phoneHref}`}>{identity.phone}</a></dd>
-              </div>
-              <div>
-                <dt>{ui.contact.locationLabel}</dt>
-                <dd>{profile.location}</dd>
               </div>
             </dl>
             <div className="contact-socials">

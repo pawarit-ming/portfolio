@@ -44,7 +44,6 @@ export async function generateMetadata({
 
   const description = ui.metadata.descriptionTemplate
     .replace("{role}", profile.role)
-    .replace("{location}", profile.location)
     .replace("{headline}", profile.headline);
 
   return {

@@ -119,8 +119,7 @@ export type Profile = {
   name: string;
   role: string;
   headline: string;
-  location: string;
-  /** Shown beside the location in the hero, e.g. a willingness to move. */
+  /** Shown under the availability in the hero, e.g. a willingness to move. */
   relocation: string;
   availability: string;
   /**
@@ -258,7 +257,6 @@ export type UiCopy = {
     description: string;
     emailLabel: string;
     phoneLabel: string;
-    locationLabel: string;
   };
 
   form: {
@@ -318,8 +316,7 @@ export type UiCopy = {
 
   metadata: {
     /**
-     * The meta description, as a template over `{role}`, `{location}` and
-     * `{headline}`. A template rather than a joiner because the punctuation
+     * The meta description, as a template over `{role}` and `{headline}`. A template rather than a joiner because the punctuation
      * between the clauses differs by language — Thai does not use a full stop
      * the way English does.
      */

@@ -18,7 +18,6 @@ export const th: Content = {
     role: "นักพัฒนา Full-stack และโมบาย",
     headline:
       "พัฒนาเว็บแอปด้วย React และแอปมือถือด้วย Flutter แล้วทดสอบงานด้วยวิธีที่ได้เรียนรู้จากการฝึกงานด้าน test automation",
-    location: "ศรีราชา ชลบุรี ประเทศไทย",
     relocation: "พร้อมย้ายไปทำงานที่กรุงเทพฯ",
     availability: "เปิดรับงานสายพัฒนา",
     summary:
@@ -377,8 +376,8 @@ export const th: Content = {
   ],
 
   navigation: [
-    { label: "เกี่ยวกับ", hash: "#about" },
     { label: "ผลงาน", hash: "#projects" },
+    { label: "เกี่ยวกับ", hash: "#about" },
     { label: "ประสบการณ์", hash: "#experience" },
     { label: "ทักษะ", hash: "#skills" },
   ],
@@ -401,7 +400,7 @@ export const th: Content = {
     },
 
     about: {
-      title: "เกี่ยวกับ",
+      title: "รู้จักกันสักนิด",
       educationHeading: "การศึกษา",
       certificationsHeading: "ใบรับรอง",
       certificateLinkLabel: "เปิดใบรับรอง {name} (PDF)",
@@ -411,7 +410,7 @@ export const th: Content = {
     },
 
     experience: {
-      title: "ประสบการณ์",
+      title: "ที่ที่เคยทำงาน",
       description:
         "ฝึกงานสองที่ ที่หนึ่งพัฒนา frontend อีกที่ทำ test automation",
       readCaseStudy: "อ่านรายละเอียดโปรเจกต์",
@@ -437,7 +436,6 @@ export const th: Content = {
         "เปิดรับงานสายพัฒนาในกรุงเทพฯ ชลบุรี หรือทำงานทางไกล ทักมาได้เลยแล้วจะรีบตอบกลับ",
       emailLabel: "อีเมล",
       phoneLabel: "โทรศัพท์",
-      locationLabel: "ที่อยู่",
     },
 
     form: {
@@ -504,7 +502,7 @@ export const th: Content = {
     },
 
     metadata: {
-      descriptionTemplate: "{role} ที่ {location} · {headline}",
+      descriptionTemplate: "{role} · {headline}",
       keywords: [
         "นักพัฒนาเว็บ",
         "รับสมัครงาน โปรแกรมเมอร์",

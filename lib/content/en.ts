@@ -12,7 +12,6 @@ export const en: Content = {
     role: "Full-stack & Mobile Developer",
     headline:
       "I build web apps in React and mobile apps in Flutter, and test them the way a test automation internship taught me to.",
-    location: "Si Racha, Chonburi, Thailand",
     relocation: "Available to relocate to Bangkok",
     availability: "Open to developer roles",
     summary:
@@ -390,8 +389,8 @@ export const en: Content = {
   ],
 
   navigation: [
-    { label: "About", hash: "#about" },
     { label: "Projects", hash: "#projects" },
+    { label: "About", hash: "#about" },
     { label: "Experience", hash: "#experience" },
     { label: "Skills", hash: "#skills" },
   ],
@@ -417,7 +416,7 @@ export const en: Content = {
     },
 
     about: {
-      title: "About",
+      title: "A bit about me",
       educationHeading: "Education",
       certificationsHeading: "Certifications",
       certificateLinkLabel: "Open the {name} certificate (PDF)",
@@ -427,7 +426,7 @@ export const en: Content = {
     },
 
     experience: {
-      title: "Experience",
+      title: "Where I have worked",
       description:
         "Two internships: one building a frontend, one automating tests.",
       readCaseStudy: "Read the case study",
@@ -453,7 +452,6 @@ export const en: Content = {
         "I am open to developer roles in Bangkok, Chonburi, or remote. Drop me a line and I will reply.",
       emailLabel: "Email",
       phoneLabel: "Phone",
-      locationLabel: "Location",
     },
 
     form: {
@@ -521,7 +519,7 @@ export const en: Content = {
     },
 
     metadata: {
-      descriptionTemplate: "{role} in {location}. {headline}",
+      descriptionTemplate: "{role}. {headline}",
       keywords: [
         "Web Developer",
         "React",

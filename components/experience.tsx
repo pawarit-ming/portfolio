@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Section } from "@/components/section";
+import { Section, sectionLabel } from "@/components/section";
 import { ArrowRightIcon } from "@/components/icons";
 import type { Content } from "@/lib/content";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -11,7 +11,7 @@ export function ExperienceSection({ locale, basePath = "", content }: {
 }) {
   const { experience, ui } = content;
   return (
-    <Section id="experience" title={ui.experience.title} description={ui.experience.description} tinted>
+    <Section id="experience" title={ui.experience.title} label={sectionLabel(content, 3, "#experience")} description={ui.experience.description}>
       <ol className="experience-list">
         {experience.map((job) => (
           <li key={`${job.company}-${job.period}`}>

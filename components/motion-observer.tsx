@@ -9,13 +9,13 @@ import { usePathname } from "next/navigation";
  * selector stagger in reading order.
  */
 const CHOREOGRAPHY: [selector: string, kind: "rise" | "row" | "mask"][] = [
-  [".section-introduction > h2, .section-introduction > p", "rise"],
+  [".section-introduction > div, .section-introduction > p", "rise"],
   [".project-preview", "mask"],
   [".project-information > *", "rise"],
   [".other-work > h3", "rise"],
   [".other-work-entry", "row"],
-  [".about-story > p, .certifications li", "row"],
-  [".education-panel", "rise"],
+  [".certifications li", "row"],
+  [".about-column", "rise"],
   [".experience-list > li", "row"],
   [".skills-reference > div", "row"],
   [".contact-information, .contact-form-panel", "rise"],
