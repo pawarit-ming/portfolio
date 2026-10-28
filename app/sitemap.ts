@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { getProjectSlugs } from "@/lib/content";
 import { localePath, localeTags, locales } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -27,15 +26,11 @@ function alternates(path: string) {
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const paths = ["", ...getProjectSlugs().map((slug) => `/projects/${slug}`)];
-
-  return paths.flatMap((path) =>
-    locales.map((locale) => ({
-      url: `${siteUrl}${localePath(locale, path)}`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: path === "" ? 1 : 0.8,
-      alternates: alternates(path),
-    })),
-  );
+  return locales.map((locale) => ({
+    url: `${siteUrl}${localePath(locale)}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 1,
+    alternates: alternates(""),
+  }));
 }

@@ -20,13 +20,6 @@ const CHOREOGRAPHY: [selector: string, kind: "rise" | "row" | "mask"][] = [
   [".skills-reference > div", "row"],
   [".contact-information, .contact-form-panel", "rise"],
   [".footer-top", "rise"],
-  // Case studies: screens first, then the story, features and the way on.
-  [".case-study-section > h2, .case-study-prose", "rise"],
-  [".case-study-screens > div > *", "row"],
-  [".case-study-features > div", "row"],
-  [".case-study-next-heading", "rise"],
-  [".case-study-next > li", "row"],
-  [".case-study-cta", "rise"],
 ];
 
 const MAX_STEP = 4;
@@ -40,6 +33,12 @@ export function MotionObserver() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // A page opened at /en#skills (or redirected to #projects) lands at the top
+    // once the router takes over, so go to the section first, and only then
+    // decide below what counts as below the fold.
+    const target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) target.scrollIntoView({ behavior: "instant" });
+
     if (!("IntersectionObserver" in window)) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

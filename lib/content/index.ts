@@ -10,7 +10,7 @@
  */
 
 import type { Locale } from "@/lib/i18n";
-import type { Content, Project, ProjectSlug, Variant } from "./types";
+import type { Content, Variant } from "./types";
 import { en } from "./en";
 import { th } from "./th";
 import { variantDefinitions } from "./variants";
@@ -43,22 +43,6 @@ export function getContent(locale: Locale, variant?: Variant): Content {
     targetRoles: override.targetRoles,
     skillGroups: override.skillGroups,
   };
-}
-
-export function getProject(
-  locale: Locale,
-  slug: string,
-): Project | undefined {
-  return getContent(locale).projects.find((project) => project.slug === slug);
-}
-
-/**
- * Slugs are identical across languages by construction — `ProjectSlug` is a
- * union both files are typed against — so the English list stands in for all
- * of them wherever only the routes matter.
- */
-export function getProjectSlugs(): ProjectSlug[] {
-  return en.projects.map((project) => project.slug);
 }
 
 export * from "./types";

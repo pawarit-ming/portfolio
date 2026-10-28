@@ -59,7 +59,7 @@ export function isLocale(value: string | undefined | null): value is Locale {
  * Builds an in-site path for a locale.
  *
  * `path` is the route below the locale segment, with its leading slash —
- * `"/projects/foo"`, `"#contact"`, or `""` for the homepage. Keeping the
+ * `"/for/dba"`, `"#contact"`, or `""` for the homepage. Keeping the
  * prefixing in one function is what stops a stray `href="/#about"` from
  * dropping a Thai reader back into English.
  */
@@ -88,7 +88,7 @@ export function withLocale(pathname: string, locale: Locale): string {
  *
  *   /en                        -> ""
  *   /en/for/dba                -> "/for/dba"
- *   /en/for/dba/projects/x     -> "/for/dba"
+ *   /en/for/dba/missing        -> "/for/dba"
  *
  * Every in-site link is built through this, which is what keeps a reader
  * inside the variant they arrived in. The variant is a path segment rather
@@ -106,7 +106,7 @@ export function variantPrefix(pathname: string): string {
 
 /**
  * Whether the page at `pathname` is one that carries the homepage sections:
- * the homepage itself, or a variant's homepage. A case study is not one, even
+ * the homepage itself, or a variant's homepage. A 404 page is not one, even
  * under a variant — its sections are elsewhere.
  */
 export function hasSections(pathname: string): boolean {
@@ -123,10 +123,9 @@ export function hasSections(pathname: string): boolean {
  * Where a section link — `#about`, `#projects` — should point from `pathname`.
  *
  * A bare hash on a page that has the sections, which keeps the reader where
- * they are. From a case study the sections are genuinely elsewhere, so the
+ * they are. From a 404 page the sections are genuinely elsewhere, so the
  * link names the homepage — the variant's homepage when reading inside one,
- * which is what stops a case study being a one-way door back to the default
- * page.
+ * so a reader is never dropped back onto the default page.
  */
 export function sectionHref(
   pathname: string,

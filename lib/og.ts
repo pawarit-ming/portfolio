@@ -6,18 +6,19 @@ export const ogSize = { width: 1200, height: 630 };
 
 /** The site's own tokens, so a shared link looks like the page it opens. */
 export const ogColors = {
-  ground: "#ffffff",
-  ink: "#18181b",
-  muted: "#52525b",
+  ground: "#f5f4f0",
+  ink: "#141414",
+  muted: "#5c5b57",
+  accent: "#2d4bff",
 };
 
-export const latinFamily = "Schibsted Grotesk";
+export const latinFamily = "Manrope";
 export const thaiFamily = "Noto Sans Thai";
 
 export type OgFont = {
   name: string;
   data: ArrayBuffer;
-  weight: 400 | 600;
+  weight: 400 | 600 | 800;
   style: "normal";
 };
 
@@ -55,11 +56,11 @@ async function loadGoogleFont(
 }
 
 /**
- * The regular and semibold cuts of one family, whichever of them arrived.
+ * The regular, semibold and extrabold cuts of one family, whichever arrived.
  * Noto Sans Thai covers Latin too, so a Thai card needs nothing else.
  */
 export async function loadFamily(family: string): Promise<OgFont[]> {
-  const weights: OgFont["weight"][] = [400, 600];
+  const weights: OgFont["weight"][] = [400, 600, 800];
   const loaded = await Promise.all(
     weights.map(async (weight) => {
       const data = await loadGoogleFont(family, weight);

@@ -16,8 +16,8 @@ export function generateStaticParams() {
 }
 
 /**
- * The homepage hero, as a card: the name at display size, the one-line
- * statement under it, and who and where along the bottom. No chips, no rules.
+ * The homepage hero, as a card: the name at display size with its blue full
+ * stop, the one-line statement under it, and the role along the bottom.
  */
 export default async function OpengraphImage({
   params,
@@ -57,12 +57,13 @@ export default async function OpengraphImage({
             style={{
               display: "flex",
               fontSize: "132px",
-              fontWeight: 600,
-              letterSpacing: locale === "th" ? "-2px" : "-6px",
+              fontWeight: 800,
+              letterSpacing: locale === "th" ? "-2px" : "-7px",
               lineHeight: locale === "th" ? 1.2 : 0.95,
             }}
           >
             {profile.name}
+            <span style={{ color: ogColors.accent }}>.</span>
           </div>
           <div
             style={{
@@ -70,15 +71,16 @@ export default async function OpengraphImage({
               marginTop: "40px",
               maxWidth: "900px",
               fontSize: "34px",
-              fontWeight: 400,
-              lineHeight: 1.35,
+              fontWeight: 600,
+              letterSpacing: "-0.5px",
+              lineHeight: 1.3,
             }}
           >
             {profile.headline}
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "28px", fontSize: "26px" }}>
+        <div style={{ display: "flex", gap: "28px", fontSize: "22px", letterSpacing: "2px", textTransform: "uppercase", color: ogColors.muted }}>
           <div style={{ display: "flex", fontWeight: 600 }}>{profile.role}</div>
         </div>
       </div>

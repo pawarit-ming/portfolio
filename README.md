@@ -6,7 +6,6 @@ v4** — so the site is its own evidence.
 
 - Homepage with hero, about, projects, experience, skills and contact
 - English and Thai, each on its own URL (`/en`, `/th`) and statically generated
-- A case-study page per project at `/[locale]/projects/[slug]`
 - Working contact form backed by a Next.js Route Handler
 - SEO: per-page metadata, hreflang alternates, JSON-LD `Person` schema,
   `sitemap.xml`, `robots.txt`, and a generated Open Graph image per language
@@ -60,10 +59,10 @@ paragraph was actually translated, only that the field exists.
 There are two lists, because a portfolio reads better when a couple of strong
 projects get room to breathe and the rest stay out of their way.
 
-**`projects`** — the featured ones. Each gets a full case-study page at
-`/projects/<slug>`, generated at build time along with its sitemap entry. Use
-this for work you want to be asked about in an interview: it has room for the
-problem, what you did, the features, and the technical decisions behind them.
+**`projects`** — the featured ones, each a full-width card on the homepage:
+screenshots, one headline figure, the tagline, the stack and a GitHub button
+when there is a repository. There are no project pages; old `/projects/<slug>`
+links are redirected to the cards in `next.config.ts`.
 
 **`otherProjects`** — everything else, shown as an index in large type under the
 featured ones: title, a sentence or two, the stack as one line, and links. No detail page. Good for
@@ -72,23 +71,21 @@ array is empty, so there is nothing to remove if you never use it.
 
 ### Screenshots
 
-Put image files under `public/projects/<slug>/` and reference them by path. A
-project takes an optional `cover` — the thumbnail on its homepage card — and a
-`gallery` array, which is every screenshot shown on the case-study page.
+Put image files under `public/projects/<slug>/`, list them in the project's
+`screens`, and add the same path to the import map at the top of
+`components/projects.tsx` (that is what gives each one its size and blur
+placeholder).
 
 ```ts
-cover: {
-  src: "/projects/asset-management-system/registration-wizard.webp",
-  alt: "Step one of the asset registration wizard, with a progress bar",
-  aspect: "screen",   // screen | phone | wide | tall | square
-},
+screens: [
+  { src: "/projects/asset-management-system/registration-wizard.webp",
+    alt: "Step one of the asset registration wizard, with a progress bar",
+    aspect: "screen" },   // screen | phone
+],
 ```
 
-Use `screen` for browser screenshots and `phone` for portrait mobile ones: both
-are shown whole, because cropping a screenshot costs you a sidebar or a toolbar.
-The gallery lays `phone` shots six across on a wide screen (three on a tablet,
-two on a phone) and `screen` shots two across, with the first `screen` shot
-leading at full width. Every frame opens full size in a lightbox.
+One `screen` shot fills the card and is cropped at the bottom; `phone` shots sit
+side by side, three is the number the layout is drawn for.
 
 Images go through `next/image`, so they are converted to WebP, resized per
 breakpoint, and lazy-loaded below the fold automatically.
@@ -193,14 +190,9 @@ a reader could not already verify further down the same page — a variant that
 claims more than the evidence under it will be found out in the interview it
 was meant to win.
 
-The case studies exist under a variant too, at
-`/[locale]/for/<variant>/projects/<slug>` — the same component and the same
-content as the default route, so nothing is duplicated but the URL. Without
-them a reader who followed "Read the case study" landed back on the default
-site and every link in the header kept them there, which is the one thing the
-variant is for. Links are built through `variantPrefix`, so they carry whichever
-world they are in; add a link with a bare `localePath` and it will quietly
-break that.
+Links are built through `variantPrefix`, so they carry whichever world they are
+in; add a link with a bare `localePath` and it will quietly drop a reader out of
+the variant.
 
 Variants are `noindex` and stay out of `sitemap.ts`, since near-identical pages
 are what a search engine reads as duplicate content. They are unlisted, not
@@ -303,14 +295,13 @@ app/
     not-found.tsx         404 page
     [...rest]/            Catches unknown paths and 404s them
     opengraph-image.tsx   Generated 1200x630 social preview
-    projects/[slug]/      Project case-study pages
 components/               Section and UI components
 lib/
   i18n.ts                 Locales, cookie, path helpers
   content/                All site content — edit here
   site.ts                 Canonical site URL
 public/projects/          Screenshots, one folder per project slug
-public/certificates/      Certificate PDFs, linked from the About card
+public/certificates/      Certificate PDFs, linked from About
 public/documents/         CV PDFs (dev and data) and the transcript
 ```
 
@@ -318,7 +309,7 @@ public/documents/         CV PDFs (dev and data) and the transcript
 
 The site is bilingual: every page exists at `/en/...` and `/th/...`, both built
 ahead of time. A visitor who lands on a URL with no language in it — `/`, or a
-link to `/projects/x` — is redirected by `proxy.ts`, which picks a language from
+link to `/for/dba` — is redirected by `proxy.ts`, which picks a language from
 the `NEXT_LOCALE` cookie first and the browser's `Accept-Language` header
 second. The switcher in the header writes that cookie, so a deliberate choice
 survives the next visit even if it disagrees with the browser.

@@ -12,12 +12,7 @@ export type Social = {
   icon: "github" | "linkedin";
 };
 
-/**
- * Slugs are shared across languages on purpose — the switcher swaps the locale
- * segment and leaves the rest of the path alone, so `/en/projects/x` has to
- * have a `/th/projects/x` to land on. Typing them as a union means a typo in
- * one language file fails the build instead of 404ing in production.
- */
+/** Keys the project cards and their screenshots; never shown to a visitor. */
 export const projectSlugs = [
   "fyt-sme-platform",
   "asset-management-system",
@@ -32,8 +27,6 @@ export type Experience = {
   period: string;
   stack: string[];
   highlights: string[];
-  /** Optional slug of a project page covering this role in depth. */
-  projectSlug?: ProjectSlug;
 };
 
 export type Metric = { value: string; label: string };
@@ -41,53 +34,35 @@ export type Metric = { value: string; label: string };
 export type ProjectLink = { label: string; href: string };
 
 /**
- * Images live in `public/`, so `src` is a path from the site root —
- * e.g. `/projects/my-app/dashboard.webp`.
- *
- * `aspect` controls how the shot is framed. Screenshots are shown whole, since
- * cropping one costs you a sidebar or a toolbar; photos may crop to fill.
- *   wide   — cropped to fill a 16:10 frame (default)
- *   tall   — cropped to fill a 3:4 frame
- *   square — cropped to fill
- *   screen — a browser screenshot, shown whole in a 16:10 frame
- *   phone  — a portrait mobile screenshot, shown whole in a handset-shaped frame
+ * A screenshot on the project card. `src` is a path from the site root, e.g.
+ * `/projects/my-app/dashboard.webp`, and must also be imported in
+ * `components/projects.tsx` so it gets its size and blur placeholder.
+ *   screen — a browser screenshot, shown alone and cropped at the bottom
+ *   phone  — a portrait mobile screenshot, shown in a row of handsets
  */
-export type ProjectImage = {
+export type ProjectScreen = {
   src: string;
   alt: string;
-  aspect?: "wide" | "tall" | "square" | "screen" | "phone";
-  caption?: string;
+  aspect: "screen" | "phone";
 };
 
-/** A project with a full case-study page at /[locale]/projects/[slug]. */
+/** A featured project: one card on the homepage, no page of its own. */
 export type Project = {
   slug: ProjectSlug;
   title: string;
   kind: string;
   period: string;
   tagline: string;
-  /** The actual business workflow, when a sequence helps explain this project. */
-  workflow?: string[];
   stack: string[];
-  metrics: Metric[];
-  overview: string[];
-  role: string[];
-  features: { title: string; description: string }[];
-  /** Thumbnail for the project card on the homepage. */
-  cover?: ProjectImage;
-  /** Extra screenshots shown further down the case-study page. */
-  gallery?: ProjectImage[];
-  /** A localized heading when the gallery contains diagrams rather than screens. */
-  galleryTitle?: string;
-  /** Live demo / repository links, shown on the case-study page. */
+  screens: ProjectScreen[];
+  /** The one figure in the card's top corner. */
+  highlight: Metric;
+  /** Repository links; the first becomes the card's button. */
   links?: ProjectLink[];
-  /** Public explanation for a commercial project whose source is private. */
-  sourceNotice?: string;
 };
 
 /**
- * A smaller project — listed compactly under the featured ones, with no
- * case-study page of its own. Good for coursework, experiments and side builds
+ * A smaller project — listed compactly under the featured ones. Good for coursework, experiments and side builds
  * that are worth showing but do not carry a full write-up.
  */
 export type SideProject = {
@@ -237,14 +212,20 @@ export type UiCopy = {
   experience: {
     title: string;
     description: string;
-    readCaseStudy: string;
   };
 
   projects: {
     title: string;
     description: string;
-    readCaseStudy: string;
     otherHeading: string;
+    /** Controls for the screenshot strip and its full-size viewer. */
+    screens: {
+      previous: string;
+      next: string;
+      close: string;
+      /** `{current}` and `{total}` are filled in, e.g. "2 of 6". */
+      counter: string;
+    };
   };
 
   skills: {
@@ -296,29 +277,13 @@ export type UiCopy = {
     back: string;
   };
 
-  project: {
-    allProjects: string;
-    overview: string;
-    whatIDid: string;
-    keyFeatures: string;
-    workflow: string;
-    screens: string;
-    /** Lightbox controls on a case-study gallery. */
-    closeImage: string;
-    previousImage: string;
-    nextImage: string;
-    /** `{current}` and `{total}` are filled in, e.g. "2 of 3". */
-    imageCounter: string;
-    nextProject: string;
-    interested: string;
-    notFoundTitle: string;
-  };
 
   metadata: {
     /**
-     * The meta description, as a template over `{role}` and `{headline}`. A template rather than a joiner because the punctuation
-     * between the clauses differs by language — Thai does not use a full stop
-     * the way English does.
+     * The meta description, as a template over `{role}` and `{headline}`.
+     * A template rather than a joiner because the punctuation between the
+     * clauses differs by language — Thai does not use a full stop the way
+     * English does.
      */
     descriptionTemplate: string;
     keywords: string[];

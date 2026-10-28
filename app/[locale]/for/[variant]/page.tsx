@@ -82,11 +82,9 @@ export default async function VariantHome({
 
   return (
     <HomeSections
-      locale={locale}
       content={getContent(locale, variant)}
       stack={variantDefinitions[variant].stack}
       resume={variantDefinitions[variant].resume}
-      basePath={`/for/${variant}`}
     />
   );
 }

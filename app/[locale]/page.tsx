@@ -59,7 +59,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         // Content is a constant defined above, not user input.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
-      <HomeSections locale={locale} content={content} />
+      <HomeSections content={content} />
     </>
   );
 }

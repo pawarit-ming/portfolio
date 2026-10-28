@@ -183,7 +183,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 
 /* Small uppercase labels in the text face: the hero's top line, section numbers, dates. */
 .hero-topline, .section-label, .hero-availability, .header-link, .experience-period, .other-work-meta > p {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -249,11 +249,6 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 .hero-footer .hero-links { font-size: var(--step-small); color: var(--muted); }
 .hero-links a { display: inline-flex; min-height: 44px; align-items: center; }
-.project-workflow { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem 0.75rem; padding: 1.125rem 0; margin-top: 0.5rem; }
-/* A step never shrinks below its own words; when the row is too narrow, whole steps wrap. */
-.project-workflow > li { flex: 1 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: var(--step-small); line-height: 1.6; }
-.project-workflow > li > span:first-child { white-space: nowrap; }
-.project-workflow > li > span[aria-hidden] { color: var(--muted); }
 .hero-stack { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin-top: 1.5rem; font-size: var(--step-small); color: var(--muted); }
 
 /* Section headings, content and media reuse the same two horizontal anchors. */
@@ -289,16 +284,21 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .project-entry:nth-child(3n + 2) .project-preview { background: var(--work-2); }
 .project-entry:nth-child(3n + 3) .project-preview { background: var(--work-3); }
 .project-preview-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; color: var(--muted); font-size: var(--step-small); }
-.project-preview-name { color: var(--fg); font-size: var(--step-lead); font-weight: 800; letter-spacing: -0.04em; }
-.project-preview-media { display: flex; justify-content: center; align-items: flex-start; flex: 1; min-height: 0; margin-top: clamp(1.25rem, 3vw, 2.5rem); }
-.project-preview-image { display: block; width: min(100%, 960px); height: auto; border-radius: var(--corner-control) var(--corner-control) 0 0; transition: transform 450ms var(--ease-out); }
-.project-preview-media > figure { width: min(100%, 960px); }
-.project-phone-previews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: clamp(0.75rem, 2vw, 1.75rem); width: min(100%, 640px); }
+/* The screenshots run sideways: swipe, scroll or use the two buttons; each opens full size. */
+.project-preview-media { flex: 1; min-height: 0; margin-top: clamp(1.25rem, 3vw, 2.5rem); }
+.screen-track { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain; scrollbar-width: none; }
+.screen-track::-webkit-scrollbar { display: none; }
+.screen-slide { flex: 0 0 min(88%, 960px); align-self: flex-start; padding: 0; border: 0; background: none; cursor: zoom-in; scroll-snap-align: start; }
+.screen-track-phones .screen-slide { flex-basis: clamp(140px, 22%, 210px); }
+.screen-slide:focus-visible { outline-offset: -3px; }
+.project-preview-image { display: block; width: 100%; height: auto; border-radius: var(--corner-control) var(--corner-control) 0 0; transition: transform 450ms var(--ease-out); }
 .project-phone-image { display: block; width: 100%; height: auto; border: 2px solid var(--line-stronger); border-radius: 10% / 4.5%; transition: transform 450ms var(--ease-out); }
-.project-cover-frame { background: var(--card); aspect-ratio: 16 / 10; border-radius: var(--corner-media); }
-.project-cover-frame img { padding: 0.75rem; transition: transform 450ms var(--ease-out); }
-.project-preview:hover img { transform: translateY(-6px); }
-.project-preview-arrow { position: absolute; right: clamp(1rem, 2vw, 1.5rem); bottom: clamp(1rem, 2vw, 1.5rem); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--card); color: var(--fg); transform: rotate(-45deg); }
+.screen-slide:hover img { transform: translateY(-6px); }
+.screen-controls { position: absolute; right: clamp(1rem, 2vw, 1.5rem); bottom: clamp(1rem, 2vw, 1.5rem); display: flex; gap: 0.5rem; }
+.screen-controls button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--card); color: var(--fg); }
+.screen-controls button:hover { background: var(--accent); color: var(--on-pdf); }
+.screen-viewer-image { border-radius: var(--corner-media); animation: viewer-in 220ms var(--ease-out); }
+.screen-viewer-phone { border: 2px solid rgb(255 255 255 / 0.35); border-radius: 10% / 4.5%; }
 .project-information {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -306,7 +306,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   gap: 0.5rem 1.5rem;
   padding-top: 1.5rem;
 }
-.project-index { padding-top: 0.6rem; color: var(--muted); font-size: 0.75rem; }
+.project-index { padding-top: 0.6rem; color: var(--muted); font-size: 0.8125rem; }
 .project-information h3 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.04em; }
 .project-description { margin-top: 0.5rem; max-width: 60ch; color: var(--body); font-size: var(--step-body); line-height: 1.6; }
 .project-open { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--frame); color: var(--fg); transform: rotate(-45deg); }
@@ -319,7 +319,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   gap: 0.25rem 2rem;
   margin-top: 0.75rem;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -343,7 +343,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 
 .about-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr) minmax(0, 0.9fr); column-gap: clamp(1.5rem, 4vw, 3.5rem); }
 .about-column { min-width: 0; padding-top: clamp(1.5rem, 3vw, 2.25rem); border-top: 1px solid var(--line-strong); }
-.about-heading { margin-bottom: 1.25rem; color: var(--muted); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.about-heading { margin-bottom: 1.25rem; color: var(--muted); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
 .education-school { margin-bottom: 0.5rem; font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.875rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.2; }
 .about-column > p:not(.education-school) { font-size: var(--step-small); color: var(--body); line-height: 1.7; }
 .certifications { display: grid; gap: 1rem; }
@@ -360,12 +360,10 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .experience-period { color: var(--muted); line-height: 1.6; }
 .experience-list h3 { font-size: var(--step-lead); font-weight: 600; line-height: 1.3; letter-spacing: -0.03em; }
 .experience-highlights { display: grid; gap: 0.75rem; margin-top: 1rem; color: var(--body); font-size: var(--step-body); line-height: 1.75; max-width: 68ch; }
-.experience-footer { margin-top: 0.75rem; }
-.experience-case-link { display: inline-flex; align-items: center; gap: 0.625rem; min-height: 44px; }
 .skills-reference { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1.5rem, 4vw, 3.5rem); }
 .skills-layout dl > div { min-width: 0; padding-block: clamp(1.75rem, 3vw, 2.5rem); border-top: 1px solid var(--line-strong); }
 .skills-layout dt { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.875rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.2; }
-.skill-index { display: block; margin-bottom: clamp(1.25rem, 3vw, 2.5rem); color: var(--muted); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.08em; }
+.skill-index { display: block; margin-bottom: clamp(1.25rem, 3vw, 2.5rem); color: var(--muted); font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.08em; }
 .skills-layout dd { min-width: 0; margin-top: 1rem; }
 .skill-items { display: flex; flex-wrap: wrap; gap: 0.25rem 0; color: var(--muted); font-size: 0.8125rem; letter-spacing: 0.06em; line-height: 1.7; text-transform: uppercase; }
 .skill-items > li { max-width: 100%; overflow-wrap: anywhere; }
@@ -419,66 +417,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .footer-socials svg { width: 0.875rem; height: 0.875rem; }
 .footer-top a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; margin-top: 2.5rem; padding-inline: 0.25rem; font-size: var(--step-small); color: var(--muted); }
-.screenshot-outline { filter: none; }
-.gallery-frame { background: var(--surface); border-radius: var(--corner-media); }
-.gallery-frame img { padding: 0.75rem; }
-.gallery-frame.image-frame-natural { background: transparent; border-radius: var(--corner-media); }
-.gallery-frame .gallery-image { display: block; width: 100%; height: auto; padding: 0; border-radius: var(--corner-media); }
-.gallery-lightbox-image { border-radius: var(--corner-media); }
-.gallery-frame .gallery-image-phone, .gallery-lightbox-image.gallery-image-phone { border-width: 2px; border-radius: 10% / 4.5%; }
 
-.case-study { background: var(--bg); }
-.case-study-header { padding-block: 2.5rem clamp(3rem, 6vw, 5rem); background: var(--frame); }
-.case-study-wrap { max-width: 1280px; margin-inline: auto; padding-inline: var(--margin); }
-.case-study-title { margin-top: clamp(2rem, 4vw, 3.5rem); font-size: var(--step-title); font-weight: 600; letter-spacing: -0.045em; line-height: 1; }
-.case-study-title-mask { display: block; overflow: hidden; padding-block: 0.1em 0.22em; margin-block: -0.1em -0.22em; }
-.case-study-title-mask > span { display: block; }
-.case-study-lede { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
-.case-study-tagline { max-width: 34ch; font-size: var(--step-lead); letter-spacing: -0.02em; line-height: 1.4; }
-.case-study-facts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1.5rem; margin-top: 1.5rem; color: var(--muted); }
-.case-study-facts .case-study-kind { color: var(--fg); font-weight: 600; }
-/* A stack name never breaks inside itself ("React Hook Form" stays whole). */
-.case-study-stack { max-width: 60ch; margin-top: 1.5rem; font-size: var(--step-small); color: var(--muted); }
-.case-study-stack span span { white-space: nowrap; }
-/* The figures sit unboxed on the header ground, read left to right. */
-.case-study-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1.5rem 2.5rem; margin-top: clamp(2.5rem, 5vw, 4rem); }
-.case-study-metrics > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; min-width: 0; }
-.case-study-metrics dd { font-size: var(--step-head); font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; overflow-wrap: anywhere; }
-.case-study-metrics dt { margin-top: 0.5rem; font-size: var(--step-small); color: var(--body); max-width: 22ch; }
-.case-study-panel .project-workflow { max-width: 680px; margin-top: 1.5rem; }
-.case-study-panel .project-workflow > li { color: var(--fg); }
-.source-notice { margin-top: 1.25rem; max-width: 80ch; color: var(--muted); font-size: var(--step-small); }
-.case-study-body { padding-block: clamp(3rem, 6vw, 5rem) clamp(4rem, 8vw, 7rem); }
-.case-study-section { margin-top: clamp(4rem, 8vw, 7rem); min-width: 0; }
-.case-study-body > .case-study-section:first-child { margin-top: 0; }
-.case-study-section h2 { font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.03em; }
-.case-study-context { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; margin-top: clamp(4rem, 8vw, 7rem); }
-.case-study-body > .case-study-context:first-child { margin-top: 0; }
-.case-study-context > .case-study-panel { margin-top: 0; }
-.case-study-context > .case-study-panel + .case-study-panel { padding: clamp(1.5rem, 3vw, 2.25rem); background: var(--frame); border-radius: var(--corner-panel); }
-.case-study-prose { max-width: 68ch; display: grid; gap: 1rem; margin-top: 1.25rem; color: var(--fg); }
-.case-study-prose ul { padding-left: 1.25rem; list-style: disc; display: grid; gap: 1rem; }
-/* Features as a list set in large type: the name leads, the line explains. */
-.case-study-features { display: grid; gap: clamp(2rem, 4vw, 3rem); margin-top: clamp(1.75rem, 3vw, 2.5rem); }
-.case-study-features > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 2.5rem; min-width: 0; }
-.case-study-features h3 { font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.03em; line-height: 1.25; }
-.case-study-features p { max-width: 60ch; padding-top: 0.375rem; color: var(--fg); }
-.case-study-footer { padding-block: clamp(3.5rem, 7vw, 5.5rem); background: var(--frame); }
-.case-study-next-heading { font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.03em; }
-/* The other projects as an index: large names, no boxes. */
-.case-study-next { display: grid; gap: 0.5rem; margin-top: 1.25rem; }
-.case-study-next > li, .case-study-next a > span { min-width: 0; }
-.case-study-next a { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding-block: 1rem; transition: opacity var(--t-hover) ease; }
-.case-study-next strong { display: block; font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.03em; line-height: 1.25; }
-.case-study-next span span { display: block; margin-top: 0.25rem; font-size: var(--step-small); color: var(--muted); }
-.case-study-next svg { transition: transform var(--t-hover) var(--ease-out); }
-@media (hover: hover) and (pointer: fine) {
-  .case-study-next:hover a:not(:hover) { opacity: 0.45; }
-  .case-study-next a:hover { color: var(--fg); }
-  .case-study-next a:hover svg { transform: translateX(4px); }
-}
-.case-study-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 1.75rem; margin-top: clamp(2.5rem, 5vw, 4rem); }
-.case-study-cta > p { font-size: var(--step-lead); letter-spacing: -0.02em; }
 
 .not-found { padding-block: clamp(4rem, 10vw, 8rem); }
 .not-found-code { font-size: var(--step-display); font-weight: 600; letter-spacing: -0.05em; line-height: 0.95; }
@@ -489,7 +428,6 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 /* Thai needs room for marks above and below the baseline. */
 :lang(th) .hero-name { letter-spacing: -0.03em; line-height: 1.2; }
 :lang(th) .section-introduction h2 { line-height: 1.45; letter-spacing: -0.02em; }
-:lang(th) .case-study-title { line-height: 1.25; letter-spacing: -0.025em; }
 :lang(th) .hero-role, :lang(th) .project-information h3, :lang(th) .experience-list h3 { line-height: 1.55; }
 
 /* Motion. The name rising out of its own baseline is the one loud move;
@@ -498,7 +436,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .hero-name-mask { display: block; overflow: hidden; padding-block: 0.1em 0.22em; margin-block: -0.1em -0.22em; }
 .hero-name-mask > span { display: block; }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-name-mask > span, .case-study-title-mask > span { animation: line-up 1000ms var(--ease-out) 100ms both; }
+  .hero-name-mask > span { animation: line-up 1000ms var(--ease-out) 100ms both; }
   .hero-description, .hero-footer { animation: arrive 700ms var(--ease-out) 320ms both; }
   .hero-footer { animation-delay: 420ms; }
 
@@ -519,6 +457,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 
 }
 @keyframes line-up { from { transform: translateY(105%); } }
+@keyframes viewer-in { from { opacity: 0; transform: scale(0.98); } }
 @keyframes arrive {
   from { transform: translateY(14px); opacity: 0; }
   to { transform: none; opacity: 1; }
@@ -529,11 +468,11 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
   transition: color var(--t-hover) ease, text-decoration-color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
 }
-.text-action svg, .project-action svg, .experience-case-link svg { transition: transform var(--t-hover) var(--ease-out); }
+.text-action svg { transition: transform var(--t-hover) var(--ease-out); }
 .primary-action svg { transition: transform var(--t-hover) var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .text-action:hover, .contact-socials a:hover { text-decoration-color: currentColor; }
-  .text-action:hover svg, .primary-action:hover svg, .experience-case-link:hover svg { transform: translateX(3px); }
+  .text-action:hover svg, .primary-action:hover svg { transform: translateX(3px); }
 }
 
 @media (max-width: 1099px) {
@@ -546,7 +485,6 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   .contact-layout { gap: 2rem; }
   .footer-top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.8fr); gap: 1.5rem; }
   .footer-top nav { grid-template-columns: 1fr; }
-  .case-study-context { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .site-header > .page-wrap { height: 72px; }
@@ -560,11 +498,13 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   .section-content { margin-top: 2rem; }
   .project-information { grid-template-columns: minmax(0, 1fr) auto; padding-top: 1.25rem; }
   .project-index { display: none; }
-  /* The caption below already names it; on a phone the panel is just the picture. */
   .project-preview { height: auto; padding: 1.25rem 1.25rem 0; }
-  .project-preview-top { display: none; }
-  .project-preview-media { margin-top: 0; }
-  .project-preview-arrow { display: none; }
+  .project-preview-top { margin-bottom: 1rem; }
+    .project-preview-media { margin-top: 0; }
+  .screen-slide { flex-basis: 88%; }
+  .screen-track-phones .screen-slide { flex-basis: 42%; }
+  /* A thumb swipes; the buttons would only cover the pictures. */
+  .screen-controls { display: none; }
   .other-work { margin-top: 3.5rem; }
   .other-work > h3 { margin-bottom: 1.25rem; }
   .other-work-entry { grid-template-columns: 1fr; }
@@ -582,15 +522,6 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   .footer-top { grid-template-columns: 1fr 1fr; gap: 1.75rem 1.25rem; }
   .footer-top > :first-child { grid-column: 1 / -1; }
   .footer-bottom { flex-direction: column; }
-  .case-study-header { padding-block: 2rem 3rem; }
-  .case-study-tagline { max-width: none; }
-  .case-study-facts { margin-top: 1.25rem; }
-  .case-study-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.25rem; }
-  .case-study-context > .case-study-panel + .case-study-panel { padding: 1.5rem 1.25rem; }
-  .case-study-features > div { grid-template-columns: 1fr; gap: 0.25rem; }
-  .case-study-features p { padding-top: 0; }
-  .project-workflow { gap: 0.375rem 0.75rem; }
-  .project-workflow > li { flex: 0 0 auto; justify-content: flex-start; gap: 0.75rem; }
 }
 @media (max-width: 374px) {
   .contact-email { font-size: var(--step-small); }
@@ -598,7 +529,7 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
   .hero-actions { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html, .screen-track { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 @media (prefers-reduced-transparency: reduce) {
