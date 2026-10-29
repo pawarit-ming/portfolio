@@ -1,27 +1,31 @@
 ---
 version: beta
 name: Pawarit Wang Portfolio
-description: A bilingual developer portfolio with evidence-based project case studies.
+description: A bilingual one-page developer portfolio, editorial in style, with project cards instead of case studies.
 colors:
-  primary: "#1d4ed8"
-  background: "#ffffff"
-  surface: "#fafafa"
-  frame: "#f4f4f5"
-  well: "#e9e9ec"
-  foreground: "#18181b"
-  field-border: "#d4d4d8"
+  primary: "#2d4bff"
+  background: "#f5f4f0"
+  surface: "#efeee9"
+  card: "#fbfaf7"
+  frame: "#ebe9e3"
+  well: "#e2e0d9"
+  foreground: "#141414"
+  muted: "#5c5b57"
+  line: "#cfccc4"
+  dark-band: "#1c1c1c"
 typography:
   sans:
-    fontFamily: "Schibsted Grotesk, Noto Sans Thai, system-ui, sans-serif"
+    fontFamily: "Manrope, Noto Sans Thai, system-ui, sans-serif"
   scale:
-    display: "clamp(2.75rem, 11.5vw, 10.5rem)"
-    title: "clamp(2.75rem, 6vw, 5.5rem)"
-    head: "clamp(2rem, 1.65rem + 1.4vw, 2.75rem)"
+    name: "clamp(3.25rem, 11vw, 11rem)"
+    section: "clamp(2.25rem, 1.5rem + 3.2vw, 4.5rem)"
+    statement: "clamp(1.375rem, 1rem + 1.2vw, 2.125rem)"
     lead: "clamp(1.375rem, 1.1rem + 0.7vw, 1.75rem)"
     body: "1rem"
     small: "0.875rem"
+    label: "0.8125rem"
 rounded:
-  control: "0.625rem"
+  control: "0.25rem"
   media: "1rem"
   panel: "1.25rem"
 spacing:
@@ -40,146 +44,143 @@ two disagree, the CSS wins and this file should be corrected.
 
 ## Overview
 
-A junior web and mobile developer's portfolio for recruiters and engineering
-interviewers, in English and Thai with matching URLs. The page leads with the
-person, then the work, then the record. Design work follows the taste skill in
-`.claude/skills/taste-skill` (mirrored in `.agents/skills/taste-skill` for
-Codex): its house rules below are binding on every page, including case
-studies, the 404 page and the Open Graph cards.
+A junior full-stack and mobile developer's portfolio for recruiters, in English
+and Thai with matching URLs. It is one page: recruiters scan, so there are no
+project detail pages, and every section says only what no other section says.
+The look follows a reference the user chose: a warm off-white ground, very large
+heavy type, small numbered uppercase labels, thin rules, and two full fields of
+colour near the end.
 
-## House rules
+## Rules
 
 - Headlines run two lines or fewer at every width.
-- No eyebrows: no small label above a heading.
-- No monospace outside real code.
-- No thin rules or 1px outlined boxes. Real form fields keep their borders.
-- No gradients, no glass or backdrop blur, no shadows on anything at rest.
-  One exception, at the user's request: the sticky header (see Elevation).
-- No chips or pills for technologies or roles: stacks read as a sentence with
-  ` · ` between names, and a name never breaks inside itself.
-- No icon-topped cards and no rows of identical boxed cards.
-- Five type sizes on a page at most: display or title, head, lead, body, small.
-- The blue accent marks primary actions only (View projects, Send message,
-  Get in touch on case studies). Text links are underlined in the ink colour.
-- Separate surfaces by a step in tone, never by a line or a shadow.
+- One accent, the blue. It marks the primary action (View projects, Send
+  message), the full stop after the name, the section numbers and the
+  availability dot. Text links are underlined in the ink colour.
+- No gradients, and no shadows on anything at rest. The sticky header is the one
+  exception (see Elevation).
+- Stacks read as a line of names with ` · ` between them, never as chips.
+- Copy stays short. If a fact appears in one section, it does not appear in
+  another.
+
+The taste skill in `.claude/skills/taste-skill` is still used for its checks
+(overflow, contrast, screenshots). Its bans on eyebrows, index numbers,
+uppercase labels and hairlines do not apply here: those are the reference style
+the user asked for, so its inspector reports them and they are left as they are.
 
 ## Colours
 
-White ground, near-black ink, neutral grey tone steps, one blue. The page
-alternates grounds so no two neighbouring sections share one: Hero white, About
-grey, Projects white, Experience grey, Skills white, Contact grey, Footer white.
-`--frame` is the grey section ground; `--well` sits behind screenshots so a white
-interface still reads as a picture; `--card` is the white surface used on grey.
-Running text is in the full ink; grey is for dates, captions and secondary
-notes. Dark equivalents live in `.dark`. Keep the existing white, grey and blue
-palette unless the user asks otherwise; a green palette was rejected before.
+Off-white ground and near-black ink, with warm grey tone steps and one blue.
+`--frame` is the tinted section ground (About), `--card` the lighter surface for
+the contact form, and `--work-1..3` the three pale tints behind the project
+screenshots (cool grey, sand, sage), taken in turn. Skills sits on a near-black
+band and Contact on a band of the accent; each redefines `--fg`, `--muted` and
+`--line-strong` locally so the shared components read correctly on it. Running
+text is in the full ink; grey is for dates, labels and secondary notes. Dark
+equivalents live in `.dark`, with a lighter blue (`#7f93ff`) as the accent.
 
 ## Typography
 
-Schibsted Grotesk for Latin, Noto Sans Thai for Thai glyphs, weight 600 for
-display and headings. The name on the homepage and the 404 code use the display
-step; case-study titles use the title step. Both rise out of their own baseline
-on load. Thai headings get extra line height for vowel and tone marks.
+Manrope for Latin, Noto Sans Thai for Thai glyphs. Display and section headings
+are weight 800 with tight tracking; the name ends in a blue full stop. Labels
+(the hero's top line, section numbers, menu links, dates, the stack line under
+each project) are 13px, weight 600, uppercase, tracked 0.08em, in the same
+family. There is no monospace and no second family. Thai headings get extra line
+height for vowel and tone marks, and the name's mask leaves room below the
+baseline so descenders are not clipped.
 
 ## Layout
 
 One page wrapper: 1280px maximum, fluid 20–32px side margins, shared by the
-header and every section. Gaps between sections are clearly larger than gaps
-inside them.
+header and every section. Section headings sit on a two-column grid: the
+numbered label and the heading on the left, the one-sentence intro on the right.
 
-### Homepage, top to bottom
+### Top to bottom
 
 - **Header**: a clear-glass sticky bar (see Elevation). Wordmark (PW monogram
-  and name), About, Projects, Experience, Skills, language and theme switches,
-  Get in touch.
-- **Hero**: everything on one left edge. The name at display size; one line of
-  facts under it (the role in the ink at body size, then location and
-  availability in grey); the statement at lead size; the View projects and
-  Resume actions; the social links. No picture and no side column: a facts
-  block parked on the right read as stranded.
-- **About** (grey): summary, certificates and languages on the left; the
-  education panel in white on the right.
-- **Things I have built** (white): a one-sentence intro, the FYT ERP as a wide
-  entry with its screenshot on the well, then two supporting projects side by
-  side. Each entry: title, kind and period, tagline, its lifecycle chain
-  (for example Registration → Borrowing → Inspection → Disposal), two figures,
-  the stack line and an underlined case-study link. Then Other projects as an
-  index set in large type, unboxed; hovering one row dims the rest.
-- **Experience** (grey): the two internships, unboxed, a date and company column
+  and name), then Projects, About, Experience, Skills as uppercase labels,
+  language and theme switches, and Get in touch.
+- **Hero**: type alone, no picture. The role as a label, the name at full size
+  with its blue full stop, the statement at statement size, then a footer row:
+  availability (blue dot) and the relocation line, the social links, and the
+  Resume and View projects actions. No address anywhere on the site. A thin
+  rule closes the hero.
+- **01 / Projects**: each project is a full-width panel on its own tint. Its
+  headline figure sits at the top left; below it, the screenshots run in a strip
+  that scrolls sideways (swipe, trackpad, or the two round buttons, one picture
+  per press) and opens full size in a `<dialog>` viewer. Under the panel:
+  `/01`, the title, the tagline, a round GitHub button when the repository is
+  public, then the stack and the kind of work with its organisation and period
+  as a label row. Thin rules separate the projects. Other projects follow as
+  one-line rows (title and date, a short description, the stack), with a rule
+  above.
+- **02 / About** (tinted): the summary as the section intro, then three ruled
+  columns: Education (with the transcript), Certifications, Languages.
+- **03 / Experience**: the two internships, unboxed, a date and company column
   beside the role and contribution.
-- **Skills** (white): one tone panel for the evidenced groups with links to the
-  projects behind them, beside a plain reference list.
-- **Contact** (grey): details, roles and links on the left; the form on a white
-  panel on the right.
-- **Footer** (white): monogram, name, role and email, navigation and socials.
-  The name is not repeated at display size; the user removed that.
+- **04 / Skills** (near-black band): a three-by-two ruled grid, each group with
+  its number, its name at heading size, and its tools as one uppercase line.
+- **05 / Get in touch** (accent band): details and social links on the left, the
+  form on a card on the right.
+- **Footer**: monogram, name, role and email, navigation and socials.
 
-### Case study, top to bottom
-
-- **Header** (grey): back link, title, the tagline at lead size, one line of
-  kind and period, then the figures in an unboxed row. Nothing else: the chain,
-  the source notice and the stack live in the body.
-- **Screens** first: a browser screenshot leads at full width with the rest two
-  across; phone screenshots sit six across on desktop, three on a tablet, two
-  on a phone. Every frame opens in the native lightbox.
-- **Overview** beside **What I did**: overview prose with the lifecycle chain
-  and source notice under it; the contribution list in a grey panel ending with
-  the full stack line.
-- **Key features** as a list in large type: the name at lead size, the line
-  explaining it beside.
-- **Footer** (grey): the other case studies as an index in large type, then the
-  Get in touch action.
+Old `/projects/<slug>` links redirect to `#projects` (`next.config.ts`), and a
+page opened at any `#section` scrolls to it once the router has loaded.
 
 ### 404 and Open Graph
 
-The 404 page sits on the page wrapper: `404` at display size, the title at lead
-size, one sentence and the back action. The Open Graph cards mirror the hero
-and the case-study header: name (132px) or project title (88px), the statement
-under it, role and location or kind and name along the bottom, in Schibsted
-Grotesk (Noto Sans Thai for Thai), white ground, no chips.
+The 404 page sits on the page wrapper: `404` at display size, the title, one
+sentence and the back action. The Open Graph card mirrors the hero: the name in
+Manrope 800 with its blue full stop, the statement under it, the role as a
+label along the bottom, on the off-white ground (Noto Sans Thai for the Thai
+card).
 
 ## Elevation
 
 Everything is flat except the sticky header, which the user explicitly asked to
-be clear glass: a 68% white (or near-black) tint, 20px backdrop blur at 140%
-saturation, a faint bottom edge, an inner highlight and a light floating
-shadow. The mobile menu shares the same glass. `--nav-glass-*` variables hold
-the values for both themes. It falls back to an opaque bar when backdrop
-filters are unsupported or reduced transparency is requested. Do not spread the
-glass to any content panel; the header lines carry `taste-skill-ignore` so the
-lint passes on this one deliberate exception.
+be clear glass: an 82% ground tint, 20px backdrop blur at 140% saturation, a
+faint bottom edge, an inner highlight and a light floating shadow. The mobile
+menu shares it. `--nav-glass-*` variables hold the values for both themes, and
+it falls back to an opaque bar when backdrop filters are unsupported or reduced
+transparency is requested. Do not spread the glass to any content panel.
 
 ## Shapes
 
-Rounded corners stay: 10px on controls and inputs, 16px on media, 20px on large
-panels and screenshot wells. Full-width section grounds keep straight edges.
+4px corners on controls and inputs, 16px on media, 20px on panels and project
+tints. Round buttons (the strip controls, the GitHub button) are full circles.
+Full-width section bands keep straight edges.
 
 ## Motion
 
-- The hero name and case-study titles rise from behind their baseline; the hero
-  copy follows in a short stagger.
+- The name rises from behind its baseline; the statement and the footer row
+  follow in a short stagger.
 - Below the fold, `components/motion-observer.tsx` walks each section in reading
-  order: blocks rise, list rows enter one by one, screenshots open from their
-  top edge inside their well. 450–700ms, 45–60ms between siblings, once. Only
-  what is below the fold at mount is hidden, so nothing visible blinks and no
-  content depends on the script.
-- Under the hand: underlines darken, arrows nudge, buttons press, index rows dim
-  their neighbours.
-- `prefers-reduced-motion: reduce` keeps every block in place.
+  order: blocks rise, list rows enter one by one, project panels open from their
+  top edge. 450–700ms, once. Only what is below the fold at mount is hidden, so
+  nothing visible blinks and no content depends on the script.
+- The screenshot strip scrolls smoothly and snaps to each picture; the viewer
+  fades each picture in.
+- Under the hand: underlines darken, arrows nudge, buttons press, screenshots
+  lift slightly.
+- `prefers-reduced-motion: reduce` keeps every block in place and makes every
+  scroll instant.
 
 ## Content
 
 - Describe the work plainly and separate personal contributions from team
-  context. No invented customers, figures or claims of sole authorship.
+  context. No invented customers or figures. Sole authorship is claimed only
+  where the user has confirmed it: the FYT Trading ERP, which they built alone.
 - The FYT Trading ERP is a personal project, in use and still in development.
   It is not work experience and it is never described as a family business.
-- FYT screenshots show the demo company and sample data, and say so in their
-  captions. Its source stays private.
+  Its screenshots show the demo company and sample data; its source stays
+  private.
+- Figures on the site match the CV and were measured from git; keep them in step.
 - English and Thai stay in step: the same sections, facts and figures.
 
 ## Process
 
 - The user usually wants edits only. Build, test or inspect only when asked.
+- Commits carry no Claude co-author line.
 - The taste skill has one source: `.claude/skills/taste-skill`, read by Claude
   Code. `.agents/skills/taste-skill` is a copy for Codex. Update the skill
   there first, then copy the folder over the Codex one so both read the same
