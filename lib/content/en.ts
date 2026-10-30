@@ -62,6 +62,7 @@ export const en: Content = {
         "An ERP I built on my own for a trading company, in React and TypeScript with the business rules enforced in PostgreSQL.",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       screens: [
+        { src: "/projects/fyt-sme-platform/landing.webp", alt: "The FYT ERP Trading start page: the headline ERP Trading Software for SME trading companies, from RFQ to credit received with a monthly financial report, a Sign in button, and the six stages Client RFQ, Vendor Quotation, Our Quotation, Client PO, Our PO and Our Invoice", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/client-rfq-form.webp", alt: "The Create a new RFQ form: date, sequence, channel, client, contact, follow-up person and attachment, then a product row with SKU, client product name, brand, model, quantity and unit, followed by rows for a new vendor quote, quote history and our quote", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/client-rfq-list.webp", alt: "The Client RFQ list in the FYT workspace: twenty requests for quotation with their date, channel, client, follow-up person, products, step badge and age in days", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/wi-settings.webp", alt: "The WI Settings hub listing 27 settings, among them brands, channels, currencies, payment terms, SKU names, step process, units and VAT rates", aspect: "screen" },

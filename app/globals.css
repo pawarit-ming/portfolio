@@ -286,7 +286,8 @@ button:not(:disabled):active, .primary-action:active { transform: translateY(2px
 .project-preview-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; color: var(--muted); font-size: var(--step-small); }
 /* The screenshots run sideways: swipe, scroll or use the two buttons; each opens full size. */
 .project-preview-media { flex: 1; min-height: 0; margin-top: clamp(1.25rem, 3vw, 2.5rem); }
-.screen-track { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain; scrollbar-width: none; }
+/* The top padding (pulled back by the negative margin) gives the hover lift room, since the track clips vertically. */
+.screen-track { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); height: calc(100% + 8px); margin-top: -8px; padding-top: 8px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain; scrollbar-width: none; }
 .screen-track::-webkit-scrollbar { display: none; }
 .screen-slide { flex: 0 0 min(88%, 960px); align-self: flex-start; padding: 0; border: 0; background: none; cursor: zoom-in; scroll-snap-align: start; }
 .screen-track-phones .screen-slide { flex-basis: clamp(140px, 22%, 210px); }

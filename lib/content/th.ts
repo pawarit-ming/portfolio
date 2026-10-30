@@ -63,6 +63,7 @@ export const th: Content = {
         "ระบบ ERP สำหรับบริษัทเทรดดิ้งที่พัฒนาคนเดียวทั้งระบบ ด้วย React และ TypeScript โดยให้ PostgreSQL บังคับกฎทางธุรกิจ",
       stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "TanStack Query", "React Hook Form", "Zod", "Vite", "Vitest"],
       screens: [
+        { src: "/projects/fyt-sme-platform/landing.webp", alt: "หน้าเริ่มต้นของ FYT ERP Trading มีหัวข้อ ERP Trading Software สำหรับบริษัทเทรดดิ้ง SME ตั้งแต่ RFQ จนถึงรับเงิน พร้อมรายงานการเงินรายเดือน ปุ่มเข้าสู่ระบบ และหกขั้นตอน Client RFQ, Vendor Quotation, Our Quotation, Client PO, Our PO และ Our Invoice", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/client-rfq-form.webp", alt: "ฟอร์มสร้าง RFQ ใหม่ มีวันที่ ลำดับ ช่องทาง ลูกค้า ผู้ติดต่อ ผู้ติดตาม และไฟล์แนบ ตามด้วยรายการสินค้าที่มี SKU ชื่อสินค้าของลูกค้า แบรนด์ รุ่น จำนวน และหน่วย และแถวใบเสนอราคาจากผู้ขาย ประวัติราคา และราคาที่เราเสนอ", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/client-rfq-list.webp", alt: "รายการ Client RFQ ในระบบ FYT แสดงคำขอใบเสนอราคา 20 รายการ พร้อมวันที่ ช่องทาง ลูกค้า ผู้ติดตาม สินค้า ขั้นตอน และจำนวนวัน", aspect: "screen" },
         { src: "/projects/fyt-sme-platform/wi-settings.webp", alt: "หน้า WI Settings แสดงการตั้งค่า 27 หมวด เช่น แบรนด์ ช่องทาง สกุลเงิน เงื่อนไขการชำระเงิน ชื่อ SKU ขั้นตอนงาน หน่วย และอัตรา VAT", aspect: "screen" },

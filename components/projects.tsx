@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import landing from "@/public/projects/fyt-sme-platform/landing.webp";
 import rfqForm from "@/public/projects/fyt-sme-platform/client-rfq-form.webp";
 import rfqList from "@/public/projects/fyt-sme-platform/client-rfq-list.webp";
 import settings from "@/public/projects/fyt-sme-platform/wi-settings.webp";
@@ -19,6 +20,7 @@ import type { Content } from "@/lib/content";
 // Static imports reserve each screenshot's real proportions before it loads,
 // and give each a tiny blurred preview to show until the real one arrives.
 const screenImages: Record<string, StaticImageData> = {
+  "/projects/fyt-sme-platform/landing.webp": landing,
   "/projects/fyt-sme-platform/client-rfq-form.webp": rfqForm,
   "/projects/fyt-sme-platform/client-rfq-list.webp": rfqList,
   "/projects/fyt-sme-platform/wi-settings.webp": settings,
