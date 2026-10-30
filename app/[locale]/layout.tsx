@@ -159,6 +159,7 @@ export default async function RootLayout({
             name={profile.name}
             role={profile.role}
             resumes={resumes}
+            year={new Date().getFullYear()}
           />
           <MotionObserver />
         </ThemeProvider>

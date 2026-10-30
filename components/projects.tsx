@@ -35,6 +35,14 @@ const screenImages: Record<string, StaticImageData> = {
   "/projects/thai-cattle-passport/seller-location-screen.webp": seller,
 };
 
+// A screenshot listed in the content but missing above would otherwise reach
+// next/image as `undefined` and fail with an error about `blurDataURL`.
+function screenImage(src: string): StaticImageData {
+  const image = screenImages[src];
+  if (!image) throw new Error(`Add ${src} to screenImages in components/projects.tsx`);
+  return image;
+}
+
 export function Projects({ content }: { content: Content }) {
   const { projects, otherProjects, ui } = content;
   return (
@@ -48,7 +56,7 @@ export function Projects({ content }: { content: Content }) {
               <p className="project-preview-top">{project.highlight.value} · {project.highlight.label}</p>
               <div className="project-preview-media">
                 <ProjectScreens
-                  screens={project.screens.map((screen) => ({ ...screen, image: screenImages[screen.src] }))}
+                  screens={project.screens.map((screen) => ({ ...screen, image: screenImage(screen.src) }))}
                   labels={ui.projects.screens}
                 />
               </div>

@@ -48,11 +48,10 @@ export const documents = {
  * Leave `href` empty and that link is hidden automatically.
  */
 export const socials: Social[] = [
-  { label: "GitHub", href: "https://github.com/pawarit-ming", icon: "github" },
+  { label: "GitHub", href: "https://github.com/pawarit-ming" },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/pawarit-wang/",
-    icon: "linkedin",
   },
 ];
 

@@ -16,14 +16,18 @@ type FooterCopy = Pick<UiCopy, "footerNavLabel" | "footer">;
  *
  * `resumes` is keyed by `variantPrefix`, because this footer lives in the
  * layout and a variant page carries a different CV from the default one.
+ *
+ * `year` comes from the server too: worked out here, the browser's clock would
+ * disagree with the prerendered HTML from New Year until the next deploy.
  */
-export function SiteFooter({ locale, ui, navigation, name, role, resumes }: {
+export function SiteFooter({ locale, ui, navigation, name, role, resumes, year }: {
   locale: Locale;
   ui: FooterCopy;
   navigation: NavItem[];
   name: string;
   role: string;
   resumes: Record<string, string>;
+  year: number;
 }) {
   const pathname = usePathname() ?? "/";
   const resume = resumes[variantPrefix(pathname)] ?? resumes[""];
@@ -60,7 +64,7 @@ export function SiteFooter({ locale, ui, navigation, name, role, resumes }: {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} {name}</p>
+          <p>© {year} {name}</p>
           <p>{ui.footer.builtWith}</p>
         </div>
       </div>

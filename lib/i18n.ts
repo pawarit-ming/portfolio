@@ -6,6 +6,9 @@
  * generate both language versions statically.
  */
 
+// Relative and with its extension, so `node --test` can load this file as it is.
+import { variants } from "./content/types.ts";
+
 export const locales = ["en", "th"] as const;
 
 export type Locale = (typeof locales)[number];
@@ -101,7 +104,15 @@ export function variantPrefix(pathname: string): string {
   const segments = pathname.split("/").filter(Boolean);
   if (!isLocale(segments[0])) return "";
 
-  return segments[1] === "for" && segments[2] ? `/for/${segments[2]}` : "";
+  return segments[1] === "for" && isVariant(segments[2]) ? `/for/${segments[2]}` : "";
+}
+
+/**
+ * Only a variant that exists counts. `/en/for/DBA` is a 404, and treating it as
+ * a variant would point its header and footer at sections it does not have.
+ */
+function isVariant(value: string | undefined): boolean {
+  return (variants as readonly (string | undefined)[]).includes(value);
 }
 
 /**
@@ -115,7 +126,8 @@ export function hasSections(pathname: string): boolean {
 
   // ["en"] is the homepage; ["en", "for", "dba"] is a variant's homepage.
   return (
-    segments.length === 1 || (segments.length === 3 && segments[1] === "for")
+    segments.length === 1 ||
+    (segments.length === 3 && segments[1] === "for" && isVariant(segments[2]))
   );
 }
 

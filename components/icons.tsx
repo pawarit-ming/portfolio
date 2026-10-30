@@ -21,23 +21,6 @@ export function MailIcon(props: IconProps) {
   );
 }
 
-export function PhoneIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M7.2 3.5H4.6A1.6 1.6 0 0 0 3 5.2c0 8.6 7.2 15.8 15.8 15.8a1.6 1.6 0 0 0 1.7-1.6v-2.6l-4.3-1.6-1.9 2.2a13.5 13.5 0 0 1-6.5-6.5l2.2-1.9Z" />
-    </svg>
-  );
-}
-
-export function PinIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M20 10.5c0 5.2-8 11-8 11s-8-5.8-8-11a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10.3" r="2.8" />
-    </svg>
-  );
-}
-
 export function ArrowRightIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
@@ -130,16 +113,3 @@ export function GithubIcon(props: IconProps) {
     </svg>
   );
 }
-
-export function LinkedinIcon(props: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.3 8.94h3.4V21H3.3V8.94Zm5.53 0h3.26v1.65h.05c.45-.86 1.56-1.77 3.22-1.77 3.44 0 4.08 2.27 4.08 5.21V21h-3.4v-5.29c0-1.26-.02-2.89-1.76-2.89-1.76 0-2.03 1.38-2.03 2.8V21h-3.4V8.94Z" />
-    </svg>
-  );
-}
-
-export const socialIcons = {
-  github: GithubIcon,
-  linkedin: LinkedinIcon,
-} as const;

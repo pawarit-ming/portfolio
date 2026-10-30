@@ -38,7 +38,8 @@ npm run dev
 ```
 
 Open <http://localhost:3000>. `npm run build` makes a production build and
-`npm run lint` runs ESLint.
+`npm run lint` runs ESLint. `npm test` runs the tests for the language and
+link helpers in `lib/i18n.ts`, with Node's built-in test runner.
 
 The contact form needs Resend to send mail. Copy `.env.example` to
 `.env.local` and fill in `RESEND_API_KEY`, `CONTACT_TO_EMAIL` and

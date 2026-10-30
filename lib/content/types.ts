@@ -9,7 +9,6 @@
 export type Social = {
   label: string;
   href: string;
-  icon: "github" | "linkedin";
 };
 
 /** Keys the project cards and their screenshots; never shown to a visitor. */
