@@ -122,7 +122,7 @@ numbered label and the heading on the left, the one-sentence intro on the right.
   its number, its name at heading size, and its tools as one uppercase line.
 - **05 / Get in touch** (accent band): details and social links on the left, the
   form on a card on the right.
-- **Footer**: monogram, name, role and email, navigation and socials.
+- **Footer**: monogram, name and role, navigation with a Contact link, then the resume and socials. No email: the Contact section right above already shows it.
 
 Old `/projects/<slug>` links redirect to `#projects` (`next.config.ts`), and a
 page opened at any `#section` scrolls to it once the router has loaded.

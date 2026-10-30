@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MotionObserver } from "@/components/motion-observer";
-import { getContent } from "@/lib/content";
+import { documents, getContent, variantDefinitions, variants } from "@/lib/content";
 import {
   isLocale,
   localePath,
@@ -110,6 +110,12 @@ export default async function RootLayout({
   if (!isLocale(locale)) notFound();
 
   const { ui, navigation, profile } = getContent(locale);
+  // The footer is shared by every page, so it gets each CV keyed by the
+  // variant prefix it sits under and picks one from the path.
+  const resumes: Record<string, string> = {
+    "": documents.resume,
+    ...Object.fromEntries(variants.map((variant) => [`/for/${variant}`, variantDefinitions[variant].resume])),
+  };
 
   return (
     <html
@@ -152,6 +158,7 @@ export default async function RootLayout({
             navigation={navigation}
             name={profile.name}
             role={profile.role}
+            resumes={resumes}
           />
           <MotionObserver />
         </ThemeProvider>

@@ -345,6 +345,9 @@ export const th: Content = {
     footer: {
       navigationHeading: "สำรวจเว็บไซต์",
       socialsHeading: "ช่องทางอื่น",
+      contact: "ติดต่อ",
+      resume: "เรซูเม่ (PDF)",
+      resumeLinkLabel: "เปิดเรซูเม่ฉบับภาษาอังกฤษ (PDF เปิดในแท็บใหม่)",
       builtWith: "สร้างด้วย Next.js, TypeScript และ Tailwind CSS",
     },
 

@@ -353,7 +353,10 @@ export const en: Content = {
 
     footer: {
       navigationHeading: "Explore",
-      socialsHeading: "Find me online",
+      socialsHeading: "Elsewhere",
+      contact: "Contact",
+      resume: "Resume (PDF)",
+      resumeLinkLabel: "Open my resume (PDF, opens in a new tab)",
       builtWith: "Built with Next.js, TypeScript and Tailwind CSS.",
     },
 

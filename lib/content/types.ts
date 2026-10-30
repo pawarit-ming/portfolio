@@ -80,8 +80,9 @@ export type SideProject = {
  * `localePath`, so no link can quietly drop a Thai reader into English.
  *
  * Contact is deliberately absent: the "Get in touch" button sits right beside
- * this list and points at the same anchor, and the footer prints the address
- * itself. Two adjacent controls with one destination read as an oversight.
+ * this list and points at the same anchor. Two adjacent controls with one
+ * destination read as an oversight. The footer has no such button, so it adds
+ * its own Contact link after this list.
  */
 export type NavItem = { label: string; hash: string };
 
@@ -267,6 +268,10 @@ export type UiCopy = {
   footer: {
     navigationHeading: string;
     socialsHeading: string;
+    /** The footer's own link to the Contact section, after the shared list. */
+    contact: string;
+    resume: string;
+    resumeLinkLabel: string;
     /** Follows "© 2026 Pawarit Wang." */
     builtWith: string;
   };
